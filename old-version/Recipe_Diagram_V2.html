@@ -114,7 +114,6 @@ svg.lines{position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-
 <div class="hd">
   <h1>Recipe Diagram</h1>
   <p>Hover to highlight · Click for detail · Ghost label = off-screen linked item</p>
-  <p>***Mine is general term for using the 3rd weapon to collect items/resources***</p>
 </div>
 
 <div class="tabs">
@@ -209,12 +208,6 @@ const ITEMS = {
   coal:         {ic:'🖤',nm:'Coal',            type:'natural',day:10, src:'⛏ Mine — Caves'},
   ruby:         {ic:'💎',nm:'Ruby',            type:'natural',day:15, src:'⛏ Mine — Deep Caves'},
   gold_crystal: {ic:'💛',nm:'Gold Crystal',    type:'natural',day:20, src:'⛏ Mine — Mountains'},
-  power_shard:  {ic:'⚡',nm:'Power Shard',     type:'natural',day:1,  src:'⛏ Mine — Surface'},
-  copper:       {ic:'🟤',nm:'Copper',          type:'natural',day:1,  src:'⛏ Mine — Surface'},
-  wood:         {ic:'🌲',nm:'Wood',            type:'natural',day:1,  src:'🌲 Chop trees(Builder\'s Shop - WIP)'},
-  stone:        {ic:'🪨',nm:'Stone',           type:'natural',day:1,  src:'⛏ Mine — Surface(Builder\'s Shop - WIP)'},
-  power_core:   {ic:'🔋',nm:'Power Core',      type:'inter',  day:1,  src:'⚗️ Crafting Station', recipe:[['power_shard',1],['metal',1],['iron',1]], mech:'craft', mechNote:'Lõi năng lượng giúp máy móc hoạt động'},
-  circuit:      {ic:'💡',nm:'Circuit',         type:'inter',  day:1,  src:'⚗️ Crafting Station', recipe:[['power_shard',1],['metal',1],['copper',1]], mech:'craft', mechNote:'Mạch điện mở khoá Blueprint - WIP'},
   poison_shard: {ic:'☠️',nm:'Poison Shard',    type:'inter',  day:15, src:'⚗️ Crafting Station', recipe:[['trash',3],['sand',3],['trash',3]], note:'Trash ×6 + Sand ×3'},
   acid_shard:   {ic:'💧',nm:'Acid Shard',      type:'inter',  day:15, src:'⚗️ Crafting Station', recipe:[['trash',3],['metal',3],['trash',3]], note:'Trash ×6 + Metal Scrap ×3'},
   // GLASS VIALS
@@ -278,7 +271,7 @@ EDGES.push({from:'coconut',to:'coconut_milk'});
 // DAY BLOCKS — 5 columns: crops, natural/coop, ingredients, food, bottles/specials
 const DAY_BLOCKS=[
   {day:1, cls:'d1',
-   crops:['berry','wheat'], naturals:['monster','iron','sand','trash','metal','power_shard','copper','wood','stone'], inters:['flour','power_core','circuit'], foods:[], bottles:[]},
+   crops:['berry','wheat'], naturals:['monster','iron','sand','trash','metal'], inters:['flour'], foods:[], bottles:[]},
   {day:3, cls:'d3',
    crops:['bean','carrot','cabbage','coconut'], naturals:['coconut_milk'],
    inters:['bean_oil','coconut_oil','margarine'], foods:[], bottles:[]},
@@ -368,7 +361,6 @@ DAY_BLOCKS.forEach(b=>{
       let sub='';
       if(item.hp) sub=`<div class="sub">+${item.hp}HP${item.regen?' ↑':''}${MECH_BADGE[item.mech]||''}</div>`;
       else if(item.effect) sub=`<div class="sub" style="white-space:normal;max-width:130px;font-size:7px;color:var(--b)">${item.effect.substring(0,40)}…</div>`;
-      else if(item.mechNote) sub=`<div class="sub" style="white-space:normal;max-width:130px;font-size:7px;color:var(--y)">${item.mechNote}</div>`;
       else if(item.src) sub=`<div class="sub">${item.src}</div>`;
       const trig=item.trigger?`<div style="margin-top:1px"><span class="trigger-badge">${item.trigger}</span></div>`:'';
       n.innerHTML=`<span class="ic">${item.ic}</span><div><div class="nm">${item.nm}</div>${sub}${trig}</div>`;
