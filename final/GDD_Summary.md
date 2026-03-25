@@ -48,7 +48,7 @@
 - ⚙️ Machines and structures continue running automatically while the player sleeps
 - ⏳ Sleeping early = losing night farming minutes. If you've optimized your time and got everything sorted on the farm — get some sleep.
 
-> **Sleep Buff:** Fully restore HP & Energy on wakeup. +33% movement speed in the morning (7–10 AM)
+> **Sleep Buff:** Fully restore HP & Energy on wakeup. +25% movement speed in the morning (7–10 AM)
 
 ---
 
@@ -107,21 +107,21 @@ Each crop can be used as:
 
 | Icon | Name | Unlock | Trigger | Weapon | Yield | Used For |
 |------|------|--------|---------|--------|-------|----------|
-| 🫐 | Berry | Day 1 | — | AR | 1 fruit | Ammo, Frost Bottle |
+| 🫐 | Berry | Day 1 | — | AR | 1 crop | Ammo, Frost Bottle |
 | 🌾 | Wheat *(1 bundle = 3 units)* | Day 1 | — | SMG | 3/bundle | Ammo, Flour, Chicken Feed |
-| 🌱 | Bean | Day 3 | — | SMG | 1 fruit | Ammo, Bean Oil |
-| 🥕 | Carrot | Day 3 | — | — | 1 fruit | Hot Bunny, Carrot Cake, Red Alert Salad |
-| 🥬 | Cabbage | Day 3 | — | — | 1 fruit | Cabbage Sauce, Burger Berry |
-| 🥥 | Coconut | Day 3 | — | — | 1 fruit | Coconut Oil → Coconut Milk |
-| 🫚 | Beetroot | Day 5 | — | — | 1 fruit | Sugar (9 beet = 1 sugar) |
-| 🍇 | Grape | Day 8 | 📦 Open Treasure Pod | (special) | 1 fruit | Ammo, Sweet Grapeball, Cluster Bottle |
-| 🍅 | Tomato | Day 6 | 🗡 Kill 300 monsters | Shotgun | 1 fruit | Ammo, Tomato Soup, Red Alert Salad → Crit Bottle |
-| ⭐ | Carambola | Day 10 | ⚔️ Defeat first Boss | Sniper | 1 fruit | Ammo, Carambola Cake, Fresh Salad, Arc Bottle |
-| 🌶️ | Chili | Day 10 | — | Flamethrower | 1 fruit | Ammo, Burnwich, Red Alert Salad, Blaze Bottle |
-| 🍎 | Apple | Day 15 | — | Grenade | 1 fruit | Ammo, Apple Pie, Ap-pleClear |
-| 🫑 | Pepper | Day 15 | — | Toxic Grenade | 1 fruit | Ammo, Fresh Salad, Venom Bottle |
-| 🌵 | Durian *(WIP)* | Day 20 | — | — | 1 fruit | Miasma Bottle |
-| 🍈 | Noni Fruit *(WIP)* | Day 20 | — | — | 1 fruit | Corrosion Bottle (legacy) |
+| 🌱 | Bean | Day 3 | — | SMG | 1 crop | Ammo, Bean Oil |
+| 🥕 | Carrot | Day 3 | — | — | 1 crop | Hot Bunny, Carrot Cake, Red Alert Salad |
+| 🥬 | Cabbage | Day 3 | — | — | 1 crop | Cabbage Sauce, Burger Berry |
+| 🥥 | Coconut | Day 3 | — | — | 1 crop | Coconut Oil → Coconut Milk |
+| 🫚 | Beetroot | Day 5 | — | — | 1 crop | Sugar (9 beet = 1 sugar) |
+| 🍇 | Grape | Day 8 | 📦 Open Treasure Pod | (special) | 1 crop | Ammo, Sweet Grapeball, Cluster Bottle |
+| 🍅 | Tomato | Day 6 | 🗡 Kill 300 monsters | Shotgun | 1 crop | Ammo, Tomato Soup, Red Alert Salad → Crit Bottle |
+| ⭐ | Carambola | Day 10 | ⚔️ Defeat first Boss | Sniper | 1 crop | Ammo, Carambola Cake, Fresh Salad, Arc Bottle |
+| 🌶️ | Chili | Day 10 | — | Flamethrower | 1 crop | Ammo, Burnwich, Red Alert Salad, Blaze Bottle |
+| 🍎 | Apple | Day 15 | — | Grenade | 1 crop | Ammo, Apple Pie, Ap-pleClear |
+| 🫑 | Pepper | Day 15 | — | Toxic Grenade | 1 crop | Ammo, Fresh Salad, Venom Bottle |
+| 🌵 | Durian *(WIP)* | Day 20 | — | — | 1 crop | Miasma Bottle |
+| 🍈 | Noni Fruit *(WIP)* | Day 20 | — | — | 1 crop | Corrosion Bottle (legacy) |
 
 > ⚠️ **Wheat dual-use:** 1 bundle = 3 SMG ammo OR 1 Flour. Recommended split: ~2 bundles ammo / 1 bundle food / 1 bundle chicken feed (4 Garden plots).
 >

@@ -61,8 +61,11 @@
 | 🟡 | Sand | Natural | Day 1 | ⛏ Mine — Beach |
 | 🗑️ | Trash | Natural | Day 1 | ⛏ Mine — Ruins |
 | 🔩 | Iron | Natural | Day 1 | ⛏ Mine — Surface |
+| ⚡ | Power Shard | Natural | Day 1 | ⛏ Mine — Surface |
+| 🟤 | Copper | Natural | Day 1 | ⛏ Mine — Surface |
+| 🌲 | Wood | Natural | Day 1 | 🌲 Chop trees *(Builder's Shop — WIP)* |
+| 🪨 | Stone | Natural | Day 1 | ⛏ Mine — Surface *(Builder's Shop — WIP)* |
 | 🥚 | Egg | Coop | Day 7 | 🐔 Coop reproduction *(Trigger: 🏗 Build Coop)* |
-| 🥛 | Coconut Milk | Coop | Day 3 | ⚗️ Crafting Station *(from Coconut ×3)* |
 | 🖤 | Coal | Natural | Day 10 | ⛏ Mine — Caves |
 | 🍯 | Honey | Natural | Day 11 | 🤖 Apiary Gadget *(Trigger: Place first Apiary Gadget)* |
 | 💎 | Ruby | Natural | Day 15 | ⛏ Mine — Deep Caves |
@@ -77,8 +80,11 @@ All crafted at ⚗️ Crafting Station.
 | Icon | Name | Day | Recipe |
 |------|------|-----|--------|
 | 🥐 | Flour | Day 1 | 🌾 Wheat ×9 (3×3) |
+| 🔋 | Power Core | Day 1 | ⚡ Power Shard ×1 + 🔧 Metal Scrap ×1 + 🔩 Iron ×1 |
+| 💡 | Circuit | Day 1 | ⚡ Power Shard ×1 + 🔧 Metal Scrap ×1 + 🟤 Copper ×1 |
 | 🛢️ | Bean Oil | Day 3 | 🌱 Bean ×9 (3×3) |
 | 🧴 | Coconut Oil | Day 3 | 🥥 Coconut ×9 (3×3) |
+| 🥛 | Coconut Milk | Day 3 | 🥥 Coconut ×9 (3×3) — ⚗️ Crafting Station |
 | 🧈 | Margarine | Day 3 | 🛢️ Bean Oil ×3 + 🧴 Coconut Oil ×1 |
 | 🍬 | Sugar | Day 5 | 🫚 Beetroot ×9 (3×3) |
 | 🧪 | Glass Vial Lv1 | Day 5 | 🟡 Sand ×9 (3×3) |
@@ -167,13 +173,12 @@ All crafted at ⚗️ Crafting Station.
 ```
 DAY 1
   Crops:       🫐 Berry · 🌾 Wheat
-  Natural:     💀 Monster Meat · 🔩 Iron · 🟡 Sand · 🗑️ Trash · 🔧 Metal Scrap
-  Ingredients: 🥐 Flour
+  Natural:     💀 Monster Meat · 🔩 Iron · 🟡 Sand · 🗑️ Trash · 🔧 Metal Scrap · ⚡ Power Shard · 🟤 Copper · 🌲 Wood (WIP) · 🪨 Stone (WIP)
+  Ingredients: 🥐 Flour · 🔋 Power Core · 💡 Circuit
 
 DAY 3
   Crops:       🌱 Bean · 🥕 Carrot · 🥬 Cabbage · 🥥 Coconut
-  Natural:     🥛 Coconut Milk
-  Ingredients: 🛢️ Bean Oil · 🧴 Coconut Oil · 🧈 Margarine
+  Ingredients: 🛢️ Bean Oil · 🧴 Coconut Oil · 🥛 Coconut Milk · 🧈 Margarine
 
 DAY 5
   Crops:       🫚 Beetroot
