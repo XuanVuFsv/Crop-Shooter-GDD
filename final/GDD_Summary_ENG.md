@@ -91,7 +91,7 @@ Each crop can be used as:
 | **3** | New crops & ingredients | 🌱 Bean (SMG ammo), 🥕 Carrot, 🥬 Cabbage, 🥥 Coconut, 🛢️ Bean Oil, 🧴 Coconut Oil, 🧈 Margarine (Bean Oil×3 + Coconut Oil×1) |
 | **5** | First expansion | 🫚 Beetroot → Sugar, 🧪 Glass Vial Lv1 (9 Sand), 🍞 Bread +5HP, 🍳 Omelet +25HP, 🥖 Soggy Bread +30HP **STEALTH**, 🎂 Berry Cake +20HP, 🧊 Frost Bottle |
 | **6** | Tomato + Cabbage Sauce | 🍅 Tomato (Shotgun) *[🗡 Kill 300 monsters]*, 🥣 Cabbage Sauce, 🍔 Burger Berry +20HP, ⚡ Rapidfire Bottle |
-| **7** | 🐔 Coop (blueprint from Pod), 🐔 Expand Coop → 20 slots |
+| **7** | 🐔 Coop (no blueprint needed), 🐔 Expand Coop (6 → 12) |
 | **8** | Grape & mid-game food | 🍇 Grape *[📦 Open Treasure Pod]*, 🌿 Spring Grass upgrade (Coop), 🥪 Hot Bunny +15HP, 🧁 Carrot Cake +40HP, 🍡 Sweet Grapeball +20HP → Cluster Bottle |
 | **10** | Mid game | ⭐ Carambola (Sniper) *[⚔️ Defeat first Boss]*, 🌶️ Chili (Flamethrower), 🖤 Coal (caves), 🍦 Cream, 🍲 Tomato Soup +75HP → Crit Bottle, 🤖 Crop Turret (blueprint) |
 | **11** | Automation begins | ⛏️ Drill Gadget Lv1, 🔗 Refinery Link, 🍯 Honey (Apiary Gadget) *[🤖 Place first Apiary]*, 🎯 Crit Bottle |
@@ -423,7 +423,7 @@ Filters Salt Water → Fresh Water for watering Garden. Runs automatically durin
 
 ### 🐔 Coop
 
-Raises Hen/Rooster → Eggs & Meat. Max 12 chickens (base) → 20. Hen+Rooster pairs breed every 12h. Demolish required.
+Raises Hen/Rooster → Eggs & Meat. Max 6 chickens (base) → 12 after upgrade. Hen+Rooster pairs breed every 12h. Demolish required.
 
 | # | Upgrade |
 |---|---------|
