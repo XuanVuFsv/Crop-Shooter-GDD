@@ -17,11 +17,11 @@ Hệ thống công trình chia làm 3 nhóm chính. Mỗi công trình có thể
 
 ### Fabricate Gadget Flow
 
-> **1.** Unlock Blueprint tại **Builder's Shop** → **2.** Vào **Fabricate Gadget** và nhấn Fabricate → **3.** Gadget được lưu lại (chỉ 1 cái tại một thời điểm) → **4.** Di chuyển ra vị trí chỉ định → **5.** Chọn điểm đặt lên map.
+> **1.** Purchase Blueprint tại **Builder's Shop** → **2.** Vào **Fabricate Gadget** và nhấn Fabricate → **3.** Gadget được lưu lại (chỉ 1 cái tại một thời điểm) → **4.** Di chuyển ra vị trí chỉ định → **5.** Chọn điểm đặt lên map.
 
 ### Garden Flow
 
-> **Pond / Natural Water Sources** (nước mặn) → **Water Purifier** (lọc thành nước ngọt) → **Garden** (tưới cây) → Thu hoạch trái cây.
+> **Pond / Natural Water Sources** (nước mặn) → **Water Purifier** (lọc thành nước ngọt) → **Garden** (tưới cây) → Thu hoạch nông sản.
 
 ### Bảng tất cả công trình *(sắp xếp theo ngày unlock)*
 
@@ -29,7 +29,7 @@ Hệ thống công trình chia làm 3 nhóm chính. Mỗi công trình có thể
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Gear Upgrades | Base | — | Day 1 | 16 | Nâng chỉ số người chơi (HP, Water, Speed, Backpack) |
 | 2 | Farm House | Base | — | Day 1 | — | Sleep để bỏ qua phần còn lại của đêm |
-| 3 | Farm Market | Base | — | Day 1 | 1 | Bán trái cây / vật phẩm, dynamic pricing |
+| 3 | Farm Market | Base | — | Day 1 | 1 | Bán nông sản / vật phẩm, dynamic pricing |
 | 4 | Garden | Farming | — | Day 1 | 8 | Công trình farming chính, tối đa 4 plot |
 | 5 | Water Purifier | Farming | — | Day 1 | 4 | Lọc salt water → fresh water |
 | 6 | Refinery | Science Lab | — | Day 1 | — | Lưu trữ vật phẩm (chỉ bỏ vào, không lấy ra) |
@@ -107,9 +107,9 @@ Nâng cấp chỉ số cá nhân của người chơi. Mua trực tiếp qua UI,
 
 **Nhóm:** Base · **Mở:** Day 1 · **Blueprint:** Không cần.
 
-**Sleep to skip** — bỏ qua phần còn lại của đêm, chuyển thẳng đến 7h sáng. Có thể ngủ sau khi dọn sạch quái hoặc từ 3h sáng. Khi thức dậy: hồi đầy HP và Energy.
+**Sleep to skip** — bỏ qua phần còn lại của đêm, chuyển thẳng đến 7h sáng. Có thể ngủ sau khi dọn sạch quái hoặc từ 3h sáng. Khi thức dậy: hồi đầy HP và Energy. Tăng tốc độ di chuyển trong 3h thêm 25%.
 
-> ⚠️ Ngủ sớm = mất phút farm ban đêm (drop Granumz, trái cây, blueprint). Cần cân bằng tốc độ farm để Sleep không bị spam.
+> ⚠️ Ngủ sớm = mất phút farm (drop Granumz, nông sản, blueprint). Cần cân bằng tốc độ farm để Sleep không bị spam.
 
 ---
 
@@ -117,7 +117,7 @@ Nâng cấp chỉ số cá nhân của người chơi. Mua trực tiếp qua UI,
 
 **Nhóm:** Base · **Mở:** Day 1 · **Blueprint:** Không cần.
 
-Bán trái cây và vật phẩm lấy Granumz. Hệ thống giá động sử dụng **Perlin Noise + chỉ số chênh lệch supply/demand**. Bán nhiều 1 loại → giảm giá. Khuyến khích người chơi đa dạng hoá cây trồng.
+Bán nông sản và vật phẩm lấy Granumz. Hệ thống giá động sử dụng **Perlin Noise + chỉ số chênh lệch supply/demand**. Bán nhiều 1 loại → giảm giá. Khuyến khích người chơi đa dạng hoá cây trồng.
 
 > 💡 **Dynamic Pricing:** Dùng Perlin Noise kết hợp chênh lệch số lượng bán giữa các loại vật phẩm. Bán nhiều 1 loại → sụt giá. Đa dạng hoá danh mục bán để giữ giá tốt.
 
@@ -131,7 +131,7 @@ Bán trái cây và vật phẩm lấy Granumz. Hệ thống giá động sử d
 
 **Nhóm:** Base · **Mở:** Day 2 · **Blueprint:** Free — rải cố định trên map.
 
-Rải rác tại các vị trí cố định trên map, từ địa hình đơn giản đến hiểm trở (khe đá, cây cao…). Độ khó để tiếp cận khác nhau — yêu cầu kỹ năng điều khiển và HandGun. Reward: **Granumz + Trái cây + Potion + Blueprint Lv3 Fabricate Gadget**.
+Rải rác tại các vị trí cố định trên map, từ địa hình đơn giản đến hiểm trở (khe đá, cây cao…). Độ khó để tiếp cận khác nhau — yêu cầu kỹ năng điều khiển và HandGun. Reward: **Granumz + Nông sản + Potion + Blueprint Lv3 Fabricate Gadget**.
 
 > 🎨 **Level Design:** Các vị trí Treasure Pod cần có gradient độ khó rõ ràng. Pod Lv3 phải yêu cầu skill ceiling cao — phần thưởng dành riêng cho hardcore player, cung cấp blueprint gadget cấp cao.
 
@@ -163,7 +163,7 @@ Mua Blueprint bằng Granumz để mở khoá xây dựng công trình mới và
 
 **Nhóm:** Farming · **Mở:** Day 1 · **Blueprint:** Không cần · 🔴 Demolish required.
 
-Công trình farming chính. Bắt đầu với 1 plot — mỗi plot trồng 1 loại cây. Trái cây = đạn = nguyên liệu craft. Tối đa 4 plot sau khi nâng cấp.
+Công trình farming chính. Bắt đầu với 1 plot — mỗi plot trồng 1 loại cây. Nông sản = đạn = nguyên liệu craft. Tối đa 4 plot sau khi nâng cấp.
 
 | # | Tên | Effect | Cost | Day | Type |
 | --- | --- | --- | --- | --- | --- |
@@ -309,7 +309,7 @@ Gadget hỗ trợ combat và quality-of-life. Đặt gần base.
 
 **Mở:** Day 10 · **Blueprint:** 2,000G · Ammo Cap: 200 crops · Fire Rate: 1 shot/2s
 
-> 🎨 **Design Note:** Nạp trái cây vào để tự động bắn quái trong phase đêm. Các level nâng tier trái cây được phép nạp và tổng ammo cap.
+> 🎨 **Design Note:** Nạp nông sản vào để tự động bắn quái trong phase đêm. Các level nâng tier nông sản được phép nạp và tổng ammo cap.
 
 | Level | Mô tả | Ammo Cap | Tier | Fire Rate | Cost |
 | --- | --- | --- | --- | --- | --- |
@@ -329,7 +329,7 @@ Gadget hỗ trợ combat và quality-of-life. Đặt gần base.
 | Lv2 | Improved healing | 125 HP | 3h | 4m | 900G |
 | Lv3 | Max healing (max) | 150 HP | 3h | 5m | 1,300G |
 
-> - [ ] **TODO:** Xác định `BASE_UPGRADE_VALUE` — sát thương Turret theo tier trái cây, cân bằng heal vs HP pool.
+> - [ ] **TODO:** Xác định `BASE_UPGRADE_VALUE` — sát thương Turret theo tier nông sản, cân bằng heal vs HP pool.
 
 ---
 
@@ -351,7 +351,7 @@ Nạp vật phẩm vào Refinery từ xa. Giảm áp lực Backpack khi farm xa 
 
 **Mở:** Day 16 · **Cost:** 4,500G · Không có upgrade.
 
-Tự động nạp trái cây từ 1 ô đất chỉ định vào Crop Turret gần nhất. Kết hợp với Garden Auto Harvest tạo ra automation loop hoàn chỉnh.
+Tự động nạp nông sản từ 1 ô đất chỉ định vào Crop Turret gần nhất. Kết hợp với Garden Auto Harvest tạo ra automation loop hoàn chỉnh.
 
 #### Market Link *(Blueprint only)*
 

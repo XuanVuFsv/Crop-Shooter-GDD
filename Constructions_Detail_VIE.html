@@ -293,9 +293,9 @@
 
     <div id="flows">
       <h3 class="h3">Fabricate Gadget Flow</h3>
-      <div class="flow-box"><strong>1.</strong> Unlock Blueprint tại <strong>Builder's Shop</strong> → <strong>2.</strong> Vào <strong>Fabricate Gadget</strong> nhấn Fabricate → <strong>3.</strong> Gadget lưu lại (chỉ 1 cái tại một thời điểm) → <strong>4.</strong> Di chuyển ra vị trí chỉ định → <strong>5.</strong> Chọn điểm đặt lên map.</div>
+      <div class="flow-box"><strong>1.</strong> Purchase Blueprint tại <strong>Builder's Shop</strong> → <strong>2.</strong> Vào <strong>Fabricate Gadget</strong> nhấn Fabricate → <strong>3.</strong> Gadget lưu lại (chỉ 1 cái tại một thời điểm) → <strong>4.</strong> Di chuyển ra vị trí chỉ định → <strong>5.</strong> Chọn điểm đặt lên map.</div>
       <h3 class="h3">Garden Water Flow</h3>
-      <div class="flow-box"><strong>Pond / Natural Water Sources</strong> (nước mặn) → <strong>Water Purifier</strong> (lọc → nước ngọt) → <strong>Garden</strong> (tưới cây) → Thu hoạch trái cây.</div>
+      <div class="flow-box"><strong>Pond / Natural Water Sources</strong> (nước mặn) → <strong>Water Purifier</strong> (lọc → nước ngọt) → <strong>Garden</strong> (tưới cây) → Thu hoạch nông sản.</div>
     </div>
 
     <h3 class="h3" id="building-table">Bảng tất cả công trình <em style="font-size:11px;color:var(--text-muted)">(theo ngày unlock)</em></h3>
@@ -304,7 +304,7 @@
       <tbody>
         <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">1</td><td class="ov-name">Gear Upgrades</td><td><span class="tag gray">Base</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>16</td><td class="ov-desc">Nâng chỉ số người chơi (HP, Water, Speed, Backpack)</td></tr>
         <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">2</td><td class="ov-name">Farm House</td><td><span class="tag gray">Base</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>—</td><td class="ov-desc">Sleep để bỏ qua phần còn lại của đêm</td></tr>
-        <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">3</td><td class="ov-name">Farm Market</td><td><span class="tag gray">Base</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>1</td><td class="ov-desc">Bán trái cây / vật phẩm, dynamic pricing</td></tr>
+        <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">3</td><td class="ov-name">Farm Market</td><td><span class="tag gray">Base</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>1</td><td class="ov-desc">Bán nông sản / vật phẩm, dynamic pricing</td></tr>
         <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">4</td><td class="ov-name">Garden</td><td><span class="tag green">Farming</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>8</td><td class="ov-desc">Công trình farming chính, tối đa 4 plot</td></tr>
         <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">5</td><td class="ov-name">Water Purifier</td><td><span class="tag green">Farming</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>4</td><td class="ov-desc">Lọc salt water → fresh water</td></tr>
         <tr><td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">6</td><td class="ov-name">Refinery</td><td><span class="tag blue">Science Lab</span></td><td class="ov-cost">—</td><td class="ov-day">Day 1</td><td>—</td><td class="ov-desc">Lưu trữ vật phẩm (chỉ bỏ vào, không lấy ra)</td></tr>
@@ -402,8 +402,8 @@
         </div>
       </div>
       <div class="building-body">
-        <div class="building-desc"><strong>Sleep to skip</strong> — bỏ qua phần còn lại của đêm, chuyển thẳng đến 7h sáng. Có thể ngủ sau khi dọn sạch quái hoặc từ 3h sáng. Khi thức dậy: hồi đầy HP và Energy.</div>
-        <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body">Ngủ sớm = mất phút farm ban đêm (drop Granumz, trái cây, blueprint). Cần cân bằng để Sleep không bị spam.</div></div>
+        <div class="building-desc"><strong>Sleep to skip</strong> — bỏ qua phần còn lại của đêm, chuyển thẳng đến 7h sáng. Có thể ngủ sau khi dọn sạch quái hoặc từ 3h sáng. Khi thức dậy: hồi đầy HP và Energy. Tăng tốc độ di chuyển trong 3h thêm 25%</div>
+        <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body">Ngủ sớm = mất phút farm (drop Granumz, nông sản, blueprint). Cần cân bằng để Sleep không bị spam.</div></div>
       </div>
     </div>
 
@@ -417,7 +417,7 @@
         </div>
       </div>
       <div class="building-body">
-        <div class="building-desc">Bán trái cây và vật phẩm lấy Granumz. Hệ thống giá động sử dụng <strong>Perlin Noise + chỉ số chênh lệch supply/demand</strong>. Bán nhiều 1 loại → giảm giá.</div>
+        <div class="building-desc">Bán nông sản và vật phẩm lấy Granumz. Hệ thống giá động sử dụng <strong>Perlin Noise + chỉ số chênh lệch supply/demand</strong>. Bán nhiều 1 loại → giảm giá.</div>
         <div class="callout info"><div class="callout-icon">💡</div><div class="callout-body"><strong>Dynamic Pricing:</strong> Perlin Noise kết hợp chênh lệch số lượng bán. Bán nhiều 1 loại → sụt giá. Đa dạng hoá danh mục bán để giữ giá tốt.</div></div>
         <table class="upgrade-table">
           <thead><tr><th>#</th><th>Tên</th><th>Effect</th><th>Cost</th><th>Day</th><th>Type</th></tr></thead>
@@ -436,7 +436,7 @@
         </div>
       </div>
       <div class="building-body">
-        <div class="building-desc">Rải rác tại vị trí cố định trên map, từ địa hình đơn giản đến hiểm trở. Reward: <strong>Granumz + Trái cây + Potion + Blueprint Lv3 Fabricate Gadget</strong>.</div>
+        <div class="building-desc">Rải rác tại vị trí cố định trên map, từ địa hình đơn giản đến hiểm trở. Reward: <strong>Granumz + Nông sản + Potion + Blueprint Lv3 Fabricate Gadget</strong>.</div>
         <div class="callout design"><div class="callout-icon">🎨</div><div class="callout-body"><strong>Level Design:</strong> Gradient độ khó rõ ràng. Pod Lv3 phải yêu cầu skill ceiling cao — phần thưởng dành riêng cho hardcore player.</div></div>
         <table class="upgrade-table">
           <thead><tr><th>#</th><th>Tier</th><th>Reward</th><th>Ngày xuất hiện</th><th>Type</th></tr></thead>
@@ -482,7 +482,7 @@
         </div>
       </div>
       <div class="building-body">
-        <div class="building-desc">Công trình farming chính. Bắt đầu với 1 plot — mỗi plot trồng 1 loại cây. Trái cây = đạn = nguyên liệu craft. Tối đa 4 plot.</div>
+        <div class="building-desc">Công trình farming chính. Bắt đầu với 1 plot — mỗi plot trồng 1 loại cây. Nông sản = đạn = nguyên liệu craft. Tối đa 4 plot.</div>
         <table class="upgrade-table">
           <thead><tr><th>#</th><th>Tên</th><th>Effect</th><th>Cost</th><th>Day</th><th>Type</th></tr></thead>
           <tbody>
@@ -651,7 +651,7 @@
       <div class="gadget-card">
         <div class="gadget-header"><div class="gadget-icon">🍊</div><div class="gadget-name">Crop Turret</div><div class="gadget-meta-right">Day 10 · BP: 2,000G</div></div>
         <div class="base-stats-row"><div class="stat-chip"><span class="stat-k">Ammo Cap</span><span class="stat-v">200 crops</span></div><div class="stat-chip"><span class="stat-k">Fire Rate</span><span class="stat-v">1 shot/2s</span></div></div>
-        <div class="callout design" style="margin:8px 14px;max-width:calc(100% - 28px)"><div class="callout-icon" style="font-size:13px">🎨</div><div class="callout-body" style="font-size:11px"><strong>Design Note:</strong> Nạp trái cây vào để tự động bắn quái trong phase đêm. Các level nâng tier trái cây được phép nạp và tổng ammo cap.</div></div>
+        <div class="callout design" style="margin:8px 14px;max-width:calc(100% - 28px)"><div class="callout-icon" style="font-size:13px">🎨</div><div class="callout-body" style="font-size:11px"><strong>Design Note:</strong> Nạp nông sản vào để tự động bắn quái trong phase đêm. Các level nâng tier nông sản được phép nạp và tổng ammo cap.</div></div>
         <div class="level-rows">
           <div class="level-row"><div class="lv-badge">Lv1</div><div class="lv-desc">Basic turret — 200 ammo, Basic crops, 1/2s.<div class="lv-sub-stats"><div class="stat-chip"><span class="stat-k">Cap</span><span class="stat-v">200</span></div><div class="stat-chip"><span class="stat-k">Tier</span><span class="stat-v">Basic</span></div><div class="stat-chip"><span class="stat-k">Rate</span><span class="stat-v">1/2s</span></div></div></div><div class="lv-cost">1,300G</div></div>
           <div class="level-row"><div class="lv-badge">Lv2</div><div class="lv-desc">Mid-tier allowed — 250 ammo, 1/1.5s.<div class="lv-sub-stats"><div class="stat-chip"><span class="stat-k">Cap</span><span class="stat-v">250</span></div><div class="stat-chip"><span class="stat-k">Tier</span><span class="stat-v">Mid</span></div><div class="stat-chip"><span class="stat-k">Rate</span><span class="stat-v">1/1.5s</span></div></div></div><div class="lv-cost">4,000G</div></div>
@@ -668,7 +668,7 @@
           <div class="level-row"><div class="lv-badge">Lv3</div><div class="lv-desc">150 HP, 3h cooldown, 5m range. (max)<div class="lv-sub-stats"><div class="stat-chip"><span class="stat-k">Heal</span><span class="stat-v">150 HP</span></div><div class="stat-chip"><span class="stat-k">CD</span><span class="stat-v">3h</span></div><div class="stat-chip"><span class="stat-k">Range</span><span class="stat-v">5m</span></div></div></div><div class="lv-cost">1,300G</div></div>
         </div>
       </div>
-      <div class="todo-item"><div class="todo-checkbox"></div><div>TODO: Xác định <code>BASE_UPGRADE_VALUE</code> — sát thương Turret theo tier trái cây, cân bằng heal vs HP pool.</div></div>
+      <div class="todo-item"><div class="todo-checkbox"></div><div>TODO: Xác định <code>BASE_UPGRADE_VALUE</code> — sát thương Turret theo tier nông sản, cân bằng heal vs HP pool.</div></div>
     </div>
 
     <!-- WARPTECH -->
@@ -686,7 +686,7 @@
       <div class="gadget-card">
         <div class="gadget-header"><div class="gadget-icon">🔫</div><div class="gadget-name">Turret Link <span class="tag blue">Blueprint only</span></div><div class="gadget-meta-right">Day 16</div></div>
         <div class="base-stats-row"><div class="stat-chip"><span class="stat-k">Upgrade</span><span class="stat-v">Không có</span></div></div>
-        <div class="level-rows"><div class="level-row"><div class="lv-badge">—</div><div class="lv-desc">Tự động nạp trái cây từ 1 ô đất chỉ định vào Crop Turret gần nhất. Kết hợp Garden Auto Harvest tạo automation loop hoàn chỉnh.</div><div class="lv-cost">4,500G</div></div></div>
+        <div class="level-rows"><div class="level-row"><div class="lv-badge">—</div><div class="lv-desc">Tự động nạp nông sản từ 1 ô đất chỉ định vào Crop Turret gần nhất. Kết hợp Garden Auto Harvest tạo automation loop hoàn chỉnh.</div><div class="lv-cost">4,500G</div></div></div>
       </div>
       <div class="gadget-card">
         <div class="gadget-header"><div class="gadget-icon">🏷️</div><div class="gadget-name">Market Link <span class="tag blue">Blueprint only</span></div><div class="gadget-meta-right">Day 18</div></div>

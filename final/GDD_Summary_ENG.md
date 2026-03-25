@@ -24,7 +24,7 @@
 
 ## 01 Day / Night Cycle
 
-### ☀️ Day Phase — 7 AM – 10 PM
+### ☀️ Day Phase — 7 AM – 7 PM
 
 - 🌾 Farm crops, water the garden, harvest
 - ⛏ Mine resources (caves, ruins)
@@ -34,7 +34,7 @@
 - 🐔 Feed & check the Coop
 - 📦 Open Treasure Pods on the map
 
-### 🌙 Night Phase — 10 PM – 3 AM
+### 🌙 Night Phase — 7 PM – 3 AM
 
 - ⚔️ Monster waves attack your base
 - 🔫 Use Crop Turret + player weapons to defend
@@ -66,7 +66,7 @@
 
 **Fight:** Eliminate monster waves, collect Granumz & other drops
 
-**Upgrade:** Unlock blueprints, build & upgrade structures
+**Upgrade:** Purchase blueprints, build & upgrade structures
 
 ### Ammo = Crops Principle
 
@@ -131,6 +131,17 @@ Each crop can be used as:
 
 ## 05 Recipes — Crafting Station
 
+## Recipe Slot Rules (3 slots)
+
+- Quy tắc ingame: **Mọi recipe luôn phải có đúng 3 slot** (3 cụm `Item ×N`).
+- Nếu recipe chỉ có **2 thành phần** `A×m + B×n`, hãy **tách 1 thành phần** thành 2 slot để đủ 3:
+    - `A×m + B×n` → `A×a + B×n + A×(m−a)` (với `1 ≤ a < m`)
+- Ưu tiên tách thành phần có số lượng lớn hơn / dễ chia hơn.
+- Ví dụ:
+    - `🍇 Grape ×16 + 🍬 Sugar ×1` → `🍇 Grape ×8 + 🍬 Sugar ×1 + 🍇 Grape ×8`
+    - `🛢️ Bean Oil ×3 + 🧴 Coconut Oil ×1` → `🛢️ Bean Oil ×2 + 🧴 Coconut Oil ×1 + 🛢️ Bean Oil ×1`
+    - `🧪 Vial Lv1 ×2 + 💎 Ruby ×2` → `🧪 Vial Lv1 ×1 + 💎 Ruby ×2 + 🧪 Vial Lv1 ×1` (hoặc tách Ruby tương tự)
+
 ### Resource Ingredients / Vials
 
 | Output | Ingredients | Notes | Unlock |
@@ -164,7 +175,7 @@ Each crop can be used as:
 | 🍳 Omelet | Egg ×18 | +25 HP · REGEN | Day 7 |
 | 🎂 Berry Cake | Flour + Berry ×8 + Sugar | +20 HP → Frost Bottle | Day 5 |
 | 🥖 Soggy Bread | Flour + Monster Meat ×4 | +30 HP · STEALTH (monsters ignore you temporarily) | Day 5 |
-| 🍔 Burger Berry | Flour + Cabbage ×4 + Berry ×8 | +20 HP → Rapidfire Bottle | Day 6 |
+| 🍔 Burger Berry | Flour + Cabbage ×4 + Berry ×8 | +25 HP → Rapidfire Bottle | Day 6 |
 | 🥪 Hot Bunny | Carrot ×4 (2×2) + Margarine ×1 | +15 HP · Ap-pleClear 1/3 | Day 8 |
 | 🍡 Sweet Grapeball | Grape ×16 + Sugar ×1 | +20 HP → Cluster Bottle | Day 8 |
 | 🧁 Carrot Cake | Carrot ×5 + Coconut Milk ×3 + Sugar ×1 | +40 HP · Ap-pleClear 2/3 | Day 8 |
@@ -288,6 +299,13 @@ After 6 breeding cycles:
 | 2–5 | 3 | 5–15 | 3 | 15 | 45 |
 | 3–6 | 3 | 6–18 | 4 | 24 | 72 |
 
+**CL = 4**
+
+| H–R | CL | Egg/batch | Batches | Min | Max |
+|-----|----|-----------|---------|-----|-----|
+| 1–5 | 4 | 5–15 | 2 | 10 | 30 |
+| 2–6 | 4 | 6–18 | 3 | 18 | 54 |
+
 **CL = 5**
 
 | H–R | CL | Egg/batch | Batches | Min | Max |
@@ -343,7 +361,7 @@ After 6 breeding cycles:
 | ⚗️ | Crafting Station | Farming | Crafts all: Materials, Bottles, Food, Ingredients | Queue +slot, Speed upgrade | Input only, no retrieval |
 | 🐔 | Coop | Farming | Raise Hen/Rooster → Eggs & Meat | High Wall, Expand Coop (→12) | Max 6 → 12 chickens |
 | 🔬 | Refinery | Science Lab | Central storage hub — deposit only | — | Cannot retrieve |
-| 🏪 | Builder's Shop | Science Lab | Unlock blueprints with Granumz | — | Some blueprints from Treasure Pods or Unlock Events |
+| 🏪 | Builder's Shop | Science Lab | Purchase blueprints with Granumz | — | Some blueprints from Treasure Pods or Unlock Events |
 | 🔧 | Fabricate Gadget | Science Lab | Craft & place Gadgets on the map | — | Holds 1 Gadget at a time |
 | 💰 | Farm Market | Science Lab | Sell items for Granumz | +5% Sell Value ×2 (WIP) | Prices fluctuate via Perlin Noise |
 | 🏠 | Farm House | Base | Sleep to skip — restores HP & Energy | — | Sleeping early loses night farming time |
@@ -405,7 +423,7 @@ Natural Salt Water source. Auto-refills with cooldown. Supplies water to the Wat
 | 3 | More Water Contain II |
 | 4 | Decrease Cooldown II |
 | 5 | More Water Contain III |
-| 6 | Decrease Cooldown III |
+| 6 | More Water Contain IV |
 
 
 ### 💧 Water Purifier
@@ -417,9 +435,7 @@ Filters Salt Water → Fresh Water for watering Garden. Runs automatically durin
 | 1 | More Water Contain I |
 | 2 | Decrease Purifier Time I |
 | 3 | More Water Contain II |
-| 4 | Decrease Purifier Time II |
-| 5 | More Water Contain III |
-| 6 | Decrease Purifier Time III |
+| 4 | More Water Contain III |
 
 ### 🐔 Coop
 
@@ -436,7 +452,7 @@ Raises Hen/Rooster → Eggs & Meat. Max 6 chickens (base) → 12 after upgrade. 
 
 ## 10 Science Lab
 
-The Lab is the central tech hub — housing the Refinery, Fabricate Gadget, and Builder's Shop. This is where Gadgets are unlocked, crafted, and deployed onto the map.
+The Lab is the central tech hub — housing the Refinery, Fabricate Gadget, and Builder's Shop. This is where Gadgets are purchased, crafted, and deployed onto the map.
 
 ### 🔬 Refinery
 
@@ -444,11 +460,11 @@ Central item storage vault. ⚠ Deposit only — items cannot be retrieved. Conn
 
 ### 🏪 Builder's Shop
 
-Unlock blueprints with Granumz and materials. Some special blueprints are only available from Treasure Pods (level 3 Gadgets). Unlocked blueprints are used in Fabricate Gadget.
+Purchase blueprints with Granumz and materials. Some special blueprints are only available from Treasure Pods (level 3 Gadgets). Purchased blueprints are used in Fabricate Gadget.
 
 ### 🔧 Fabricate Gadget
 
-Craft Gadgets from unlocked blueprints. Holds 1 Gadget at a time. Flow: Press Fabricate → move to map → select designated location → place.
+Craft Gadgets from purchased blueprints. Holds 1 Gadget at a time. Flow: Press Fabricate → move to map → select designated location → place.
 
 ### 💰 Farm Market
 
@@ -493,7 +509,7 @@ Sell crops and items for Granumz — the main currency. Dynamic pricing system: 
 
 ### 🏠 Farm House
 
-Sleep to skip — skips the rest of the night. On wakeup: fully restores HP & Energy. Increases movement speed. Can sleep after clearing threats or from 3 AM.
+Sleep to skip — skips the rest of the night. On wakeup: fully restores HP & Energy. Increases movement speed in 3h to 25%. Can sleep after clearing threats or from 3 AM.
 
 > ⚠️ Sleeping early = losing night farming minutes (Granumz, crop, blueprint drops). Balance farming pace so Sleep is not spammed.
 
@@ -514,7 +530,7 @@ Passive tracking — automatically unlocks rewards when conditions are met. No n
 | 🌿 Green Thumb | Harvest 100 Berries for the first time | +1 Garden Plot (early access) |
 | 💀 Night Cleaner | Kill 50 monsters in a single night | Exclusive blueprint |
 | 🗡 Monster Slayer | Kill 300 monsters total | Tomato (Shotgun) unlock |
-| 🐔 Balanced Ranch | Raise 3 balanced Hen-Rooster pairs | Vitamizer early unlock |
+| 🐔 Balanced Farm | Raise 3 balanced Hen-Rooster pairs | Vitamizer early unlock |
 | 📦 Pod Hunter | Open all Treasure Pods on the map | Granumz bonus + Vial Lv3 blueprint |
 | 🌙 Survivor | Survive 20 days | Miracle Mix unlock (Garden) |
 | 👑 Boss Slayer | Kill 3 Bosses (Day 5 / 10 / 15) | Miracle Mix — increases harvest count, reduces Rotten timer |

@@ -214,7 +214,7 @@ const ITEMS = {
   wood:         {ic:'🌲',nm:'Wood',            type:'natural',day:1,  src:'🌲 Chop trees(Builder\'s Shop - WIP)'},
   stone:        {ic:'🪨',nm:'Stone',           type:'natural',day:1,  src:'⛏ Mine — Surface(Builder\'s Shop - WIP)'},
   power_core:   {ic:'🔋',nm:'Power Core',      type:'inter',  day:1,  src:'⚗️ Crafting Station', recipe:[['power_shard',1],['metal',1],['iron',1]], mech:'craft', mechNote:'Energy core that powers machinery'},
-  circuit:      {ic:'💡',nm:'Circuit',         type:'inter',  day:1,  src:'⚗️ Crafting Station', recipe:[['power_shard',1],['metal',1],['copper',1]], mech:'craft', mechNote:'Circuit that unlocks Blueprints - WIP'},
+  circuit:      {ic:'💡',nm:'Circuit',         type:'inter',  day:1,  src:'⚗️ Crafting Station', recipe:[['power_shard',1],['metal',1],['copper',1]], mech:'craft', mechNote:'Circuit that purchases Blueprints - WIP'},
   poison_shard: {ic:'☠️',nm:'Poison Shard',    type:'inter',  day:15, src:'⚗️ Crafting Station', recipe:[['trash',3],['sand',3],['trash',3]], note:'Trash ×6 + Sand ×3'},
   acid_shard:   {ic:'💧',nm:'Acid Shard',      type:'inter',  day:15, src:'⚗️ Crafting Station', recipe:[['trash',3],['metal',3],['trash',3]], note:'Trash ×6 + Metal Scrap ×3'},
   // GLASS VIALS
@@ -232,7 +232,7 @@ const ITEMS = {
   // FOOD
   bread:        {ic:'🍞',nm:'Bread',           type:'food',   day:5,  src:'⚗️ Crafting Station', hp:5,   recipe:[['flour',1],['sugar',1],['flour',1]],                  mech:'heal'},
   hot_bunny:    {ic:'🥪',nm:'Hot Bunny',       type:'food',   day:8,  src:'⚗️ Crafting Station', hp:15,  recipe:[['carrot',4],['carrot',4],['margarine',1]],             mech:'craft', mechNote:'Ap-pleClear Ca-Rotket (1/3)'},
-  burger_berry: {ic:'🍔',nm:'Burger Berry',    type:'food',   day:6,  src:'⚗️ Crafting Station', hp:20,  recipe:[['flour',1],['cabbage',4],['berry',8]],                 mech:'bottle', mechNote:'→ Rapidfire Bottle'},
+  burger_berry: {ic:'🍔',nm:'Burger Berry',    type:'food',   day:6,  src:'⚗️ Crafting Station', hp:25,  recipe:[['flour',1],['cabbage',4],['berry',8]],                 mech:'bottle', mechNote:'→ Rapidfire Bottle'},
   omelet:       {ic:'🍳',nm:'Omelet',          type:'food',   day:7,  src:'⚗️ Crafting Station', hp:25,  recipe:[['egg',6],['egg',6],['egg',6]],                         mech:'regen', mechNote:'+HP regen after eating'},
   soggy_bread:  {ic:'🥖',nm:'Soggy Bread',     type:'food',   day:5,  src:'⚗️ Crafting Station', hp:30,  recipe:[['flour',1],['monster',2],['monster',2]],               mech:'stealth', mechNote:'Stealth — monsters ignore you temporarily'},
   sweet_grape:  {ic:'🍡',nm:'Sweet Grapeball', type:'food',   day:8,  src:'⚗️ Crafting Station', hp:20,  recipe:[['grape',8],['grape',8],['sugar',1]],                   mech:'bottle', mechNote:'→ Cluster Bottle'},
@@ -673,5 +673,39 @@ function closePanel(){
 window.addEventListener('load',()=>setTimeout(drawLines,120));
 window.addEventListener('resize',()=>drawLines(activeId||null));
 </script>
+<ul>
+
+      <li><b>Quy tắc ingame:</b> Mọi recipe luôn phải có đúng <b>3 slot</b> (3 cụm <code>Item ×N</code>).</li>
+
+      <li>Nếu recipe chỉ có <b>2 thành phần</b> <code>A×m + B×n</code>, hãy <b>tách 1 thành phần</b> thành 2 slot để đủ
+        3:
+
+        <ul>
+
+          <li><code>A×m + B×n</code> → <code>A×a + B×n + A×(m−a)</code> (với <code>1 ≤ a &lt; m</code>)</li>
+
+        </ul>
+
+      </li>
+
+      <li>Ưu tiên tách thành phần có số lượng lớn hơn / dễ chia hơn.</li>
+
+      <li>Ví dụ:
+
+        <ul>
+
+          <li><code>🍇 Grape ×16 + 🍬 Sugar ×1</code> → <code>🍇 Grape ×8 + 🍬 Sugar ×1 + 🍇 Grape ×8</code></li>
+
+          <li><code>🛢️ Bean Oil ×3 + 🧴 Coconut Oil ×1</code> →
+            <code>🛢️ Bean Oil ×2 + 🧴 Coconut Oil ×1 + 🛢️ Bean Oil ×1</code></li>
+
+          <li><code>🧪 Vial Lv1 ×2 + 💎 Ruby ×2</code> → <code>🧪 Vial Lv1 ×1 + 💎 Ruby ×2 + 🧪 Vial Lv1 ×1</code> (hoặc
+            tách Ruby tương tự)</li>
+
+        </ul>
+
+      </li>
+
+    </ul>
 </body>
 </html>

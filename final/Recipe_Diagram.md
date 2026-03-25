@@ -17,6 +17,19 @@
 
 ---
 
+## Recipe Slot Rules (3 slots)
+
+- Quy tắc ingame: **Mọi recipe luôn phải có đúng 3 slot** (3 cụm `Item ×N`).
+- Nếu recipe chỉ có **2 thành phần** `A×m + B×n`, hãy **tách 1 thành phần** thành 2 slot để đủ 3:
+    - `A×m + B×n` → `A×a + B×n + A×(m−a)` (với `1 ≤ a < m`)
+- Ưu tiên tách thành phần có số lượng lớn hơn / dễ chia hơn.
+- Ví dụ:
+    - `🍇 Grape ×16 + 🍬 Sugar ×1` → `🍇 Grape ×8 + 🍬 Sugar ×1 + 🍇 Grape ×8`
+    - `🛢️ Bean Oil ×3 + 🧴 Coconut Oil ×1` → `🛢️ Bean Oil ×2 + 🧴 Coconut Oil ×1 + 🛢️ Bean Oil ×1`
+    - `🧪 Vial Lv1 ×2 + 💎 Ruby ×2` → `🧪 Vial Lv1 ×1 + 💎 Ruby ×2 + 🧪 Vial Lv1 ×1` (hoặc tách Ruby tương tự)
+
+---
+
 ## Crops
 
 | Icon | Name | Unlock Day | Unlock Trigger |
@@ -88,7 +101,7 @@ All crafted at ⚗️ Crafting Station.
 | 🍳 | Omelet | Day 7 | +25 HP | **REGEN** — +HP regen after eating | 🥚 Egg ×18 (3×6) |
 | 🥖 | Soggy Bread | Day 5 | +30 HP | **STEALTH** — Monsters ignore you temporarily | 🥐 Flour ×1 + 💀 Monster Meat ×4 |
 | 🎂 | Berry Cake | Day 5 | +20 HP | **BOTTLE** → Frost Bottle | 🥐 Flour ×1 + 🫐 Berry ×8 + 🍬 Sugar ×1 |
-| 🍔 | Burger Berry | Day 6 | +20 HP | **BOTTLE** → Rapidfire Bottle | 🥐 Flour ×1 + 🥬 Cabbage ×4 + 🫐 Berry ×8 |
+| 🍔 | Burger Berry | Day 6 | +25 HP | **BOTTLE** → Rapidfire Bottle | 🥐 Flour ×1 + 🥬 Cabbage ×4 + 🫐 Berry ×8 |
 | 🍡 | Sweet Grapeball | Day 8 | +20 HP | **BOTTLE** → Cluster Bottle | 🍇 Grape ×16 + 🍬 Sugar ×1 |
 | 🥪 | Hot Bunny | Day 8 | +15 HP | **CRAFT** — Ap-pleClear Ca-Rotket (1/3) | 🥕 Carrot ×4 (2×2) + 🧈 Margarine ×1 |
 | 🧁 | Carrot Cake | Day 8 | +40 HP | **CRAFT** — Ap-pleClear Ca-Rotket (2/3) | 🥕 Carrot ×5 + 🥛 Coconut Milk ×3 + 🍬 Sugar ×1 |
