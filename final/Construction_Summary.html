@@ -232,138 +232,150 @@ function img(key,cls='bcard-ic'){
 
 // ── DATA ──────────────────────────────────────────────────────────────────
 // cost: Granumz. day: unlock day. upgrades: [{name,desc,ic,cost,day,tag}]
+// Sorted by unlock day (ascending)
 const BUILDINGS = [
-  // ── BASE CONSTRUCTION ──
+  // Day 1
   {
     id:'gear', name:'Gear Upgrades', cat:'base', ic:'general_gear',
     blueprintCost:0, day:1, demolish:false,
+    keyEffect:'Upgrade HP, Water, Speed, Backpack, Energy',
     desc:'Personal stat upgrades. Purchase via UI interaction. No blueprint required — always available from Day 1.',
     upgrades:[
-      {name:'Heart Module Lv1', desc:'+1 max HP slot',           ic:'heart_lv1',    cost:150,  day:1},
-      {name:'Heart Module Lv2', desc:'+1 max HP slot',           ic:'heart_lv2',    cost:300,  day:4},
-      {name:'Heart Module Lv3', desc:'+1 max HP slot',           ic:'heart_lv3',    cost:600,  day:9},
-      {name:'Heart Module Lv4', desc:'+1 max HP slot (max)',     ic:'heart_lv4',    cost:1200, day:14},
-      {name:'Water Module Lv1', desc:'+25% max water capacity',  ic:'water_module', cost:200,  day:2},
-      {name:'Water Module Lv2', desc:'+25% max water capacity',  ic:'water_module', cost:400,  day:7},
-      {name:'Water Module Lv3', desc:'+25% max water capacity',  ic:'water_module', cost:800,  day:12},
-      {name:'Boost Module Lv1', desc:'+15% movement speed',      ic:'boost_lv1',    cost:350,  day:4},
-      {name:'Boost Module Lv2', desc:'+15% movement speed (max)',ic:'boost_lv2',    cost:700,  day:9},
-      {name:'Backpack Lv1',     desc:'+10 capacity per slot',    ic:'backpack_lv1', cost:250,  day:2},
-      {name:'Backpack Lv2',     desc:'+10 capacity per slot',    ic:'backpack_lv2', cost:500,  day:5},
-      {name:'Backpack Lv3',     desc:'+10 capacity per slot',    ic:'backpack_lv3', cost:900,  day:10},
-      {name:'Backpack Lv4',     desc:'+10 capacity per slot (max)',ic:'backpack_lv4',cost:1600,day:16},
-      {name:'Energy Module Lv1',desc:'+stamina regen rate',      ic:'energy_lv1',   cost:300,  day:3},
-      {name:'Energy Module Lv2',desc:'+stamina regen rate',      ic:'energy_lv2',   cost:600,  day:8},
-      {name:'Energy Module Lv3',desc:'+stamina regen rate (max)',ic:'energy_lv3',   cost:1100, day:13},
+      {name:'Heart Module Lv1', desc:'+25 max HP',               ic:'heart_lv1',    cost:350,  day:4},
+      {name:'Heart Module Lv2', desc:'+50 max HP',               ic:'heart_lv2',    cost:500,  day:7},
+      {name:'Heart Module Lv3', desc:'+75 max HP',               ic:'heart_lv3',    cost:750,  day:12},
+      {name:'Heart Module Lv4', desc:'+100 max HP (max)',        ic:'heart_lv4',    cost:900,  day:17},
+      {name:'Water Module Lv1', desc:'+50 water capacity',       ic:'water_module', cost:350,  day:2},
+      {name:'Water Module Lv2', desc:'+100 water capacity',      ic:'water_module', cost:500,  day:7},
+      {name:'Water Module Lv3', desc:'+150 water capacity (max)',ic:'water_module', cost:750,  day:12},
+      {name:'Boost Module Lv1', desc:'+1 movement speed',        ic:'boost_lv1',    cost:500,  day:4},
+      {name:'Boost Module Lv2', desc:'+2 movement speed (max)',  ic:'boost_lv2',    cost:950,  day:12},
+      {name:'Backpack Lv1',     desc:'+15 capacity',             ic:'backpack_lv1', cost:500,  day:5},
+      {name:'Backpack Lv2',     desc:'+35 capacity',             ic:'backpack_lv2', cost:950,  day:9},
+      {name:'Backpack Lv3',     desc:'+65 capacity',             ic:'backpack_lv3', cost:4500, day:17},
+      {name:'Backpack Lv4',     desc:'+85 capacity (max)',       ic:'backpack_lv4', cost:9000, day:21},
+      {name:'Energy Module Lv1',desc:'+1 stamina regen',         ic:'energy_lv1',   cost:300,  day:5},
+      {name:'Energy Module Lv2',desc:'+3 stamina regen',         ic:'energy_lv2',   cost:600,  day:10},
+      {name:'Energy Module Lv3',desc:'+6 stamina regen (max)',   ic:'energy_lv3',   cost:1100, day:20},
     ]
   },
   {
-    id:'house', name:'Ranch House', cat:'base', ic:'house',
+    id:'house', name:'Farm House', cat:'base', ic:'house',
     blueprintCost:0, day:1, demolish:false,
-    desc:'Sleep to skip day/night cycle. Balances farm pace — prevents sleep from being useless by tying crop timer to real time, not skip count.',
+    keyEffect:'Sleep to skip night — restores HP & Energy on wake',
+    desc:'Sleep to skip the remainder of the night and jump to 7 AM. Can sleep after clearing all monsters or from 3 AM onward. On wake: restores HP and Energy. +25% movement speed for 3 hours.',
     upgrades:[]
   },
   {
     id:'market', name:'Farm Market', cat:'base', ic:'market',
-    blueprintCost:500, day:3, demolish:true,
-    desc:'Sell crops and items for Granumz. Dynamic pricing via Perlin Noise + supply/demand inflation. Selling many of the same item decreases its price.',
+    blueprintCost:0, day:1, demolish:false,
+    keyEffect:'Sell produce for Granumz — dynamic Perlin Noise pricing',
+    desc:'Sell produce and items for Granumz. Dynamic pricing via Perlin Noise + supply/demand inflation. Selling many of the same item decreases its price.',
     upgrades:[
-      {name:'Selling Boost', desc:'+5% × 2 selling value on all items', ic:'market_upgrade', cost:800, day:7, tag:'blueprint'},
+      {name:'Selling Boost', desc:'+5% sell value on all items (×2 times)', ic:'market_upgrade', cost:0, day:1, tag:'achievement'},
     ]
   },
-  {
-    id:'treasure', name:'Treasure Pod', cat:'base', ic:'treasure_pod',
-    blueprintCost:0, day:1, demolish:false,
-    desc:'Fixed locations scattered across map. Difficulty to reach varies — requires skill + HandGun traversal. Rewards: Granumz + crops + potions + Fabricate blueprints (Lv3).',
-    upgrades:[
-      {name:'Treasure Pod Lv1', desc:'Standard pod — common rewards',          ic:'treasure_lv1', cost:0, day:1},
-      {name:'Treasure Pod Lv2', desc:'Medium difficulty — better rewards',      ic:'treasure_lv2', cost:0, day:8,  tag:'milestone'},
-      {name:'Treasure Pod Lv3', desc:'Hard reach — blueprint + rare item drop', ic:'treasure_lv3', cost:0, day:15, tag:'milestone'},
-    ]
-  },
-  {
-    id:'builder', name:"Builder's Shop", cat:'base', ic:'builder_shop',
-    blueprintCost:0, day:1, demolish:false,
-    desc:'Purchase blueprints to unlock construction of new buildings and Fabricate Gadgets. All buildings require blueprint purchase before placement.',
-    upgrades:[]
-  },
-
-  // ── FARMING ──
   {
     id:'garden', name:'Garden', cat:'farming', ic:'garden',
     blueprintCost:0, day:1, demolish:true,
+    keyEffect:'Primary farming — up to 4 plots, crops = ammo + food',
     desc:'Main farming building. Starts with 1 plot. Max 4 plots. Each plot grows 1 crop type. Crops = ammo + food ingredients.',
     upgrades:[
-      {name:'Additional Plot II',  desc:'Unlock 2nd plot',                          ic:'additional_plot',             cost:300,  day:2},
-      {name:'Nutrient Soil',       desc:'+% max harvest yield per crop',             ic:'nutrient_soil',cost:600,  day:5},
-      {name:'Additional Plot III', desc:'Unlock 3rd plot',                           ic:'additional_plot',             cost:800,  day:7},
-      {name:'Sprinkler',           desc:'Auto-water all plots — no manual watering', ic:'sprinkler',    cost:1000, day:9},
-      {name:'Additional Plot IV',  desc:'Unlock 4th plot (max)',                     ic:'additional_plot',             cost:1200, day:12},
-      {name:'Alluvium Soil',       desc:'-20% grow time permanently for all crops',  ic:'alluvium_soil',             cost:1500, day:14},
-      {name:'Auto Harvest',        desc:'Auto-harvest into Garden Silo when ready',  ic:'auto_harvest',             cost:1800, day:17},
-      {name:'Miracle Mix',         desc:'+Rotten time · +Harvest count · Requires Kill 3 Bosses achievement', ic:'miracle_mix', cost:0, day:18, tag:'achievement'},
-    ]
-  },
-  {
-    id:'silo', name:'Silo', cat:'farming', ic:'silo',
-    blueprintCost:200, day:1, demolish:true,
-    desc:'Item storage. Each port holds up to 150 units of one item type. Starts with 1 port.',
-    upgrades:[
-      {name:'Additional Storage I',  desc:'Unlock 2nd port',      ic:'silo_storage', cost:400,  day:2},
-      {name:'Additional Storage II', desc:'Unlock 3rd port',      ic:'silo_storage', cost:700,  day:6},
-      {name:'Additional Storage III',desc:'Unlock 4th port (max)',ic:'silo_storage', cost:1100, day:11},
-      {name:'Bug Free Spring Grass', desc:'+% max egg production — natural chicken feed. Also usable in Coop.', ic:'bug_free', cost:800, day:8},
-    ]
-  },
-  {
-    id:'pond', name:'Pond', cat:'farming', ic:'pond',
-    blueprintCost:300, day:2, demolish:true,
-    desc:'Collects natural water. Has refill cooldown. Provides salt water which must be purified before use in Garden.',
-    upgrades:[
-      {name:'More Water I',      desc:'+30% max water capacity', ic:'', cost:400,  day:4},
-      {name:'Decrease Cooldown I',desc:'-20% refill cooldown',   ic:'', cost:500,  day:7},
-      {name:'More Water II',     desc:'+30% max water capacity', ic:'', cost:700,  day:9},
-      {name:'Decrease Cooldown II',desc:'-20% refill cooldown',  ic:'', cost:800,  day:12},
-      {name:'More Water III',    desc:'+30% max water capacity', ic:'', cost:1000, day:14},
-      {name:'More Water IV',     desc:'+30% max water capacity (max)', ic:'', cost:1300, day:17},
+      {name:'Additional Plot II',  desc:'Unlock 2nd plot',                                      ic:'additional_plot', cost:350,  day:1},
+      {name:'Additional Plot III', desc:'Unlock 3rd plot',                                      ic:'additional_plot', cost:350,  day:1},
+      {name:'Additional Plot IV',  desc:'Unlock 4th plot (max)',                                ic:'additional_plot', cost:350,  day:1},
+      {name:'Nutrient Soil',       desc:'+25% max harvest yield for all crops',                 ic:'nutrient_soil',   cost:500,  day:5},
+      {name:'Alluvium Soil',       desc:'-20% grow time permanently',                           ic:'alluvium_soil',   cost:900,  day:8},
+      {name:'Sprinkler',           desc:'Auto-water all plots — no manual watering needed',     ic:'sprinkler',       cost:1500, day:10},
+      {name:'Auto Harvest',        desc:'Automatically harvests into Silo when crops are ripe', ic:'auto_harvest',    cost:1800, day:15},
+      {name:'Miracle Mix',         desc:'+Rotten timer · +Harvest count. Unlocked after defeating 4 bosses.', ic:'miracle_mix', cost:0, day:0, tag:'achievement'},
     ]
   },
   {
     id:'purifier', name:'Water Purifier', cat:'farming', ic:'purifier',
-    blueprintCost:400, day:3, demolish:true,
-    desc:'Converts salt water → fresh water for Garden irrigation.',
+    blueprintCost:0, day:1, demolish:false,
+    keyEffect:'Converts Salt Water → Fresh Water for Garden',
+    desc:'Filters water from Pond or Natural Water Sources. Converts Salt Water → Fresh Water. Runs automatically during Sleep phase.',
     upgrades:[
-      {name:'More Water Contain I',   desc:'+30% purifier tank capacity', ic:'', cost:400,  day:5},
-      {name:'Decrease Purifier Time', desc:'-25% purification duration',  ic:'', cost:600,  day:7},
-      {name:'More Water Contain II',  desc:'+30% purifier tank capacity', ic:'', cost:800,  day:10},
-      {name:'More Water Contain III', desc:'+30% capacity (max)',          ic:'', cost:1100, day:14},
+      {name:'More Water Contain I',     desc:'+25 tank capacity',       ic:'', cost:350,  day:1},
+      {name:'Decrease Purifier Time I', desc:'-25% purification time',  ic:'', cost:350,  day:5},
+      {name:'More Water Contain II',    desc:'+25 tank capacity',       ic:'', cost:500,  day:7},
+      {name:'More Water Contain III',   desc:'+50 tank capacity (max)', ic:'', cost:1100, day:10},
+    ]
+  },
+  {
+    id:'refinery', name:'Refinery', cat:'fabricate', ic:'refinery',
+    blueprintCost:0, day:1, demolish:false,
+    keyEffect:'Deposit-only item storage depot — no withdrawal',
+    desc:'Item storage depot — deposit only, no withdrawal. Connect Refinery Link to deposit remotely. Part of the Science Lab system.',
+    upgrades:[]
+  },
+  // Day 2
+  {
+    id:'treasure', name:'Treasure Pod', cat:'base', ic:'treasure_pod',
+    blueprintCost:0, day:2, demolish:false,
+    keyEffect:'Granumz + crops + potions + Gadget Blueprints (Lv3)',
+    desc:'Fixed locations scattered across map. Difficulty to reach varies. Rewards: Granumz + crops + potions + Fabricate blueprints (Lv3).',
+    upgrades:[
+      {name:'Treasure Pod Lv1', desc:'Standard pod — common rewards',          ic:'treasure_lv1', cost:0, day:2},
+      {name:'Treasure Pod Lv2', desc:'Medium difficulty — better rewards',      ic:'treasure_lv2', cost:0, day:8,  tag:'milestone'},
+      {name:'Treasure Pod Lv3', desc:'Hard reach — blueprint + rare item drop', ic:'treasure_lv3', cost:0, day:15, tag:'milestone'},
+    ]
+  },
+  // Day 4
+  {
+    id:'builder', name:"Builder's Shop", cat:'base', ic:'builder_shop',
+    blueprintCost:0, day:4, demolish:false,
+    keyEffect:'Purchase Blueprints to unlock buildings & Gadgets',
+    desc:'Purchase blueprints to unlock construction of new buildings and Fabricate Gadgets. All buildings require blueprint purchase before placement.',
+    upgrades:[]
+  },
+  {
+    id:'silo', name:'Silo', cat:'farming', ic:'silo',
+    blueprintCost:0, day:4, demolish:true,
+    keyEffect:'Item storage — 150 items/port, max 4 ports',
+    desc:'Item storage warehouse. Each port holds up to 150 items of the same type. Starts with 1 port (Port I), maximum 4 ports.',
+    upgrades:[
+      {name:'Additional Storage II',  desc:'Unlock 2nd port',       ic:'silo_storage', cost:500,  day:4},
+      {name:'Additional Storage III', desc:'Unlock 3rd port',       ic:'silo_storage', cost:500,  day:4},
+      {name:'Additional Storage IV',  desc:'Unlock 4th port (max)', ic:'silo_storage', cost:1100, day:4},
+    ]
+  },
+  {
+    id:'fabricate', name:'Fabricate Gadget', cat:'fabricate', ic:'fabricate',
+    blueprintCost:0, day:4, demolish:false,
+    keyEffect:'Craft & deploy Gadgets — 1 stored at a time',
+    desc:'Craft and place Gadgets on the map. Stores 1 Gadget at a time. 3 categories: Extractors, Utilities, WarpTech. Higher tier gadgets require Lv3 Treasure Pod blueprints.',
+    upgrades:[]
+  },
+  // Day 7
+  {
+    id:'pond', name:'Pond', cat:'farming', ic:'pond',
+    blueprintCost:0, day:7, demolish:true,
+    keyEffect:'Natural salt water source — auto-refills on cooldown',
+    desc:'Holds water generated from natural sources. Auto-refills on cooldown. Provides salt water — must pass through Water Purifier before watering the Garden.',
+    upgrades:[
+      {name:'More Water I',        desc:'+20 max water capacity',       ic:'', cost:350,  day:7},
+      {name:'Decrease Cooldown I', desc:'-20% refill cooldown',         ic:'', cost:350,  day:7},
+      {name:'More Water II',       desc:'+30 max water capacity',       ic:'', cost:500,  day:7},
+      {name:'Decrease Cooldown II',desc:'-20% refill cooldown',         ic:'', cost:500,  day:7},
+      {name:'More Water III',      desc:'+50 max water capacity',       ic:'', cost:1300, day:7},
+      {name:'More Water IV',       desc:'+100 max water capacity (max)',ic:'', cost:1300, day:7},
     ]
   },
   {
     id:'coop', name:'Coop', cat:'farming', ic:'coop',
-    blueprintCost:500, day:5, demolish:true,
-    desc:'Raises chickens for eggs and meat. Requires Build_Coop milestone. Max 12 chickens (base). Hen+Rooster pair triggers breeding every 12h. Chicken ages out after 6 breeds → auto-converts.',
+    blueprintCost:0, day:7, demolish:true,
+    keyEffect:'Raise chickens for eggs & meat — breeds every 12h',
+    desc:'Raise chickens for eggs and meat. Max 6 chickens (base), expandable to 12. A Hen + Rooster pair breeds every 12h in-game. Old chickens automatically convert to meat after 6 breeding cycles.',
     upgrades:[
-      {name:'High Wall',       desc:'Prevents monsters from attacking chickens at night', ic:'high_wall',   cost:600,  day:6},
-      {name:'Bug Free Spring Grass', desc:'+% max egg production — chickens eat natural grass', ic:'bug_free', cost:800, day:8},
-      {name:'Vitamizer',       desc:'-20% breeding time · +10% egg production rate',    ic:'vitamizer',   cost:1200, day:11},
-      {name:'Expand Coop',     desc:'Increase max chickens from 12 → 20',              ic:'expand_coop', cost:2000, day:16},
+      {name:'High Wall',             desc:'Prevents monsters from attacking chickens at night',   ic:'high_wall',   cost:900,  day:7},
+      {name:'Bug Free Spring Grass', desc:'+% max egg production — chickens graze on natural grass', ic:'bug_free', cost:900, day:7},
+      {name:'Vitamizer',             desc:'-20% breeding time · +10% egg production rate',       ic:'vitamizer',   cost:1200, day:7},
+      {name:'Expand Coop',           desc:'Increase max chickens from 6 → 12',                  ic:'expand_coop', cost:2000, day:7},
     ]
   },
 
-  // ── FABRICATE ──
-  {
-    id:'fabricate', name:'Fabricate Gadget', cat:'fabricate', ic:'fabricate',
-    blueprintCost:0, day:1, demolish:false,
-    desc:'Build and deploy automated gadgets. 3 categories: Extractors, Utilities, WarpTech. Higher tier gadgets require Lv3 Treasure Pod blueprints.',
-    upgrades:[]
-  },
-  {
-    id:'refinery', name:'Refinery', cat:'fabricate', ic:'refinery',
-    blueprintCost:800, day:5, demolish:true,
-    desc:'Process raw resources into refined materials. One-way: items can be put in but not taken out. Runs automatically.',
-    upgrades:[]
-  },
 ];
 
 const FAB_CATS = [
@@ -372,30 +384,30 @@ const FAB_CATS = [
     desc:'Automated resource gathering. Place on resource nodes or near buildings. Each gadget has 3 levels — higher levels increase extraction speed and yield.',
     gadgets:[
       {
-        name:'Drill', ic:'drill_lv1', cost:800, day:12,
-        base:{ extract_time:'60s/cycle', output:'1–2 ore/cycle' },
+        name:'Drill', ic:'drill_lv1', cost:500, day:4, demolish:true,
+        base:{ extract_time:'18h/cycle', output:'10–40 items' },
         levels:[
-          {lv:1, ic:'drill_lv1', cost:800,  upgrade_cost:0,    desc:'Basic drill. 1–2 ore per cycle.',                    extract_time:'60s', output:'1–2'},
-          {lv:2, ic:'drill_lv2', cost:0,    upgrade_cost:600,  desc:'-25% cycle time. 2–3 ore per cycle.',               extract_time:'45s', output:'2–3'},
-          {lv:3, ic:'drill_lv3', cost:0,    upgrade_cost:1200, desc:'-40% cycle time. 3–5 ore per cycle. (max)',         extract_time:'36s', output:'3–5'},
+          {lv:1, ic:'drill_lv1', cost:500,  upgrade_cost:0,    desc:'10–20 items/cycle.',                    output:'10–20'},
+          {lv:2, ic:'drill_lv2', cost:0,    upgrade_cost:450,  desc:'20–30 items/cycle.',                    output:'20–30'},
+          {lv:3, ic:'drill_lv3', cost:0,    upgrade_cost:800,  desc:'30–40 items/cycle. (max)',              output:'30–40'},
         ]
       },
       {
-        name:'Water Pump', ic:'pump_lv1', cost:500, day:7,
-        base:{ pump_time:'45s/cycle', output:'10 water/cycle' },
+        name:'Water Pump', ic:'pump_lv1', cost:750, day:7, demolish:true,
+        base:{ pump_time:'6h/cycle', output:'100–200 water' },
         levels:[
-          {lv:1, ic:'pump_lv1', cost:500,  upgrade_cost:0,    desc:'Basic pump. 10 water per cycle.',                    pump_time:'45s', output:'10'},
-          {lv:2, ic:'pump_lv2', cost:0,    upgrade_cost:400,  desc:'-20% cycle time. 15 water per cycle.',              pump_time:'36s', output:'15'},
-          {lv:3, ic:'pump_lv3', cost:0,    upgrade_cost:900,  desc:'-35% cycle time. 22 water per cycle. (max)',        pump_time:'29s', output:'22'},
+          {lv:1, ic:'pump_lv1', cost:750,  upgrade_cost:0,    desc:'100 water/cycle.',                      output:'100'},
+          {lv:2, ic:'pump_lv2', cost:0,    upgrade_cost:450,  desc:'150 water/cycle.',                      output:'150'},
+          {lv:3, ic:'pump_lv3', cost:0,    upgrade_cost:800,  desc:'200 water/cycle. (max)',                output:'200'},
         ]
       },
       {
-        name:'Apiary', ic:'apiary_lv1', cost:600, day:11, tag:'milestone',
-        base:{ honey_time:'90s/cycle', output:'1 honey/cycle' },
+        name:'Apiary', ic:'apiary_lv1', cost:1000, day:11, tag:'milestone', demolish:true,
+        base:{ honey_time:'12h/cycle', output:'3–9 honey' },
         levels:[
-          {lv:1, ic:'apiary_lv1', cost:600,  upgrade_cost:0,    desc:'Produces 1 honey per cycle. Requires Place_ApiaryGadget.',  honey_time:'90s', output:'1'},
-          {lv:2, ic:'apiary_lv2', cost:0,    upgrade_cost:700,  desc:'-25% cycle time. 2 honey per cycle.',                       honey_time:'68s', output:'2'},
-          {lv:3, ic:'apiary_lv3', cost:0,    upgrade_cost:1400, desc:'-40% cycle time. 3 honey per cycle. (max)',                 honey_time:'54s', output:'3'},
+          {lv:1, ic:'apiary_lv1', cost:1000, upgrade_cost:0,   desc:'3 honey/cycle.',                       output:'3'},
+          {lv:2, ic:'apiary_lv2', cost:0,    upgrade_cost:450, desc:'6 honey/cycle.',                       output:'6'},
+          {lv:3, ic:'apiary_lv3', cost:0,    upgrade_cost:800, desc:'9 honey/cycle. (max)',                 output:'9'},
         ]
       },
     ]
@@ -405,52 +417,48 @@ const FAB_CATS = [
     desc:'Combat support and quality-of-life gadgets. Place near your base.',
     gadgets:[
       {
-        name:'Crop Turret', ic:'crop_turret', cost:700, day:10,
-        base:{ ammo_cap:'10 crops', tier:'Basic tier only', fire_rate:'1 shot/2s' },
+        name:'Crop Turret', ic:'crop_turret', cost:2000, day:10, demolish:true,
+        base:{ ammo_cap:'200 crops', tier:'Basic tier only', fire_rate:'1 shot/2s' },
         levels:[
-          {lv:1, ic:'crop_turret', cost:700,  upgrade_cost:0,    desc:'10 ammo cap. Basic crops only. 1 shot/2s.',             ammo_cap:10,  tier:'Basic',    fire_rate:'1/2s'},
-          {lv:2, ic:'crop_turret', cost:0,    upgrade_cost:800,  desc:'20 ammo cap. Mid-tier crops allowed. 1 shot/1.5s.',     ammo_cap:20,  tier:'Mid',      fire_rate:'1/1.5s'},
-          {lv:3, ic:'crop_turret', cost:0,    upgrade_cost:1500, desc:'35 ammo cap. All crop tiers. 1 shot/1s. (max)',         ammo_cap:35,  tier:'All',      fire_rate:'1/1s'},
+          {lv:1, ic:'crop_turret', cost:2000, upgrade_cost:0,    desc:'200 ammo cap. Basic crops only. 1 shot/2s.',           ammo_cap:200, tier:'Basic', fire_rate:'1/2s'},
+          {lv:2, ic:'crop_turret', cost:0,    upgrade_cost:1300, desc:'250 ammo cap. Mid-tier crops allowed. 1 shot/1.5s.',   ammo_cap:250, tier:'Mid',   fire_rate:'1/1.5s'},
+          {lv:3, ic:'crop_turret', cost:0,    upgrade_cost:4000, desc:'350 ammo cap. All tiers. 1 shot/1s. (max)',            ammo_cap:350, tier:'All',   fire_rate:'1/1s'},
         ]
       },
       {
-        name:'Med Station', ic:'med_station', cost:900, day:13,
-        base:{ heal_amount:'20 HP', cooldown:'30s', range:'3 tiles' },
+        name:'Med Station', ic:'med_station', cost:900, day:13, demolish:true,
+        base:{ heal:'100 HP', cooldown:'4h', range:'3m' },
         levels:[
-          {lv:1, ic:'med_station', cost:900,  upgrade_cost:0,    desc:'Heals 20 HP. 30s cooldown. 3-tile range.',               heal:20, cooldown:'30s', range:'3'},
-          {lv:2, ic:'med_station', cost:0,    upgrade_cost:900,  desc:'Heals 35 HP. 20s cooldown. 4-tile range.',               heal:35, cooldown:'20s', range:'4'},
-          {lv:3, ic:'med_station', cost:0,    upgrade_cost:1800, desc:'Heals 55 HP. 12s cooldown. 5-tile range. (max)',         heal:55, cooldown:'12s', range:'5'},
+          {lv:1, ic:'med_station', cost:900,  upgrade_cost:0,   desc:'100 HP, 4h cooldown, 3m range.',         heal:'100 HP', cooldown:'4h', range:'3m'},
+          {lv:2, ic:'med_station', cost:0,    upgrade_cost:500, desc:'125 HP, 3h cooldown, 4m range.',         heal:'125 HP', cooldown:'3h', range:'4m'},
+          {lv:3, ic:'med_station', cost:0,    upgrade_cost:900, desc:'150 HP, 3h cooldown, 5m range. (max)',   heal:'150 HP', cooldown:'3h', range:'5m'},
         ]
       },
     ]
   },
   {
     id:'warptech', name:'WarpTech', ic:'warptech',
-    desc:'Advanced remote-operation tech. All require Blueprint from Lv3 Treasure Pod.',
+    desc:'Advanced remote-control technology. All require Blueprints from Treasure Pod Lv3.',
     gadgets:[
       {
-        name:'Refinery Link', ic:'refinery_link', cost:0, day:15, tag:'blueprint',
-        base:{ range:'Anywhere on map', capacity:'Stack of 10/transfer' },
+        name:'Refinery Link', ic:'refinery_link', cost:2000, day:15, tag:'blueprint', demolish:true,
+        base:{ range:'Full Map', upgrade:'None' },
         levels:[
-          {lv:1, ic:'refinery_link', cost:0, upgrade_cost:0, desc:'Deposit items into Refinery remotely. 10 items/transfer.', capacity:10},
-          {lv:2, ic:'refinery_link', cost:0, upgrade_cost:1200, desc:'25 items/transfer. -30% transfer cooldown.',             capacity:25},
+          {lv:1, ic:'refinery_link', cost:2000, upgrade_cost:0, desc:'Deposit items into Refinery remotely. Reduces Backpack pressure when farming far from base.'},
         ]
       },
       {
-        name:'Turret Link', ic:'turret_link', cost:0, day:16, tag:'blueprint',
-        base:{ tile:'1 designated tile', tier:'Basic crops only', capacity:'10 crops stored' },
+        name:'Turret Link', ic:'turret_link', cost:4500, day:16, tag:'blueprint', demolish:true,
+        base:{ upgrade:'None' },
         levels:[
-          {lv:1, ic:'turret_link', cost:0, upgrade_cost:0,    desc:'Auto-loads 1 tile. Basic tier. Stores up to 10.',           capacity:10, tier:'Basic'},
-          {lv:2, ic:'turret_link', cost:0, upgrade_cost:1000, desc:'Auto-loads 1 tile. Mid tier allowed. Stores up to 20.',     capacity:20, tier:'Mid'},
-          {lv:3, ic:'turret_link', cost:0, upgrade_cost:2000, desc:'Auto-loads 1 tile. All tiers. Stores up to 35. (max)',      capacity:35, tier:'All'},
+          {lv:1, ic:'turret_link', cost:4500, upgrade_cost:0, desc:'Automatically loads produce from a designated plot into the nearest Crop Turret. Combined with Garden Auto Harvest creates a complete automation loop.'},
         ]
       },
       {
-        name:'Market Link', ic:'market_link', cost:0, day:18, tag:'blueprint',
-        base:{ sell_delay:'+5s vs direct sell', batch:'5 items/transaction' },
+        name:'Market Link', ic:'market_link', cost:4500, day:18, tag:'blueprint', demolish:true,
+        base:{ upgrade:'None' },
         levels:[
-          {lv:1, ic:'market_link', cost:0, upgrade_cost:0,    desc:'Sell remotely. 5 items/transaction. +5s sell delay.',       batch:5,  delay:'5s'},
-          {lv:2, ic:'market_link', cost:0, upgrade_cost:1500, desc:'15 items/transaction. +2s sell delay. No price penalty.',   batch:15, delay:'2s'},
+          {lv:1, ic:'market_link', cost:4500, upgrade_cost:0, desc:'Sell items remotely — no need to return to Farm Market. Convenient when farming during daytime.'},
         ]
       },
     ]
@@ -513,7 +521,8 @@ document.getElementById('fabBuildGrid').innerHTML = fabCards.map(renderCard).joi
 document.getElementById('fabGrid').innerHTML = FAB_CATS.map(cat => {
   const gadgetCards = cat.gadgets.map((g,gi) => {
     const tagHtml = g.tag ? `<span class="upg-tag tag-${g.tag}">${g.tag}</span>` : '';
-    const costHtml = g.cost > 0 ? `<span class="granumz">${g.cost}G</span>` : (g.tag==='blueprint' ? '<span style="color:var(--b)">Blueprint</span>' : '<span style="color:var(--mu)">Free</span>');
+    const demolishHtml = g.demolish ? `<span style="font-size:7px;color:var(--r);margin-left:4px">requires demolish option</span>` : '';
+    const costHtml = g.cost > 0 ? `<span class="granumz">${g.cost.toLocaleString()}G</span>` : (g.tag==='blueprint' ? '<span style="color:var(--b)">Blueprint only</span>' : '<span style="color:var(--mu)">Free</span>');
 
     // Base stats chips
     const baseStats = g.base ? Object.entries(g.base).map(([k,v]) =>
@@ -542,7 +551,7 @@ document.getElementById('fabGrid').innerHTML = FAB_CATS.map(cat => {
       <div class="gadget-head">
         ${g.ic ? img(g.ic,'gadget-ic') : '<div class="gadget-ic-ph">⚙</div>'}
         <div class="gadget-title-group">
-          <div class="gadget-name">${tagHtml}${g.name}</div>
+          <div class="gadget-name">${tagHtml}${g.name}${demolishHtml}</div>
           <div class="gadget-meta">Unlock Day ${g.day} · ${costHtml}</div>
         </div>
       </div>
@@ -562,18 +571,39 @@ const allBuildings = [...baseCards,...farmCards,...fabCards];
 document.getElementById('ovBody').innerHTML = allBuildings.map(b => {
   const icHtml = b.ic ? `<img src="${IC[b.ic]||''}" class="ov-ic" alt="">` : '<span style="font-size:16px">🏗</span>';
   const cost = b.blueprintCost > 0 ? `${b.blueprintCost.toLocaleString()}G` : '—';
-  const upgs = b.upgrades.length ? `${b.upgrades.length} upgrades` : '—';
+  const upgs = b.upgrades && b.upgrades.length ? `${b.upgrades.length} upgrades` : '—';
   const catLabel = {base:'Base',farming:'Farming',fabricate:'Fabricate'}[b.cat]||b.cat;
+  const demolishTag = b.demolish ? ' <span style="font-size:8px;color:var(--r);opacity:.8">demolish</span>' : '';
+  const keyEff = b.keyEffect || b.desc.substring(0,72)+'…';
   return `<tr>
     <td>${icHtml}</td>
-    <td class="ov-name">${b.name}</td>
+    <td class="ov-name">${b.name}${demolishTag}</td>
     <td class="ov-cat">${catLabel}</td>
     <td class="ov-cost">${cost}</td>
     <td class="ov-day">Day ${b.day}</td>
     <td class="ov-effect">${upgs}</td>
-    <td class="ov-effect" style="max-width:200px">${b.desc.substring(0,80)}…</td>
+    <td class="ov-effect" style="max-width:220px">${keyEff}</td>
   </tr>`;
 }).join('');
+
+// Also append FAB_CATS gadgets to overview
+const fabGadgetRows = FAB_CATS.flatMap(cat => cat.gadgets.map(g => {
+  const icHtml = g.ic ? `<img src="${IC[g.ic]||''}" class="ov-ic" alt="">` : '<span style="font-size:16px">⚙</span>';
+  const cost = g.cost > 0 ? `${g.cost.toLocaleString()}G` : (g.tag==='blueprint' ? 'Blueprint' : '—');
+  const upgs = g.levels && g.levels.length > 1 ? `${g.levels.length} levels` : '—';
+  const demolishTag = g.demolish ? ' <span style="font-size:8px;color:var(--r);opacity:.8">demolish</span>' : '';
+  const keyEff = (g.levels && g.levels[0]) ? g.levels[0].desc.substring(0,72)+'…' : '—';
+  return `<tr>
+    <td>${icHtml}</td>
+    <td class="ov-name">${g.name}${demolishTag}</td>
+    <td class="ov-cat">Gadget · ${cat.name}</td>
+    <td class="ov-cost">${cost}</td>
+    <td class="ov-day">Day ${g.day}</td>
+    <td class="ov-effect">${upgs}</td>
+    <td class="ov-effect" style="max-width:220px">${keyEff}</td>
+  </tr>`;
+}));
+document.getElementById('ovBody').innerHTML += fabGadgetRows.join('');
 </script>
 </body>
 </html>
