@@ -346,7 +346,7 @@ After 6 breeding cycles:
 | 🏪 | Builder's Shop | Science Lab | Unlock blueprints with Granumz | — | Some blueprints from Treasure Pods or Unlock Events |
 | 🔧 | Fabricate Gadget | Science Lab | Craft & place Gadgets on the map | — | Holds 1 Gadget at a time |
 | 💰 | Farm Market | Science Lab | Sell items for Granumz | +5% Sell Value ×2 (WIP) | Prices fluctuate via Perlin Noise |
-| 🏠 | Ranch House | Base | Sleep to skip — restores HP & Energy | — | Sleeping early loses night farming time |
+| 🏠 | Farm House | Base | Sleep to skip — restores HP & Energy | — | Sleeping early loses night farming time |
 | 🎒 | Gear Upgrades | Base | Upgrades player stats | Heart / Water / Boost / Backpack Module | Bound to the character |
 | 📦 | Treasure Pod | Map | Granumz + crops + blueprints | — | Fixed locations, requires skill |
 | ⛏️ | Drill / Pump / Apiary | Gadget | Auto-extract resources | 3 levels / extraction speed | Placed on map via Fabricate |
@@ -491,7 +491,7 @@ Sell crops and items for Granumz — the main currency. Dynamic pricing system: 
 | ⚡ Boost | Increases movement speed | 2 |
 | 🎒 Backpack | Increases max capacity by 1 slot | 4 |
 
-### 🏠 Ranch House
+### 🏠 Farm House
 
 Sleep to skip — skips the rest of the night. On wakeup: fully restores HP & Energy. Increases movement speed. Can sleep after clearing threats or from 3 AM.
 
