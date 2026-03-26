@@ -148,7 +148,7 @@ footer strong{color:var(--purple)}
 
   <div class="hero-stats">
     <div class="stat-chip">🎮 <b>Cute</b> FPS Shooter Style</div>
-    <div class="stat-chip">📄 <b>4</b>&nbsp;<span id="stat-label">tài liệu</span></div>
+    <div class="stat-chip">📄 <b id="document-page-count">0</b>&nbsp;<span id="stat-label">tài liệu</span></div>
     <div class="stat-chip">🌐 <b>VIE</b> + <b>ENG</b></div>
     <div class="stat-chip">🏗️ <b>GDD</b></div>
   </div>
@@ -189,7 +189,7 @@ footer strong{color:var(--purple)}
   </div>
 
   <div class="cards">
-    <a class="card" data-lang="vie" href="final/Constructions_Detail_VIE.html" style="--c1:#3dd6b0;--c2:#52c5f7;--hover-color:#3dd6b0;--hover-glow:rgba(61,214,176,.2)">
+    <a class="card document-page" data-lang="vie" href="final/Constructions_Detail_VIE.html" style="--c1:#3dd6b0;--c2:#52c5f7;--hover-color:#3dd6b0;--hover-glow:rgba(61,214,176,.2)">
       <span class="card-icon">🏗️</span>
       <div class="card-lang-badge" style="--c1:#3dd6b0;--c2:#52c5f7">🇻🇳 Tiếng Việt</div>
       <div class="card-title" id="ct1">Chi Tiết Công Trình</div>
@@ -207,7 +207,7 @@ footer strong{color:var(--purple)}
       <div class="card-cta"><div class="card-open" id="co2">Open document</div></div>
     </a>
 
-    <a class="card" data-lang="vie" href="final/Construction_Summary.html" style="--c1:#ffc94a;--c2:#ff8f5e;--hover-color:#ffc94a;--hover-glow:rgba(255,201,74,.2)">
+    <a class="card document-page" data-lang="vie" href="final/Construction_Summary.html" style="--c1:#ffc94a;--c2:#ff8f5e;--hover-color:#ffc94a;--hover-glow:rgba(255,201,74,.2)">
       <span class="card-icon">🗺️</span>
       <div class="card-lang-badge" style="--c1:#ffc94a;--c2:#ff8f5e">📋 Tóm tắt</div>
       <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 Chỉ Tiếng Anh</div>
@@ -237,7 +237,7 @@ footer strong{color:var(--purple)}
   </div>
 
   <div class="cards">
-    <a class="card" data-lang="vie" href="final/GDD_Summary.html" style="--c1:#ff7ec7;--c2:#a78bfa;--hover-color:#ff7ec7;--hover-glow:rgba(255,126,199,.2)">
+    <a class="card document-page" data-lang="vie" href="final/GDD_Summary.html" style="--c1:#ff7ec7;--c2:#a78bfa;--hover-color:#ff7ec7;--hover-glow:rgba(255,126,199,.2)">
       <span class="card-icon">📄</span>
       <div class="card-lang-badge" style="--c1:#ff7ec7;--c2:#a78bfa">🇻🇳 Tiếng Việt</div>
       <div class="card-title" id="ct5">GDD Tóm Tắt — Tiếng Việt</div>
@@ -255,7 +255,7 @@ footer strong{color:var(--purple)}
       <div class="card-cta"><div class="card-open" id="co6">Open document</div></div>
     </a>
 
-    <a class="card" data-lang="eng" href="final/Recipe_Diagram_ENG.html" style="--c1:#ff8f5e;--c2:#ffc94a;--hover-color:#ff8f5e;--hover-glow:rgba(255,143,94,.2)">
+    <a class="card document-page" data-lang="eng" href="final/Recipe_Diagram_ENG.html" style="--c1:#ff8f5e;--c2:#ffc94a;--hover-color:#ff8f5e;--hover-glow:rgba(255,143,94,.2)">
       <span class="card-icon">🍳</span>
       <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 English Only</div>
       <div class="card-title" id="ct7">Recipe Diagram</div>
@@ -273,7 +273,7 @@ footer strong{color:var(--purple)}
       <div class="card-cta"><div class="card-open" id="co7">Mở tài liệu</div></div>
     </a>
 
-    <a class="card" data-lang="eng" href="analysis.html" style="--c1:#095e00;--c2:#1000bc;--hover-color:#095e00;--hover-glow:rgba(255,143,94,.2)">
+    <a class="card document-page" data-lang="eng" href="analysis.html" style="--c1:#095e00;--c2:#1000bc;--hover-color:#095e00;--hover-glow:rgba(255,143,94,.2)">
       <span class="card-icon">🍳</span>
       <div class="card-lang-badge" style="--c1:#095e00;--c2:#1000bc">🇻🇳 Vietnamese Only</div>
       <div class="card-title" id="ct7">GDD Analysis</div>
@@ -409,6 +409,9 @@ function setLang(lang){
   }
   updateCardVisibility(lang);
 }
+
+const count = document.querySelectorAll('.document-page').length;
+document.getElementById('document-page-count').innerText = count;
 
 // Init
 updateCardVisibility('vie');
