@@ -1,124 +1,311 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Buildings & Upgrades — Crop Shooter</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Unbounded:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#080c08;--bg2:#0e150e;--bg3:#141e14;--bd:#1e301e;--bd2:#2a422a;
-  --g:#7fff5f;--y:#ffcf3f;--r:#ff6b3f;--b:#3fbfff;--p:#bf7fff;--o:#ff9f3f;
-  --w:#deeade;--mu:#4a664a;
-  --fh:'Syne',sans-serif;--fm:'Space Mono',monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--w);font-family:var(--fm);font-size:13px}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(127,255,95,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(127,255,95,.012) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
-.wrap{position:relative;z-index:1;padding:28px 32px 80px;max-width:1600px;margin:0 auto}
-.hd{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;border-bottom:1px solid var(--bd);padding-bottom:14px}
-.hd h1{font-family:var(--fh);font-size:24px;font-weight:800;letter-spacing:-1px;color:var(--g)}
-.hd p{color:var(--mu);font-size:10px}
+:root { --t:.22s }
 
-/* TABS */
-.tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
-.tab{padding:10px 20px;font-size:11px;font-family:var(--fh);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
-.tab:hover{color:var(--w)}.tab.active{color:var(--g);border-bottom-color:var(--g)}
+[data-theme="dark"] {
+  --bg:   #090d09; --bg1:#0d130d; --bg2:#111811; --bg3:#172017; --bg4:#1e2c1e;
+  --bd:   #233223; --bd2:#2e4230; --bd3:#3a5440;
+  --acc:  #6dff4a; --acc2:#f5c842; --acc3:#4ab8ff; --acc4:#c07dff; --acc5:#ff7450;
+  --tx:   #d5e8d0; --tx2:#8aaa88; --tx3:#4d6b4d;
+  --sh:   rgba(109,255,74,.05); --sh2:rgba(109,255,74,.12);
+  --cglow:0 0 0 1px var(--bd),inset 0 1px 0 rgba(109,255,74,.05);
+  --tglow:0 2px 14px rgba(109,255,74,.22);
+  --bbg:  #1a271a; --btx:var(--acc);
+  --grid-op:.15;
+}
+[data-theme="light"] {
+  --bg:   #f0f4ed; --bg1:#e8ede4; --bg2:#dfe7d9; --bg3:#d5e0ce; --bg4:#c9d9c1;
+  --bd:   #b5c9ad; --bd2:#a0b896; --bd3:#8aa37e;
+  --acc:  #1a7a00; --acc2:#936800; --acc3:#0068b0; --acc4:#6828b8; --acc5:#b82800;
+  --tx:   #162814; --tx2:#446040; --tx3:#82a07c;
+  --sh:   rgba(26,122,0,.05); --sh2:rgba(26,122,0,.10);
+  --cglow:0 0 0 1px var(--bd),0 2px 4px rgba(0,0,0,.07);
+  --tglow:0 2px 8px rgba(26,122,0,.14);
+  --bbg:  #c4d9bb; --btx:var(--acc);
+  --grid-op:.12;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  background:var(--bg);color:var(--tx);
+  font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;
+  transition:background var(--t),color var(--t);min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--bd) 1px,transparent 1px),
+    linear-gradient(90deg,var(--bd) 1px,transparent 1px);
+  background-size:40px 40px;
+  opacity:var(--grid-op);
+}
+
+.wrap{position:relative;z-index:1;padding:28px 32px 100px;max-width:1640px;margin:0 auto}
+
+/* ── HEADER ── */
+.hd{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--bd)}
+.hd-left{flex:1}
+.hd-eye{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--acc);margin-bottom:5px;
+}
+.hd h1{
+  font-family:'Unbounded',sans-serif;font-size:21px;font-weight:900;
+  letter-spacing:-1px;color:var(--tx);line-height:1;
+}
+.hd h1 em{color:var(--acc);font-style:normal}
+.hd-sub{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--tx3);margin-top:6px;letter-spacing:.5px;
+}
+.theme-btn{
+  width:36px;height:36px;background:var(--bg3);
+  border:1px solid var(--bd);color:var(--tx2);
+  cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color var(--t),color var(--t),background var(--t);
+  flex-shrink:0;line-height:1;
+}
+.theme-btn:hover{border-color:var(--acc);color:var(--acc);background:var(--bg4)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:2px;margin-bottom:28px;flex-wrap:wrap}
+.tab{
+  padding:8px 18px;
+  font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--tx3);cursor:pointer;
+  background:var(--bg2);border:1px solid var(--bd);
+  transition:color var(--t),background var(--t),border-color var(--t),box-shadow var(--t);
+  white-space:nowrap;position:relative;
+}
+.tab::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:2px;background:var(--acc);
+  transform:scaleX(0);transition:transform .15s;
+}
+.tab:hover{color:var(--tx);background:var(--bg3)}
+.tab.active{color:var(--acc);background:var(--bg3);border-color:var(--bd2);box-shadow:var(--tglow)}
+.tab.active::after{transform:scaleX(1)}
 .view{display:none}.view.active{display:block}
 
-/* SECTION */
-.section-title{font-family:var(--fh);font-size:15px;font-weight:800;color:var(--g);letter-spacing:-0.5px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px}
-.section-title .sec-ic{width:22px;height:22px;object-fit:contain}
+/* ── SECTION LABEL ── */
+.sec-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--tx3);
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--bd)}
 
-/* BUILDING GRID */
-.building-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:18px;margin-bottom:36px}
+/* ── BUILDING GRID ── */
+.building-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));
+  gap:14px;margin-bottom:36px;
+}
 
-/* BUILDING CARD */
-.bcard{background:var(--bg2);border:1px solid var(--bd);padding:0;overflow:hidden}
-.bcard-head{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--bg3);border-bottom:1px solid var(--bd)}
-.bcard-ic{width:56px;height:56px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
-.bcard-ic-placeholder{width:56px;height:56px;background:var(--bg);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
-.bcard-info{flex:1}
-.bcard-name{font-family:var(--fh);font-size:14px;font-weight:700;color:var(--w);margin-bottom:4px}
-.bcard-sub{font-size:10px;color:var(--mu)}
-.bcard-cost{font-size:11px;color:var(--y);font-weight:700;margin-left:auto;white-space:nowrap;text-align:right}
-.bcard-body{padding:14px 18px}
-.bcard-desc{font-size:10px;line-height:1.6;color:var(--mu);line-height:1.7;margin-bottom:8px}
+/* ── BUILDING CARD ── */
+.bcard{
+  background:var(--bg1);box-shadow:var(--cglow);
+  overflow:hidden;position:relative;
+  transition:box-shadow var(--t);
+}
+.bcard::before{
+  content:'';position:absolute;top:0;right:0;
+  width:10px;height:10px;background:var(--bg);
+  clip-path:polygon(0 0,100% 0,100% 100%);z-index:2;
+  transition:background var(--t);
+}
+.bcard:hover{box-shadow:var(--cglow),0 0 0 1px var(--bd2)}
 
-/* UPGRADE LIST */
-.upg-list{display:flex;flex-direction:column;gap:4px}
-.upg-item{display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--bg);border:1px solid var(--bd);transition:border-color .1s}
-.upg-item:hover{border-color:var(--bd2)}
-.upg-ic{width:36px;height:36px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
-.upg-ic-placeholder{width:36px;height:36px;background:var(--bg2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
-.upg-info{flex:1}
-.upg-name{font-size:11px;color:var(--w);font-weight:700;margin-bottom:1px}
-.upg-desc{font-size:10px;color:var(--mu);line-height:1.5}
-.upg-cost{font-size:10px;color:var(--y);white-space:nowrap;text-align:right;flex-shrink:0}
-.upg-day{font-size:7px;color:var(--mu);text-align:right}
-.upg-tag{display:inline-block;font-size:7px;padding:1px 4px;margin-right:3px;border-radius:1px}
-.tag-milestone{background:rgba(255,207,63,.12);color:var(--y);border:1px solid rgba(255,207,63,.3)}
-.tag-blueprint{background:rgba(63,191,255,.1);color:var(--b);border:1px solid rgba(63,191,255,.3)}
-.tag-achievement{background:rgba(191,127,255,.1);color:var(--p);border:1px solid rgba(191,127,255,.3)}
-.upg-num{font-size:8px;color:var(--mu);flex-shrink:0;width:16px;text-align:center}
+.bcard-head{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;background:var(--bg2);
+  border-bottom:1px solid var(--bd);
+}
+.bcard-ic{width:52px;height:52px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
+.bcard-ic-placeholder{
+  width:52px;height:52px;background:var(--bg);border:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+}
+.bcard-meta{flex:1;min-width:0}
+.bcard-name{
+  font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;
+  color:var(--tx);margin-bottom:6px;
+}
+.bcard-pills{display:flex;gap:4px;flex-wrap:wrap}
+.pill{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.4px;
+  padding:2px 6px;border:1px solid;
+}
+.pill-day    {color:var(--acc3);border-color:rgba(74,184,255,.3);background:rgba(74,184,255,.07)}
+.pill-free   {color:var(--tx3);border-color:var(--bd);background:var(--bg)}
+.pill-cost   {color:var(--acc2);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.07)}
+.pill-demolish{color:var(--acc5);border-color:rgba(255,116,80,.3);background:rgba(255,116,80,.07)}
 
-/* FABRICATE CATEGORIES */
-.fab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
-.fab-cat{background:var(--bg2);border:1px solid var(--bd);padding:14px}
-.fab-cat-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
-.fab-cat-ic{width:32px;height:32px;object-fit:contain}
-.fab-cat-name{font-family:var(--fh);font-size:11px;font-weight:700;color:var(--w)}
+.bcard-body{padding:12px 16px}
+.bcard-desc{font-size:10px;color:var(--tx2);line-height:1.7;margin-bottom:10px}
 
-/* OVERVIEW TABLE */
+/* ── UPGRADES ── */
+.upg-list{display:flex;flex-direction:column;gap:3px}
+.upg-item{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 8px;background:var(--bg);border:1px solid var(--bd);
+  transition:border-color var(--t),background var(--t);
+}
+.upg-item:hover{border-color:var(--bd2);background:var(--bg2)}
+.upg-ic{width:32px;height:32px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
+.upg-ic-placeholder{
+  width:32px;height:32px;background:var(--bg2);border:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;flex-shrink:0;color:var(--tx3);
+}
+.upg-num{font-family:'DM Mono',monospace;font-size:8px;color:var(--tx3);flex-shrink:0;width:14px;text-align:center}
+.upg-info{flex:1;min-width:0}
+.upg-name{font-size:10px;font-weight:600;color:var(--tx);margin-bottom:1px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.upg-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--tx2);line-height:1.5}
+.upg-right{flex-shrink:0;text-align:right}
+.upg-cost{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--acc2);white-space:nowrap}
+.upg-day{font-family:'DM Mono',monospace;font-size:8px;color:var(--tx3)}
+.granumz{color:var(--acc2);font-weight:600;font-family:'DM Mono',monospace}
+
+/* ── TAGS ── */
+.tag{
+  font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.8px;
+  text-transform:uppercase;padding:1px 4px;border:1px solid;
+}
+.tag-milestone  {color:var(--acc2);border-color:rgba(245,200,66,.4);background:rgba(245,200,66,.08)}
+.tag-blueprint  {color:var(--acc3);border-color:rgba(74,184,255,.4);background:rgba(74,184,255,.08)}
+.tag-achievement{color:var(--acc4);border-color:rgba(192,125,255,.4);background:rgba(192,125,255,.08)}
+
+/* ── OVERVIEW TABLE ── */
+.ov-wrap{overflow-x:auto}
 .ov-table{width:100%;border-collapse:collapse;font-size:10px}
-.ov-table th{text-align:left;padding:8px 10px;background:var(--bg3);color:var(--g);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--bd);font-family:var(--fh)}
-.ov-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
-.ov-table tr:hover td{background:rgba(127,255,95,.02)}
-.ov-table .ov-ic{width:24px;height:24px;object-fit:contain;image-rendering:pixelated}
-.ov-table .ov-name{color:var(--w);font-weight:700}
-.ov-table .ov-cat{color:var(--mu);font-size:8px}
-.ov-table .ov-cost{color:var(--y)}
-.ov-table .ov-day{color:var(--b)}
-.ov-table .ov-effect{color:var(--mu);font-size:9px}
+.ov-table thead tr{background:var(--bg2);border-bottom:2px solid var(--acc)}
+.ov-table th{
+  text-align:left;padding:9px 12px;
+  font-family:'Unbounded',sans-serif;
+  font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--tx3);
+}
+.ov-table td{padding:7px 12px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.ov-table tbody tr:hover td{background:var(--sh)}
+.ov-ic{width:26px;height:26px;object-fit:contain;image-rendering:pixelated}
+.ov-name{font-weight:600;color:var(--tx);font-size:11px}
+.ov-cat{font-family:'DM Mono',monospace;font-size:8px;color:var(--tx3)}
+.ov-cost{font-family:'DM Mono',monospace;color:var(--acc2)}
+.ov-day{font-family:'DM Mono',monospace;color:var(--acc3)}
+.ov-effect{color:var(--tx2);font-size:9px;max-width:220px}
 
-.granumz{color:var(--y);font-weight:700}
+/* ── FAB GRID ── */
+.fab-outer{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(480px,1fr));
+  gap:16px;margin-bottom:16px;
+}
+.fab-cat{background:var(--bg1);box-shadow:var(--cglow);overflow:hidden}
+.fab-cat-head{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px 12px;background:var(--bg2);border-bottom:1px solid var(--bd);
+}
+.fab-cat-ic{width:36px;height:36px;object-fit:contain;image-rendering:pixelated;flex-shrink:0}
+.fab-cat-nb{flex:1}
+.fab-cat-name{
+  font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;
+  color:var(--acc);margin-bottom:2px;
+}
+.fab-cat-desc{font-size:9px;color:var(--tx2);line-height:1.5}
+.fab-cat-body{padding:12px}
 
-/* GADGET CARDS */
-.gadget-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-top:4px}
+/* ── GADGET CARDS ── */
+.gadget-grid{display:flex;flex-direction:column;gap:8px}
 .gadget-card{background:var(--bg);border:1px solid var(--bd);overflow:hidden}
-.gadget-head{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg3);border-bottom:1px solid var(--bd)}
-.gadget-ic{width:48px;height:48px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
-.gadget-ic-ph{width:48px;height:48px;background:var(--bg2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.gadget-head{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 12px;background:var(--bg2);border-bottom:1px solid var(--bd);
+}
+.gadget-ic{width:44px;height:44px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
+.gadget-ic-ph{
+  width:44px;height:44px;background:var(--bg);border:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
+}
 .gadget-title-group{flex:1;min-width:0}
-.gadget-name{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--w);margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.gadget-meta{font-size:9px;color:var(--mu)}
-.base-stats{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;border-bottom:1px solid var(--bd)}
-.stat-chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--bd);padding:2px 7px;font-size:8px}
-.stat-chip.sm{font-size:8px;padding:2px 5px}
-.stat-k{color:var(--mu);text-transform:uppercase;letter-spacing:.4px}
-.stat-v{color:var(--g);font-weight:700}
-/* LEVEL ROWS */
-.lv-list{padding:8px 0}
-.lv-row{display:flex;align-items:flex-start;gap:10px;padding:8px 14px;border-bottom:1px solid var(--bd)}
+.gadget-name{
+  font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;
+  color:var(--tx);margin-bottom:4px;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.gadget-meta{
+  font-family:'DM Mono',monospace;font-size:9px;color:var(--tx3);
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.base-stats{
+  display:flex;flex-wrap:wrap;gap:4px;
+  padding:7px 12px;border-bottom:1px solid var(--bd);
+}
+.stat-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--bg3);border:1px solid var(--bd);
+  padding:2px 7px;font-family:'DM Mono',monospace;font-size:8px;
+}
+.stat-k{color:var(--tx3);text-transform:uppercase;letter-spacing:.4px}
+.stat-v{color:var(--acc);font-weight:500}
+
+.lv-list{padding:2px 0}
+.lv-row{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:7px 12px;border-bottom:1px solid var(--bd);
+  transition:background var(--t);
+}
+.lv-row:hover{background:var(--sh)}
 .lv-row:last-child{border-bottom:none}
-.lv-ic{width:34px;height:34px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
-.lv-badge{min-width:28px;height:18px;background:var(--bd2);color:var(--g);font-size:8px;font-weight:700;font-family:var(--fh);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.lv-ic{width:30px;height:30px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
+.lv-badge{
+  min-width:28px;height:18px;
+  background:var(--bbg);color:var(--btx);border:1px solid var(--bd2);
+  font-family:'DM Mono',monospace;font-size:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+}
 .lv-info{flex:1;min-width:0}
-.lv-desc{font-size:9px;color:var(--w);margin-bottom:4px;line-height:1.5}
+.lv-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--tx);margin-bottom:4px;line-height:1.5}
 .lv-stats{display:flex;flex-wrap:wrap;gap:4px}
-.lv-cost{font-size:10px;color:var(--y);font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
-/* FAB CAT updated head */
-.fab-cat-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
-.fab-cat-desc{font-size:9px;color:var(--mu);flex:1;line-height:1.5}
-.fab-cat-name{font-family:var(--fh);font-size:14px;font-weight:800;color:var(--g);white-space:nowrap}
-.fab-cat-ic{width:32px;height:32px;object-fit:contain;flex-shrink:0;image-rendering:pixelated}
+.lv-cost{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--acc2);font-weight:500;white-space:nowrap;flex-shrink:0;margin-top:2px;
+}
+
+/* ── FAB DIVIDER ── */
+.fab-divider{
+  height:1px;background:var(--bd);
+  margin:16px 0;position:relative;
+}
+.fab-divider::before{
+  content:'SCIENCE LAB BUILDINGS';
+  position:absolute;top:50%;left:0;transform:translateY(-50%);
+  background:var(--bg);padding:0 8px;
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--tx3);
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+        <button onclick="window.location.href='https://xuanvufsv.github.io'"
+        style="display:inline-flex; align-items:center; margin-bottom: 5px; padding:5px 10px; background-color:#e74c3c; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">
+        Crop🍅Shooter
+      </button>
 <div class="hd">
-  <h1>Buildings &amp; Upgrades</h1>
-  <p>Crop Shooter — GDD Reference · All costs in Granumz (G)</p>
+  <div class="hd-left">
+    <div class="hd-eye">GDD Reference · v1.0</div>
+    <h1>Buildings <em>&amp;</em> Upgrades</h1>
+    <div class="hd-sub">CROP SHOOTER · All costs in Granumz (G)</div>
+  </div>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀</button>
 </div>
 
 <div class="tabs">
@@ -128,343 +315,277 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="tab" onclick="sw('fabricate')">Fabricate Gadgets</div>
 </div>
 
-<!-- OVERVIEW -->
 <div class="view active" id="view-overview">
-<table class="ov-table">
-<thead><tr><th></th><th>Building</th><th>Category</th><th>Blueprint Cost</th><th>Unlock Day</th><th>Upgrades</th><th>Key Effect</th></tr></thead>
-<tbody id="ovBody"></tbody>
-</table>
+  <div class="ov-wrap">
+    <table class="ov-table">
+      <thead><tr>
+        <th></th><th>Building / Gadget</th><th>Category</th>
+        <th>Blueprint</th><th>Unlock</th><th>Upgrades</th><th>Key Effect</th>
+      </tr></thead>
+      <tbody id="ovBody"></tbody>
+    </table>
+  </div>
 </div>
 
-<!-- BASE CONSTRUCTION -->
 <div class="view" id="view-base">
-<div class="building-grid" id="baseGrid"></div>
+  <div class="sec-lbl">Base Construction</div>
+  <div class="building-grid" id="baseGrid"></div>
 </div>
 
-<!-- FARMING -->
 <div class="view" id="view-farming">
-<div class="building-grid" id="farmGrid"></div>
+  <div class="sec-lbl">Farming Construction</div>
+  <div class="building-grid" id="farmGrid"></div>
 </div>
 
-<!-- FABRICATE -->
 <div class="view" id="view-fabricate">
-<div class="fab-grid" id="fabGrid"></div>
-<div class="building-grid" id="fabBuildGrid"></div>
+  <div class="sec-lbl">Gadget Categories</div>
+  <div class="fab-outer" id="fabGrid"></div>
+  <div class="fab-divider"></div>
+  <div class="building-grid" id="fabBuildGrid"></div>
 </div>
 
 </div>
 
 <script>
-const IC = {
-  // General / Buildings
-  general_gear:       'https://xuanvufsv.github.io/gdd-images/generalgear_icon.png',
-  house:              'https://xuanvufsv.github.io/gdd-images/house_icon.png',
-  market:             'https://xuanvufsv.github.io/gdd-images/market_icon.png',
-  market_upgrade:     'https://xuanvufsv.github.io/gdd-images/market_upgrade1_icon.png',
-  treasure_pod:       'https://xuanvufsv.github.io/gdd-images/treasurepod_icon.png',
-  treasure_lv1:       'https://xuanvufsv.github.io/gdd-images/treasurepod_level1_icon.png',
-  treasure_lv2:       'https://xuanvufsv.github.io/gdd-images/treasurepod_level2_icon.png',
-  treasure_lv3:       'https://xuanvufsv.github.io/gdd-images/treasurepod_level3_icon.png',
-  builder_shop:       'https://xuanvufsv.github.io/gdd-images/buildershop_icon.png',
-  garden:             'https://xuanvufsv.github.io/gdd-images/garden_icon.png',
-  silo:               'https://xuanvufsv.github.io/gdd-images/silo_icon.png',
-  silo_storage:       'https://xuanvufsv.github.io/gdd-images/silo_upgrade_additionalstorage_icon.png',
-  bug_free:           'https://xuanvufsv.github.io/gdd-images/silo_upgrade_bugfree-springgrass_icon.png',
-  pond:               'https://xuanvufsv.github.io/gdd-images/pond_icon.png',
-  purifier:           'https://xuanvufsv.github.io/gdd-images/water_purifier_machine_icon.png',
-  coop:               'https://xuanvufsv.github.io/gdd-images/coop_icon.png',
-  high_wall:          'https://xuanvufsv.github.io/gdd-images/coop_upgrade_highwall_icon.png',
-  vitamizer:          'https://xuanvufsv.github.io/gdd-images/coop_upgrade_vitamizer_icon.png',
-  expand_coop:        'https://xuanvufsv.github.io/gdd-images/coop_upgrade_expandcoop_icon.png',
-  fabricate:          'https://xuanvufsv.github.io/gdd-images/fabricategadget_icon.png',
-  refinery:           'https://xuanvufsv.github.io/gdd-images/refinery_icon.png',
-  // Gear upgrades
-  heart_lv1:          'https://xuanvufsv.github.io/gdd-images/heartmodule_level1_icon.png',
-  heart_lv2:          'https://xuanvufsv.github.io/gdd-images/heartmodule_level2_icon.png',
-  heart_lv3:          'https://xuanvufsv.github.io/gdd-images/heartmodule_level3_icon.png',
-  heart_lv4:          'https://xuanvufsv.github.io/gdd-images/heartmodule_level4_icon.png',
-  water_module:       'https://xuanvufsv.github.io/gdd-images/watermodule_icon.png',
-  boost_lv1:          'https://xuanvufsv.github.io/gdd-images/boostmaster_level1_icon.png',
-  boost_lv2:          'https://xuanvufsv.github.io/gdd-images/boostmaster_level2_icon.png',
-  backpack_lv1:       'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level1_icon.png',
-  backpack_lv2:       'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level2_icon.png',
-  backpack_lv3:       'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level3_icon.png',
-  backpack_lv4:       'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level4_icon.png',
-  energy_lv1:         'https://xuanvufsv.github.io/gdd-images/energymodule_level1_icon.png',
-  energy_lv2:         'https://xuanvufsv.github.io/gdd-images/energymodule_level2_icon.png',
-  energy_lv3:         'https://xuanvufsv.github.io/gdd-images/energymodule_level3_icon.png',
-  // Garden upgrades
-  additional_plot:    'https://xuanvufsv.github.io/gdd-images/additionalgardenplot_icon.png',
-  nutrient_soil:      'https://xuanvufsv.github.io/gdd-images/nutrientsoil_garden_upgrade_icon.png',
-  sprinkler:          'https://xuanvufsv.github.io/gdd-images/sprinker_garden_upgrade_icon.png',
-  alluvium_soil:      'https://xuanvufsv.github.io/gdd-images/alluvium_garden_upgrade_icon.png',
-  auto_harvest:       'https://xuanvufsv.github.io/gdd-images/garden_upgrade_autohaverst_icon.png',
-  miracle_mix:        'https://xuanvufsv.github.io/gdd-images/miraclemix_garden_upgrade_icon.png',
-  // Fabricate — Extractors
-  extractors:         'https://xuanvufsv.github.io/gdd-images/extractors_icon.png',
-  drill_lv1:          'https://xuanvufsv.github.io/gdd-images/drill_level1_icon.png',
-  drill_lv2:          'https://xuanvufsv.github.io/gdd-images/drill_level2_icon.png',
-  drill_lv3:          'https://xuanvufsv.github.io/gdd-images/drill_level3_icon.png',
-  pump_lv1:           'https://xuanvufsv.github.io/gdd-images/waterpump_level1_icon.png',
-  pump_lv2:           'https://xuanvufsv.github.io/gdd-images/waterpump_level2_icon.png',
-  pump_lv3:           'https://xuanvufsv.github.io/gdd-images/waterpump_level3_icon.png',
-  apiary_lv1:         'https://xuanvufsv.github.io/gdd-images/apiary_level1_icon.png',
-  apiary_lv2:         'https://xuanvufsv.github.io/gdd-images/apiary_level2_icon.png',
-  apiary_lv3:         'https://xuanvufsv.github.io/gdd-images/apiary_level3_icon.png',
-  // Fabricate — Utilities
-  utilities:          'https://xuanvufsv.github.io/gdd-images/utilities_icon.png',
-  crop_turret:        'https://xuanvufsv.github.io/gdd-images/turret_icon.png',
-  med_station:        'https://xuanvufsv.github.io/gdd-images/medstation_icon.png',
-  // Fabricate — WarpTech
-  warptech:           'https://xuanvufsv.github.io/gdd-images/warptech_icon.png',
-  refinery_link:      'https://xuanvufsv.github.io/gdd-images/refinerylink_icon.png',
-  turret_link:        'https://xuanvufsv.github.io/gdd-images/turretlink_icon.png',
-  market_link:        'https://xuanvufsv.github.io/gdd-images/marketlink_icon.png',
-  // Misc
-  blueprint:          'https://xuanvufsv.github.io/gdd-images/blueprint_icon.png',
-  notify:             'https://xuanvufsv.github.io/gdd-images/notify_icon.png',
+function toggleTheme(){
+  const h=document.documentElement;
+  const dark=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('themeBtn').textContent=dark?'🌙':'☀';
+}
+
+const IC={
+  general_gear:'https://xuanvufsv.github.io/gdd-images/generalgear_icon.png',
+  house:'https://xuanvufsv.github.io/gdd-images/house_icon.png',
+  market:'https://xuanvufsv.github.io/gdd-images/market_icon.png',
+  market_upgrade:'https://xuanvufsv.github.io/gdd-images/market_upgrade1_icon.png',
+  treasure_pod:'https://xuanvufsv.github.io/gdd-images/treasurepod_icon.png',
+  treasure_lv1:'https://xuanvufsv.github.io/gdd-images/treasurepod_level1_icon.png',
+  treasure_lv2:'https://xuanvufsv.github.io/gdd-images/treasurepod_level2_icon.png',
+  treasure_lv3:'https://xuanvufsv.github.io/gdd-images/treasurepod_level3_icon.png',
+  builder_shop:'https://xuanvufsv.github.io/gdd-images/buildershop_icon.png',
+  garden:'https://xuanvufsv.github.io/gdd-images/garden_icon.png',
+  silo:'https://xuanvufsv.github.io/gdd-images/silo_icon.png',
+  silo_storage:'https://xuanvufsv.github.io/gdd-images/silo_upgrade_additionalstorage_icon.png',
+  bug_free:'https://xuanvufsv.github.io/gdd-images/silo_upgrade_bugfree-springgrass_icon.png',
+  pond:'https://xuanvufsv.github.io/gdd-images/pond_icon.png',
+  purifier:'https://xuanvufsv.github.io/gdd-images/water_purifier_machine_icon.png',
+  coop:'https://xuanvufsv.github.io/gdd-images/coop_icon.png',
+  high_wall:'https://xuanvufsv.github.io/gdd-images/coop_upgrade_highwall_icon.png',
+  vitamizer:'https://xuanvufsv.github.io/gdd-images/coop_upgrade_vitamizer_icon.png',
+  expand_coop:'https://xuanvufsv.github.io/gdd-images/coop_upgrade_expandcoop_icon.png',
+  fabricate:'https://xuanvufsv.github.io/gdd-images/fabricategadget_icon.png',
+  refinery:'https://xuanvufsv.github.io/gdd-images/refinery_icon.png',
+  heart_lv1:'https://xuanvufsv.github.io/gdd-images/heartmodule_level1_icon.png',
+  heart_lv2:'https://xuanvufsv.github.io/gdd-images/heartmodule_level2_icon.png',
+  heart_lv3:'https://xuanvufsv.github.io/gdd-images/heartmodule_level3_icon.png',
+  heart_lv4:'https://xuanvufsv.github.io/gdd-images/heartmodule_level4_icon.png',
+  water_module:'https://xuanvufsv.github.io/gdd-images/watermodule_icon.png',
+  boost_lv1:'https://xuanvufsv.github.io/gdd-images/boostmaster_level1_icon.png',
+  boost_lv2:'https://xuanvufsv.github.io/gdd-images/boostmaster_level2_icon.png',
+  backpack_lv1:'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level1_icon.png',
+  backpack_lv2:'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level2_icon.png',
+  backpack_lv3:'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level3_icon.png',
+  backpack_lv4:'https://xuanvufsv.github.io/gdd-images/backpackslotmodule_level4_icon.png',
+  energy_lv1:'https://xuanvufsv.github.io/gdd-images/energymodule_level1_icon.png',
+  energy_lv2:'https://xuanvufsv.github.io/gdd-images/energymodule_level2_icon.png',
+  energy_lv3:'https://xuanvufsv.github.io/gdd-images/energymodule_level3_icon.png',
+  additional_plot:'https://xuanvufsv.github.io/gdd-images/additionalgardenplot_icon.png',
+  nutrient_soil:'https://xuanvufsv.github.io/gdd-images/nutrientsoil_garden_upgrade_icon.png',
+  sprinkler:'https://xuanvufsv.github.io/gdd-images/sprinker_garden_upgrade_icon.png',
+  alluvium_soil:'https://xuanvufsv.github.io/gdd-images/alluvium_garden_upgrade_icon.png',
+  auto_harvest:'https://xuanvufsv.github.io/gdd-images/garden_upgrade_autohaverst_icon.png',
+  miracle_mix:'https://xuanvufsv.github.io/gdd-images/miraclemix_garden_upgrade_icon.png',
+  extractors:'https://xuanvufsv.github.io/gdd-images/extractors_icon.png',
+  drill_lv1:'https://xuanvufsv.github.io/gdd-images/drill_level1_icon.png',
+  drill_lv2:'https://xuanvufsv.github.io/gdd-images/drill_level2_icon.png',
+  drill_lv3:'https://xuanvufsv.github.io/gdd-images/drill_level3_icon.png',
+  pump_lv1:'https://xuanvufsv.github.io/gdd-images/waterpump_level1_icon.png',
+  pump_lv2:'https://xuanvufsv.github.io/gdd-images/waterpump_level2_icon.png',
+  pump_lv3:'https://xuanvufsv.github.io/gdd-images/waterpump_level3_icon.png',
+  apiary_lv1:'https://xuanvufsv.github.io/gdd-images/apiary_level1_icon.png',
+  apiary_lv2:'https://xuanvufsv.github.io/gdd-images/apiary_level2_icon.png',
+  apiary_lv3:'https://xuanvufsv.github.io/gdd-images/apiary_level3_icon.png',
+  utilities:'https://xuanvufsv.github.io/gdd-images/utilities_icon.png',
+  crop_turret:'https://xuanvufsv.github.io/gdd-images/turret_icon.png',
+  med_station:'https://xuanvufsv.github.io/gdd-images/medstation_icon.png',
+  warptech:'https://xuanvufsv.github.io/gdd-images/warptech_icon.png',
+  refinery_link:'https://xuanvufsv.github.io/gdd-images/refinerylink_icon.png',
+  turret_link:'https://xuanvufsv.github.io/gdd-images/turretlink_icon.png',
+  market_link:'https://xuanvufsv.github.io/gdd-images/marketlink_icon.png',
+  blueprint:'https://xuanvufsv.github.io/gdd-images/blueprint_icon.png',
+  notify:'https://xuanvufsv.github.io/gdd-images/notify_icon.png',
 };
 
 function img(key,cls='bcard-ic'){
-  if(IC[key]) return `<img src="${IC[key]}" class="${cls}" alt="">`;
-  return `<div class="${cls}-placeholder">?</div>`;
+  if(IC[key])return`<img src="${IC[key]}"class="${cls}"alt="">`;
+  return`<div class="${cls}-placeholder">?</div>`;
 }
 
-// ── DATA ──────────────────────────────────────────────────────────────────
-// cost: Granumz. day: unlock day. upgrades: [{name,desc,ic,cost,day,tag}]
-// Sorted by unlock day (ascending)
-const BUILDINGS = [
-  // Day 1
-  {
-    id:'gear', name:'Gear Upgrades', cat:'base', ic:'general_gear',
-    blueprintCost:0, day:1, demolish:false,
-    keyEffect:'Upgrade HP, Water, Speed, Backpack, Energy',
-    desc:'Personal stat upgrades. Purchase via UI interaction. No blueprint required — always available from Day 1.',
-    upgrades:[
-      {name:'Heart Module Lv1', desc:'+25 max HP',               ic:'heart_lv1',    cost:350,  day:4},
-      {name:'Heart Module Lv2', desc:'+50 max HP',               ic:'heart_lv2',    cost:500,  day:7},
-      {name:'Heart Module Lv3', desc:'+75 max HP',               ic:'heart_lv3',    cost:750,  day:12},
-      {name:'Heart Module Lv4', desc:'+100 max HP (max)',        ic:'heart_lv4',    cost:900,  day:17},
-      {name:'Water Module Lv1', desc:'+50 water capacity',       ic:'water_module', cost:350,  day:2},
-      {name:'Water Module Lv2', desc:'+100 water capacity',      ic:'water_module', cost:500,  day:7},
-      {name:'Water Module Lv3', desc:'+150 water capacity (max)',ic:'water_module', cost:750,  day:12},
-      {name:'Boost Module Lv1', desc:'+1 movement speed',        ic:'boost_lv1',    cost:500,  day:4},
-      {name:'Boost Module Lv2', desc:'+2 movement speed (max)',  ic:'boost_lv2',    cost:950,  day:12},
-      {name:'Backpack Lv1',     desc:'+15 capacity',             ic:'backpack_lv1', cost:500,  day:5},
-      {name:'Backpack Lv2',     desc:'+35 capacity',             ic:'backpack_lv2', cost:950,  day:9},
-      {name:'Backpack Lv3',     desc:'+65 capacity',             ic:'backpack_lv3', cost:4500, day:17},
-      {name:'Backpack Lv4',     desc:'+85 capacity (max)',       ic:'backpack_lv4', cost:9000, day:21},
-      {name:'Energy Module Lv1',desc:'+1 stamina regen',         ic:'energy_lv1',   cost:300,  day:5},
-      {name:'Energy Module Lv2',desc:'+3 stamina regen',         ic:'energy_lv2',   cost:600,  day:10},
-      {name:'Energy Module Lv3',desc:'+6 stamina regen (max)',   ic:'energy_lv3',   cost:1100, day:20},
-    ]
-  },
-  {
-    id:'house', name:'Farm House', cat:'base', ic:'house',
-    blueprintCost:0, day:1, demolish:false,
-    keyEffect:'Sleep to skip night — restores HP & Energy on wake',
-    desc:'Sleep to skip the remainder of the night and jump to 7 AM. Can sleep after clearing all monsters or from 3 AM onward. On wake: restores HP and Energy. +25% movement speed for 3 hours.',
-    upgrades:[]
-  },
-  {
-    id:'market', name:'Farm Market', cat:'base', ic:'market',
-    blueprintCost:0, day:1, demolish:false,
-    keyEffect:'Sell produce for Granumz — dynamic Perlin Noise pricing',
-    desc:'Sell produce and items for Granumz. Dynamic pricing via Perlin Noise + supply/demand inflation. Selling many of the same item decreases its price.',
-    upgrades:[
-      {name:'Selling Boost', desc:'+5% sell value on all items (×2 times)', ic:'market_upgrade', cost:0, day:1, tag:'achievement'},
-    ]
-  },
-  {
-    id:'garden', name:'Garden', cat:'farming', ic:'garden',
-    blueprintCost:0, day:1, demolish:true,
-    keyEffect:'Primary farming — up to 4 plots, crops = ammo + food',
-    desc:'Main farming building. Starts with 1 plot. Max 4 plots. Each plot grows 1 crop type. Crops = ammo + food ingredients.',
-    upgrades:[
-      {name:'Additional Plot II',  desc:'Unlock 2nd plot',                                      ic:'additional_plot', cost:350,  day:1},
-      {name:'Additional Plot III', desc:'Unlock 3rd plot',                                      ic:'additional_plot', cost:350,  day:1},
-      {name:'Additional Plot IV',  desc:'Unlock 4th plot (max)',                                ic:'additional_plot', cost:350,  day:1},
-      {name:'Nutrient Soil',       desc:'+25% max harvest yield for all crops',                 ic:'nutrient_soil',   cost:500,  day:5},
-      {name:'Alluvium Soil',       desc:'-20% grow time permanently',                           ic:'alluvium_soil',   cost:900,  day:8},
-      {name:'Sprinkler',           desc:'Auto-water all plots — no manual watering needed',     ic:'sprinkler',       cost:1500, day:10},
-      {name:'Auto Harvest',        desc:'Automatically harvests into Silo when crops are ripe', ic:'auto_harvest',    cost:1800, day:15},
-      {name:'Miracle Mix',         desc:'+Rotten timer · +Harvest count. Unlocked after defeating 4 bosses.', ic:'miracle_mix', cost:0, day:0, tag:'achievement'},
-    ]
-  },
-  {
-    id:'purifier', name:'Water Purifier', cat:'farming', ic:'purifier',
-    blueprintCost:0, day:1, demolish:false,
-    keyEffect:'Converts Salt Water → Fresh Water for Garden',
-    desc:'Filters water from Pond or Natural Water Sources. Converts Salt Water → Fresh Water. Runs automatically during Sleep phase.',
-    upgrades:[
-      {name:'More Water Contain I',     desc:'+25 tank capacity',       ic:'', cost:350,  day:1},
-      {name:'Decrease Purifier Time I', desc:'-25% purification time',  ic:'', cost:350,  day:5},
-      {name:'More Water Contain II',    desc:'+25 tank capacity',       ic:'', cost:500,  day:7},
-      {name:'More Water Contain III',   desc:'+50 tank capacity (max)', ic:'', cost:1100, day:10},
-    ]
-  },
-  {
-    id:'refinery', name:'Refinery', cat:'fabricate', ic:'refinery',
-    blueprintCost:0, day:1, demolish:false,
-    keyEffect:'Deposit-only item storage depot — no withdrawal',
-    desc:'Item storage depot — deposit only, no withdrawal. Connect Refinery Link to deposit remotely. Part of the Science Lab system.',
-    upgrades:[]
-  },
-  // Day 2
-  {
-    id:'treasure', name:'Treasure Pod', cat:'base', ic:'treasure_pod',
-    blueprintCost:0, day:2, demolish:false,
-    keyEffect:'Granumz + crops + potions + Gadget Blueprints (Lv3)',
-    desc:'Fixed locations scattered across map. Difficulty to reach varies. Rewards: Granumz + crops + potions + Fabricate blueprints (Lv3).',
-    upgrades:[
-      {name:'Treasure Pod Lv1', desc:'Standard pod — common rewards',          ic:'treasure_lv1', cost:0, day:2},
-      {name:'Treasure Pod Lv2', desc:'Medium difficulty — better rewards',      ic:'treasure_lv2', cost:0, day:8,  tag:'milestone'},
-      {name:'Treasure Pod Lv3', desc:'Hard reach — blueprint + rare item drop', ic:'treasure_lv3', cost:0, day:15, tag:'milestone'},
-    ]
-  },
-  // Day 4
-  {
-    id:'builder', name:"Builder's Shop", cat:'base', ic:'builder_shop',
-    blueprintCost:0, day:4, demolish:false,
-    keyEffect:'Purchase Blueprints to unlock buildings & Gadgets',
-    desc:'Purchase blueprints to unlock construction of new buildings and Fabricate Gadgets. All buildings require blueprint purchase before placement.',
-    upgrades:[]
-  },
-  {
-    id:'silo', name:'Silo', cat:'farming', ic:'silo',
-    blueprintCost:0, day:4, demolish:true,
-    keyEffect:'Item storage — 150 items/port, max 4 ports',
-    desc:'Item storage warehouse. Each port holds up to 150 items of the same type. Starts with 1 port (Port I), maximum 4 ports.',
-    upgrades:[
-      {name:'Additional Storage II',  desc:'Unlock 2nd port',       ic:'silo_storage', cost:500,  day:4},
-      {name:'Additional Storage III', desc:'Unlock 3rd port',       ic:'silo_storage', cost:500,  day:4},
-      {name:'Additional Storage IV',  desc:'Unlock 4th port (max)', ic:'silo_storage', cost:1100, day:4},
-    ]
-  },
-  {
-    id:'fabricate', name:'Fabricate Gadget', cat:'fabricate', ic:'fabricate',
-    blueprintCost:0, day:4, demolish:false,
-    keyEffect:'Craft & deploy Gadgets — 1 stored at a time',
-    desc:'Craft and place Gadgets on the map. Stores 1 Gadget at a time. 3 categories: Extractors, Utilities, WarpTech. Higher tier gadgets require Lv3 Treasure Pod blueprints.',
-    upgrades:[]
-  },
-  // Day 7
-  {
-    id:'pond', name:'Pond', cat:'farming', ic:'pond',
-    blueprintCost:0, day:7, demolish:true,
-    keyEffect:'Natural salt water source — auto-refills on cooldown',
-    desc:'Holds water generated from natural sources. Auto-refills on cooldown. Provides salt water — must pass through Water Purifier before watering the Garden.',
-    upgrades:[
-      {name:'More Water I',        desc:'+20 max water capacity',       ic:'', cost:350,  day:7},
-      {name:'Decrease Cooldown I', desc:'-20% refill cooldown',         ic:'', cost:350,  day:7},
-      {name:'More Water II',       desc:'+30 max water capacity',       ic:'', cost:500,  day:7},
-      {name:'Decrease Cooldown II',desc:'-20% refill cooldown',         ic:'', cost:500,  day:7},
-      {name:'More Water III',      desc:'+50 max water capacity',       ic:'', cost:1300, day:7},
-      {name:'More Water IV',       desc:'+100 max water capacity (max)',ic:'', cost:1300, day:7},
-    ]
-  },
-  {
-    id:'coop', name:'Coop', cat:'farming', ic:'coop',
-    blueprintCost:0, day:7, demolish:true,
-    keyEffect:'Raise chickens for eggs & meat — breeds every 12h',
-    desc:'Raise chickens for eggs and meat. Max 6 chickens (base), expandable to 12. A Hen + Rooster pair breeds every 12h in-game. Old chickens automatically convert to meat after 6 breeding cycles.',
-    upgrades:[
-      {name:'High Wall',             desc:'Prevents monsters from attacking chickens at night',   ic:'high_wall',   cost:900,  day:7},
-      {name:'Bug Free Spring Grass', desc:'+% max egg production — chickens graze on natural grass', ic:'bug_free', cost:900, day:7},
-      {name:'Vitamizer',             desc:'-20% breeding time · +10% egg production rate',       ic:'vitamizer',   cost:1200, day:7},
-      {name:'Expand Coop',           desc:'Increase max chickens from 6 → 12',                  ic:'expand_coop', cost:2000, day:7},
-    ]
-  },
-
+const BUILDINGS=[
+  {id:'gear',name:'Gear Upgrades',cat:'base',ic:'general_gear',blueprintCost:0,day:1,demolish:false,
+   keyEffect:'Upgrade HP, Water, Speed, Backpack, Energy',
+   desc:'Personal stat upgrades. Purchase via UI interaction. No blueprint required — always available from Day 1.',
+   upgrades:[
+    {name:'Heart Module Lv1',desc:'+25 max HP',ic:'heart_lv1',cost:350,day:4},
+    {name:'Heart Module Lv2',desc:'+50 max HP',ic:'heart_lv2',cost:500,day:7},
+    {name:'Heart Module Lv3',desc:'+75 max HP',ic:'heart_lv3',cost:750,day:12},
+    {name:'Heart Module Lv4',desc:'+100 max HP (max)',ic:'heart_lv4',cost:900,day:17},
+    {name:'Water Module Lv1',desc:'+50 water capacity',ic:'water_module',cost:350,day:2},
+    {name:'Water Module Lv2',desc:'+100 water capacity',ic:'water_module',cost:500,day:7},
+    {name:'Water Module Lv3',desc:'+150 water capacity (max)',ic:'water_module',cost:750,day:12},
+    {name:'Boost Module Lv1',desc:'+1 movement speed',ic:'boost_lv1',cost:500,day:4},
+    {name:'Boost Module Lv2',desc:'+2 movement speed (max)',ic:'boost_lv2',cost:950,day:12},
+    {name:'Backpack Lv1',desc:'+15 capacity',ic:'backpack_lv1',cost:500,day:5},
+    {name:'Backpack Lv2',desc:'+35 capacity',ic:'backpack_lv2',cost:950,day:9},
+    {name:'Backpack Lv3',desc:'+65 capacity',ic:'backpack_lv3',cost:4500,day:17},
+    {name:'Backpack Lv4',desc:'+85 capacity (max)',ic:'backpack_lv4',cost:9000,day:21},
+    {name:'Energy Module Lv1',desc:'+1 stamina regen',ic:'energy_lv1',cost:300,day:5},
+    {name:'Energy Module Lv2',desc:'+3 stamina regen',ic:'energy_lv2',cost:600,day:10},
+    {name:'Energy Module Lv3',desc:'+6 stamina regen (max)',ic:'energy_lv3',cost:1100,day:20},
+  ]},
+  {id:'house',name:'Farm House',cat:'base',ic:'house',blueprintCost:0,day:1,demolish:false,
+   keyEffect:'Sleep to skip night — restores HP & Energy on wake',
+   desc:'Sleep to skip the remainder of the night and jump to 7 AM. Can sleep after clearing all monsters or from 3 AM onward. On wake: restores HP and Energy. +25% movement speed for 3 hours.',
+   upgrades:[]},
+  {id:'market',name:'Farm Market',cat:'base',ic:'market',blueprintCost:0,day:1,demolish:false,
+   keyEffect:'Sell produce for Granumz — dynamic Perlin Noise pricing',
+   desc:'Sell produce and items for Granumz. Dynamic pricing via Perlin Noise + supply/demand inflation. Selling many of the same item decreases its price.',
+   upgrades:[
+    {name:'Selling Boost',desc:'+5% sell value on all items (×2 times)',ic:'market_upgrade',cost:0,day:1,tag:'achievement'},
+  ]},
+  {id:'garden',name:'Garden',cat:'farming',ic:'garden',blueprintCost:0,day:1,demolish:true,
+   keyEffect:'Primary farming — up to 4 plots, crops = ammo + food',
+   desc:'Main farming building. Starts with 1 plot. Max 4 plots. Each plot grows 1 crop type. Crops = ammo + food ingredients.',
+   upgrades:[
+    {name:'Additional Plot II',desc:'Unlock 2nd plot',ic:'additional_plot',cost:350,day:1},
+    {name:'Additional Plot III',desc:'Unlock 3rd plot',ic:'additional_plot',cost:350,day:1},
+    {name:'Additional Plot IV',desc:'Unlock 4th plot (max)',ic:'additional_plot',cost:350,day:1},
+    {name:'Nutrient Soil',desc:'+25% max harvest yield for all crops',ic:'nutrient_soil',cost:500,day:5},
+    {name:'Alluvium Soil',desc:'-20% grow time permanently',ic:'alluvium_soil',cost:900,day:8},
+    {name:'Sprinkler',desc:'Auto-water all plots — no manual watering needed',ic:'sprinkler',cost:1500,day:10},
+    {name:'Auto Harvest',desc:'Automatically harvests into Silo when crops are ripe',ic:'auto_harvest',cost:1800,day:15},
+    {name:'Miracle Mix',desc:'+Rotten timer · +Harvest count. Unlocked after defeating 4 bosses.',ic:'miracle_mix',cost:0,day:0,tag:'achievement'},
+  ]},
+  {id:'purifier',name:'Water Purifier',cat:'farming',ic:'purifier',blueprintCost:0,day:1,demolish:false,
+   keyEffect:'Converts Salt Water → Fresh Water for Garden',
+   desc:'Filters water from Pond or Natural Water Sources. Converts Salt Water → Fresh Water. Runs automatically during Sleep phase.',
+   upgrades:[
+    {name:'More Water Contain I',desc:'+25 tank capacity',ic:'',cost:350,day:1},
+    {name:'Decrease Purifier Time I',desc:'-25% purification time',ic:'',cost:350,day:5},
+    {name:'More Water Contain II',desc:'+25 tank capacity',ic:'',cost:500,day:7},
+    {name:'More Water Contain III',desc:'+50 tank capacity (max)',ic:'',cost:1100,day:10},
+  ]},
+  {id:'refinery',name:'Refinery',cat:'fabricate',ic:'refinery',blueprintCost:0,day:1,demolish:false,
+   keyEffect:'Deposit-only item storage depot — no withdrawal',
+   desc:'Item storage depot — deposit only, no withdrawal. Connect Refinery Link to deposit remotely. Part of the Science Lab system.',
+   upgrades:[]},
+  {id:'treasure',name:'Treasure Pod',cat:'base',ic:'treasure_pod',blueprintCost:0,day:2,demolish:false,
+   keyEffect:'Granumz + crops + potions + Gadget Blueprints (Lv3)',
+   desc:'Fixed locations scattered across map. Difficulty to reach varies. Rewards: Granumz + crops + potions + Fabricate blueprints (Lv3).',
+   upgrades:[
+    {name:'Treasure Pod Lv1',desc:'Standard pod — common rewards',ic:'treasure_lv1',cost:0,day:2},
+    {name:'Treasure Pod Lv2',desc:'Medium difficulty — better rewards',ic:'treasure_lv2',cost:0,day:8,tag:'milestone'},
+    {name:'Treasure Pod Lv3',desc:'Hard reach — blueprint + rare item drop',ic:'treasure_lv3',cost:0,day:15,tag:'milestone'},
+  ]},
+  {id:'builder',name:"Builder's Shop",cat:'base',ic:'builder_shop',blueprintCost:0,day:4,demolish:false,
+   keyEffect:'Purchase Blueprints to unlock buildings & Gadgets',
+   desc:"Purchase blueprints to unlock construction of new buildings and Fabricate Gadgets. All buildings require blueprint purchase before placement.",
+   upgrades:[]},
+  {id:'silo',name:'Silo',cat:'farming',ic:'silo',blueprintCost:0,day:4,demolish:true,
+   keyEffect:'Item storage — 150 items/port, max 4 ports',
+   desc:'Item storage warehouse. Each port holds up to 150 items of the same type. Starts with 1 port (Port I), maximum 4 ports.',
+   upgrades:[
+    {name:'Additional Storage II',desc:'Unlock 2nd port',ic:'silo_storage',cost:500,day:4},
+    {name:'Additional Storage III',desc:'Unlock 3rd port',ic:'silo_storage',cost:500,day:4},
+    {name:'Additional Storage IV',desc:'Unlock 4th port (max)',ic:'silo_storage',cost:1100,day:4},
+  ]},
+  {id:'fabricate',name:'Fabricate Gadget',cat:'fabricate',ic:'fabricate',blueprintCost:0,day:4,demolish:false,
+   keyEffect:'Craft & deploy Gadgets — 1 stored at a time',
+   desc:'Craft and place Gadgets on the map. Stores 1 Gadget at a time. 3 categories: Extractors, Utilities, WarpTech. Higher tier gadgets require Lv3 Treasure Pod blueprints.',
+   upgrades:[]},
+  {id:'pond',name:'Pond',cat:'farming',ic:'pond',blueprintCost:0,day:7,demolish:true,
+   keyEffect:'Natural salt water source — auto-refills on cooldown',
+   desc:'Holds water generated from natural sources. Auto-refills on cooldown. Provides salt water — must pass through Water Purifier before watering the Garden.',
+   upgrades:[
+    {name:'More Water I',desc:'+20 max water capacity',ic:'',cost:350,day:7},
+    {name:'Decrease Cooldown I',desc:'-20% refill cooldown',ic:'',cost:350,day:7},
+    {name:'More Water II',desc:'+30 max water capacity',ic:'',cost:500,day:7},
+    {name:'Decrease Cooldown II',desc:'-20% refill cooldown',ic:'',cost:500,day:7},
+    {name:'More Water III',desc:'+50 max water capacity',ic:'',cost:1300,day:7},
+    {name:'More Water IV',desc:'+100 max water capacity (max)',ic:'',cost:1300,day:7},
+  ]},
+  {id:'coop',name:'Coop',cat:'farming',ic:'coop',blueprintCost:0,day:7,demolish:true,
+   keyEffect:'Raise chickens for eggs & meat — breeds every 12h',
+   desc:'Raise chickens for eggs and meat. Max 6 chickens (base), expandable to 12. A Hen + Rooster pair breeds every 12h in-game. Old chickens automatically convert to meat after 6 breeding cycles.',
+   upgrades:[
+    {name:'High Wall',desc:'Prevents monsters from attacking chickens at night',ic:'high_wall',cost:900,day:7},
+    {name:'Bug Free Spring Grass',desc:'+% max egg production — chickens graze on natural grass',ic:'bug_free',cost:900,day:7},
+    {name:'Vitamizer',desc:'-20% breeding time · +10% egg production rate',ic:'vitamizer',cost:1200,day:7},
+    {name:'Expand Coop',desc:'Increase max chickens from 6 → 12',ic:'expand_coop',cost:2000,day:7},
+  ]},
 ];
 
-const FAB_CATS = [
-  {
-    id:'extractors', name:'Extractors', ic:'extractors',
-    desc:'Automated resource gathering. Place on resource nodes or near buildings. Each gadget has 3 levels — higher levels increase extraction speed and yield.',
-    gadgets:[
-      {
-        name:'Drill', ic:'drill_lv1', cost:500, day:4, demolish:true,
-        base:{ extract_time:'18h/cycle', output:'10–40 items' },
-        levels:[
-          {lv:1, ic:'drill_lv1', cost:500,  upgrade_cost:0,    desc:'10–20 items/cycle.',                    output:'10–20'},
-          {lv:2, ic:'drill_lv2', cost:0,    upgrade_cost:450,  desc:'20–30 items/cycle.',                    output:'20–30'},
-          {lv:3, ic:'drill_lv3', cost:0,    upgrade_cost:800,  desc:'30–40 items/cycle. (max)',              output:'30–40'},
-        ]
-      },
-      {
-        name:'Water Pump', ic:'pump_lv1', cost:750, day:7, demolish:true,
-        base:{ pump_time:'6h/cycle', output:'100–200 water' },
-        levels:[
-          {lv:1, ic:'pump_lv1', cost:750,  upgrade_cost:0,    desc:'100 water/cycle.',                      output:'100'},
-          {lv:2, ic:'pump_lv2', cost:0,    upgrade_cost:450,  desc:'150 water/cycle.',                      output:'150'},
-          {lv:3, ic:'pump_lv3', cost:0,    upgrade_cost:800,  desc:'200 water/cycle. (max)',                output:'200'},
-        ]
-      },
-      {
-        name:'Apiary', ic:'apiary_lv1', cost:1000, day:11, tag:'milestone', demolish:true,
-        base:{ honey_time:'12h/cycle', output:'3–9 honey' },
-        levels:[
-          {lv:1, ic:'apiary_lv1', cost:1000, upgrade_cost:0,   desc:'3 honey/cycle.',                       output:'3'},
-          {lv:2, ic:'apiary_lv2', cost:0,    upgrade_cost:450, desc:'6 honey/cycle.',                       output:'6'},
-          {lv:3, ic:'apiary_lv3', cost:0,    upgrade_cost:800, desc:'9 honey/cycle. (max)',                 output:'9'},
-        ]
-      },
-    ]
-  },
-  {
-    id:'utilities', name:'Utilities', ic:'utilities',
-    desc:'Combat support and quality-of-life gadgets. Place near your base.',
-    gadgets:[
-      {
-        name:'Crop Turret', ic:'crop_turret', cost:2000, day:10, demolish:true,
-        base:{ ammo_cap:'200 crops', tier:'Basic tier only', fire_rate:'1 shot/2s' },
-        levels:[
-          {lv:1, ic:'crop_turret', cost:2000, upgrade_cost:0,    desc:'200 ammo cap. Basic crops only. 1 shot/2s.',           ammo_cap:200, tier:'Basic', fire_rate:'1/2s'},
-          {lv:2, ic:'crop_turret', cost:0,    upgrade_cost:1300, desc:'250 ammo cap. Mid-tier crops allowed. 1 shot/1.5s.',   ammo_cap:250, tier:'Mid',   fire_rate:'1/1.5s'},
-          {lv:3, ic:'crop_turret', cost:0,    upgrade_cost:4000, desc:'350 ammo cap. All tiers. 1 shot/1s. (max)',            ammo_cap:350, tier:'All',   fire_rate:'1/1s'},
-        ]
-      },
-      {
-        name:'Med Station', ic:'med_station', cost:900, day:13, demolish:true,
-        base:{ heal:'100 HP', cooldown:'4h', range:'3m' },
-        levels:[
-          {lv:1, ic:'med_station', cost:900,  upgrade_cost:0,   desc:'100 HP, 4h cooldown, 3m range.',         heal:'100 HP', cooldown:'4h', range:'3m'},
-          {lv:2, ic:'med_station', cost:0,    upgrade_cost:500, desc:'125 HP, 3h cooldown, 4m range.',         heal:'125 HP', cooldown:'3h', range:'4m'},
-          {lv:3, ic:'med_station', cost:0,    upgrade_cost:900, desc:'150 HP, 3h cooldown, 5m range. (max)',   heal:'150 HP', cooldown:'3h', range:'5m'},
-        ]
-      },
-    ]
-  },
-  {
-    id:'warptech', name:'WarpTech', ic:'warptech',
-    desc:'Advanced remote-control technology. All require Blueprints from Treasure Pod Lv3.',
-    gadgets:[
-      {
-        name:'Refinery Link', ic:'refinery_link', cost:2000, day:15, tag:'blueprint', demolish:true,
-        base:{ range:'Full Map', upgrade:'None' },
-        levels:[
-          {lv:1, ic:'refinery_link', cost:2000, upgrade_cost:0, desc:'Deposit items into Refinery remotely. Reduces Backpack pressure when farming far from base.'},
-        ]
-      },
-      {
-        name:'Turret Link', ic:'turret_link', cost:4500, day:16, tag:'blueprint', demolish:true,
-        base:{ upgrade:'None' },
-        levels:[
-          {lv:1, ic:'turret_link', cost:4500, upgrade_cost:0, desc:'Automatically loads produce from a designated plot into the nearest Crop Turret. Combined with Garden Auto Harvest creates a complete automation loop.'},
-        ]
-      },
-      {
-        name:'Market Link', ic:'market_link', cost:4500, day:18, tag:'blueprint', demolish:true,
-        base:{ upgrade:'None' },
-        levels:[
-          {lv:1, ic:'market_link', cost:4500, upgrade_cost:0, desc:'Sell items remotely — no need to return to Farm Market. Convenient when farming during daytime.'},
-        ]
-      },
-    ]
-  },
+const FAB_CATS=[
+  {id:'extractors',name:'Extractors',ic:'extractors',
+   desc:'Automated resource gathering. Place on resource nodes or near buildings. Each gadget has 3 levels — higher levels increase extraction speed and yield.',
+   gadgets:[
+    {name:'Drill',ic:'drill_lv1',cost:500,day:4,demolish:true,
+     base:{extract_time:'18h/cycle',output:'10–40 items'},
+     levels:[
+      {lv:1,ic:'drill_lv1',cost:500,upgrade_cost:0,desc:'10–20 items/cycle.',output:'10–20'},
+      {lv:2,ic:'drill_lv2',cost:0,upgrade_cost:450,desc:'20–30 items/cycle.',output:'20–30'},
+      {lv:3,ic:'drill_lv3',cost:0,upgrade_cost:800,desc:'30–40 items/cycle. (max)',output:'30–40'},
+    ]},
+    {name:'Water Pump',ic:'pump_lv1',cost:750,day:7,demolish:true,
+     base:{pump_time:'6h/cycle',output:'100–200 water'},
+     levels:[
+      {lv:1,ic:'pump_lv1',cost:750,upgrade_cost:0,desc:'100 water/cycle.',output:'100'},
+      {lv:2,ic:'pump_lv2',cost:0,upgrade_cost:450,desc:'150 water/cycle.',output:'150'},
+      {lv:3,ic:'pump_lv3',cost:0,upgrade_cost:800,desc:'200 water/cycle. (max)',output:'200'},
+    ]},
+    {name:'Apiary',ic:'apiary_lv1',cost:1000,day:11,tag:'milestone',demolish:true,
+     base:{honey_time:'12h/cycle',output:'3–9 honey'},
+     levels:[
+      {lv:1,ic:'apiary_lv1',cost:1000,upgrade_cost:0,desc:'3 honey/cycle.',output:'3'},
+      {lv:2,ic:'apiary_lv2',cost:0,upgrade_cost:450,desc:'6 honey/cycle.',output:'6'},
+      {lv:3,ic:'apiary_lv3',cost:0,upgrade_cost:800,desc:'9 honey/cycle. (max)',output:'9'},
+    ]},
+  ]},
+  {id:'utilities',name:'Utilities',ic:'utilities',
+   desc:'Combat support and quality-of-life gadgets. Place near your base.',
+   gadgets:[
+    {name:'Crop Turret',ic:'crop_turret',cost:2000,day:10,demolish:true,
+     base:{ammo_cap:'200 crops',tier:'Basic tier only',fire_rate:'1 shot/2s'},
+     levels:[
+      {lv:1,ic:'crop_turret',cost:2000,upgrade_cost:0,desc:'200 ammo cap. Basic crops only. 1 shot/2s.',ammo_cap:200,tier:'Basic',fire_rate:'1/2s'},
+      {lv:2,ic:'crop_turret',cost:0,upgrade_cost:1300,desc:'250 ammo cap. Mid-tier crops allowed. 1 shot/1.5s.',ammo_cap:250,tier:'Mid',fire_rate:'1/1.5s'},
+      {lv:3,ic:'crop_turret',cost:0,upgrade_cost:4000,desc:'350 ammo cap. All tiers. 1 shot/1s. (max)',ammo_cap:350,tier:'All',fire_rate:'1/1s'},
+    ]},
+    {name:'Med Station',ic:'med_station',cost:900,day:13,demolish:true,
+     base:{heal:'100 HP',cooldown:'4h',range:'3m'},
+     levels:[
+      {lv:1,ic:'med_station',cost:900,upgrade_cost:0,desc:'100 HP, 4h cooldown, 3m range.',heal:'100 HP',cooldown:'4h',range:'3m'},
+      {lv:2,ic:'med_station',cost:0,upgrade_cost:500,desc:'125 HP, 3h cooldown, 4m range.',heal:'125 HP',cooldown:'3h',range:'4m'},
+      {lv:3,ic:'med_station',cost:0,upgrade_cost:900,desc:'150 HP, 3h cooldown, 5m range. (max)',heal:'150 HP',cooldown:'3h',range:'5m'},
+    ]},
+  ]},
+  {id:'warptech',name:'WarpTech',ic:'warptech',
+   desc:'Advanced remote-control technology. All require Blueprints from Treasure Pod Lv3.',
+   gadgets:[
+    {name:'Refinery Link',ic:'refinery_link',cost:2000,day:15,tag:'blueprint',demolish:true,
+     base:{range:'Full Map',upgrade:'None'},
+     levels:[{lv:1,ic:'refinery_link',cost:2000,upgrade_cost:0,desc:'Deposit items into Refinery remotely. Reduces Backpack pressure when farming far from base.'}]},
+    {name:'Turret Link',ic:'turret_link',cost:4500,day:16,tag:'blueprint',demolish:true,
+     base:{upgrade:'None'},
+     levels:[{lv:1,ic:'turret_link',cost:4500,upgrade_cost:0,desc:'Automatically loads produce from a designated plot into the nearest Crop Turret. Combined with Garden Auto Harvest creates a complete automation loop.'}]},
+    {name:'Market Link',ic:'market_link',cost:4500,day:18,tag:'blueprint',demolish:true,
+     base:{upgrade:'None'},
+     levels:[{lv:1,ic:'market_link',cost:4500,upgrade_cost:0,desc:'Sell items remotely — no need to return to Farm Market. Convenient when farming during daytime.'}]},
+  ]},
 ];
-// ── BUILD DOM ──────────────────────────────────────────────────────────────
+
+/* ── RENDER ── */
 function sw(id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
@@ -472,138 +593,133 @@ function sw(id){
   document.getElementById('view-'+id).classList.add('active');
 }
 
-function renderUpgrade(u, idx){
-  const tagHtml = u.tag ? `<span class="upg-tag tag-${u.tag}">${u.tag}</span>` : '';
-  const costHtml = u.cost > 0 ? `<span class="granumz">${u.cost.toLocaleString()}G</span>` : (u.tag==='achievement'?'<span style="color:var(--p)">Achievement</span>':'Free');
-  return `<div class="upg-item">
-    <div class="upg-num">${idx+1}</div>
-    ${u.ic ? img(u.ic,'upg-ic') : '<div class="upg-ic-placeholder">·</div>'}
-    <div class="upg-info">
-      <div class="upg-name">${tagHtml}${u.name}</div>
-      <div class="upg-desc">${u.desc}</div>
-    </div>
-    <div>
-      <div class="upg-cost">${costHtml}</div>
-      <div class="upg-day">Day ${u.day}</div>
-    </div>
-  </div>`;
+function mkTag(t){return t?`<span class="tag tag-${t}">${t}</span>`:''}
+
+function renderUpgrade(u,i){
+  const costHtml=u.cost>0
+    ?`<span class="granumz">${u.cost.toLocaleString()}G</span>`
+    :(u.tag==='achievement'?'<span style="color:var(--acc4)">Achievement</span>':'<span style="color:var(--tx3)">Free</span>');
+  const dayHtml=u.day>0?`<div class="upg-day">Day ${u.day}</div>`:'';
+  return`<div class="upg-item">
+  <div class="upg-num">${i+1}</div>
+  ${u.ic?img(u.ic,'upg-ic'):'<div class="upg-ic-placeholder">—</div>'}
+  <div class="upg-info">
+    <div class="upg-name">${mkTag(u.tag)}${u.name}</div>
+    <div class="upg-desc">${u.desc}</div>
+  </div>
+  <div class="upg-right"><div class="upg-cost">${costHtml}</div>${dayHtml}</div>
+</div>`;
 }
 
 function renderCard(b){
-  const icHtml = b.ic ? img(b.ic,'bcard-ic') : '<div class="bcard-ic-placeholder">🏗</div>';
-  const bpCost = b.blueprintCost > 0 ? `<span class="granumz">${b.blueprintCost}G</span> blueprint` : (b.blueprintCost===0&&b.day===1?'Available from start':'Free');
-  const demolishTag = b.demolish ? '<span style="font-size:7px;color:var(--r);margin-left:6px">requires demolish option</span>' : '';
-  return `<div class="bcard">
-    <div class="bcard-head">
-      ${icHtml}
-      <div class="bcard-info">
-        <div class="bcard-name">${b.name}${demolishTag}</div>
-        <div class="bcard-sub">Day ${b.day} · ${bpCost}</div>
-      </div>
+  const ic=b.ic?img(b.ic,'bcard-ic'):'<div class="bcard-ic-placeholder">🏗</div>';
+  const bp=b.blueprintCost>0
+    ?`<span class="pill pill-cost">${b.blueprintCost.toLocaleString()}G blueprint</span>`
+    :`<span class="pill pill-free">No blueprint</span>`;
+  const dem=b.demolish?`<span class="pill pill-demolish">Demolish</span>`:'';
+  return`<div class="bcard">
+  <div class="bcard-head">${ic}
+    <div class="bcard-meta">
+      <div class="bcard-name">${b.name}</div>
+      <div class="bcard-pills"><span class="pill pill-day">Day ${b.day}</span>${bp}${dem}</div>
     </div>
-    <div class="bcard-body">
-      <div class="bcard-desc">${b.desc}</div>
-      ${b.upgrades.length ? `<div class="upg-list">${b.upgrades.map((u,i)=>renderUpgrade(u,i)).join('')}</div>` : ''}
-    </div>
-  </div>`;
+  </div>
+  <div class="bcard-body">
+    <div class="bcard-desc">${b.desc}</div>
+    ${b.upgrades.length?`<div class="upg-list">${b.upgrades.map((u,i)=>renderUpgrade(u,i)).join('')}</div>`:''}
+  </div>
+</div>`;
 }
 
-// Populate grids
-const baseCards = BUILDINGS.filter(b=>b.cat==='base');
-const farmCards  = BUILDINGS.filter(b=>b.cat==='farming');
-const fabCards   = BUILDINGS.filter(b=>b.cat==='fabricate');
+const baseCards=BUILDINGS.filter(b=>b.cat==='base');
+const farmCards=BUILDINGS.filter(b=>b.cat==='farming');
+const fabCards=BUILDINGS.filter(b=>b.cat==='fabricate');
 
-document.getElementById('baseGrid').innerHTML = baseCards.map(renderCard).join('');
-document.getElementById('farmGrid').innerHTML  = farmCards.map(renderCard).join('');
-document.getElementById('fabBuildGrid').innerHTML = fabCards.map(renderCard).join('');
+document.getElementById('baseGrid').innerHTML=baseCards.map(renderCard).join('');
+document.getElementById('farmGrid').innerHTML=farmCards.map(renderCard).join('');
+document.getElementById('fabBuildGrid').innerHTML=fabCards.map(renderCard).join('');
 
-// Fabricate categories
-document.getElementById('fabGrid').innerHTML = FAB_CATS.map(cat => {
-  const gadgetCards = cat.gadgets.map((g,gi) => {
-    const tagHtml = g.tag ? `<span class="upg-tag tag-${g.tag}">${g.tag}</span>` : '';
-    const demolishHtml = g.demolish ? `<span style="font-size:7px;color:var(--r);margin-left:4px">requires demolish option</span>` : '';
-    const costHtml = g.cost > 0 ? `<span class="granumz">${g.cost.toLocaleString()}G</span>` : (g.tag==='blueprint' ? '<span style="color:var(--b)">Blueprint only</span>' : '<span style="color:var(--mu)">Free</span>');
-
-    // Base stats chips
-    const baseStats = g.base ? Object.entries(g.base).map(([k,v]) =>
+document.getElementById('fabGrid').innerHTML=FAB_CATS.map(cat=>{
+  const gadgetCards=cat.gadgets.map(g=>{
+    const costHtml=g.cost>0
+      ?`<span class="granumz">${g.cost.toLocaleString()}G</span>`
+      :(g.tag==='blueprint'?'<span style="color:var(--acc3)">Blueprint only</span>':'<span style="color:var(--tx3)">Free</span>');
+    const dem=g.demolish?`<span class="pill pill-demolish" style="font-size:7px;padding:1px 5px">Demolish</span>`:'';
+    const baseStats=g.base?Object.entries(g.base).map(([k,v])=>
       `<span class="stat-chip"><span class="stat-k">${k.replace(/_/g,' ')}</span><span class="stat-v">${v}</span></span>`
-    ).join('') : '';
-
-    // Level rows
-    const levelRows = (g.levels||[]).map(lv => {
-      const upgCost = lv.upgrade_cost > 0 ? `<span class="granumz">${lv.upgrade_cost}G</span>` : '<span style="color:var(--mu)">—</span>';
-      const lvStats = Object.entries(lv)
+    ).join(''):'';
+    const levelRows=(g.levels||[]).map(lv=>{
+      const uc=lv.upgrade_cost>0?`<span class="granumz">${lv.upgrade_cost.toLocaleString()}G</span>`:'<span style="color:var(--tx3)">—</span>';
+      const lvStats=Object.entries(lv)
         .filter(([k])=>!['lv','ic','cost','upgrade_cost','desc'].includes(k))
-        .map(([k,v])=>`<span class="stat-chip sm"><span class="stat-k">${k.replace(/_/g,' ')}</span><span class="stat-v">${v}</span></span>`)
+        .map(([k,v])=>`<span class="stat-chip"><span class="stat-k">${k.replace(/_/g,' ')}</span><span class="stat-v">${v}</span></span>`)
         .join('');
-      return `<div class="lv-row">
-        ${img(lv.ic,'lv-ic')}
-        <div class="lv-badge">Lv${lv.lv}</div>
-        <div class="lv-info">
-          <div class="lv-desc">${lv.desc}</div>
-          <div class="lv-stats">${lvStats}</div>
-        </div>
-        <div class="lv-cost">${upgCost}</div>
-      </div>`;
-    }).join('');
-
-    return `<div class="gadget-card">
-      <div class="gadget-head">
-        ${g.ic ? img(g.ic,'gadget-ic') : '<div class="gadget-ic-ph">⚙</div>'}
-        <div class="gadget-title-group">
-          <div class="gadget-name">${tagHtml}${g.name}${demolishHtml}</div>
-          <div class="gadget-meta">Unlock Day ${g.day} · ${costHtml}</div>
-        </div>
-      </div>
-      ${baseStats ? `<div class="base-stats">${baseStats}</div>` : ''}
-      <div class="lv-list">${levelRows}</div>
+      return`<div class="lv-row">
+      ${img(lv.ic,'lv-ic')}
+      <div class="lv-badge">Lv${lv.lv}</div>
+      <div class="lv-info"><div class="lv-desc">${lv.desc}</div><div class="lv-stats">${lvStats}</div></div>
+      <div class="lv-cost">${uc}</div>
     </div>`;
-  }).join('');
-
-  return `<div class="fab-cat">
-    <div class="fab-cat-head">${img(cat.ic,'fab-cat-ic')}<div class="fab-cat-name">${cat.name}</div><div class="fab-cat-desc">${cat.desc}</div></div>
-    <div class="gadget-grid">${gadgetCards}</div>
+    }).join('');
+    return`<div class="gadget-card">
+    <div class="gadget-head">
+      ${g.ic?img(g.ic,'gadget-ic'):'<div class="gadget-ic-ph">⚙</div>'}
+      <div class="gadget-title-group">
+        <div class="gadget-name">${mkTag(g.tag)}${g.name}${dem}</div>
+        <div class="gadget-meta"><span>Day ${g.day}</span><span>${costHtml}</span></div>
+      </div>
+    </div>
+    ${baseStats?`<div class="base-stats">${baseStats}</div>`:''}
+    <div class="lv-list">${levelRows}</div>
   </div>`;
+  }).join('');
+  return`<div class="fab-cat">
+  <div class="fab-cat-head">
+    ${img(cat.ic,'fab-cat-ic')}
+    <div class="fab-cat-nb">
+      <div class="fab-cat-name">${cat.name}</div>
+      <div class="fab-cat-desc">${cat.desc}</div>
+    </div>
+  </div>
+  <div class="fab-cat-body"><div class="gadget-grid">${gadgetCards}</div></div>
+</div>`;
 }).join('');
 
-// Overview table
-const allBuildings = [...baseCards,...farmCards,...fabCards];
-document.getElementById('ovBody').innerHTML = allBuildings.map(b => {
-  const icHtml = b.ic ? `<img src="${IC[b.ic]||''}" class="ov-ic" alt="">` : '<span style="font-size:16px">🏗</span>';
-  const cost = b.blueprintCost > 0 ? `${b.blueprintCost.toLocaleString()}G` : '—';
-  const upgs = b.upgrades && b.upgrades.length ? `${b.upgrades.length} upgrades` : '—';
-  const catLabel = {base:'Base',farming:'Farming',fabricate:'Fabricate'}[b.cat]||b.cat;
-  const demolishTag = b.demolish ? ' <span style="font-size:8px;color:var(--r);opacity:.8">demolish</span>' : '';
-  const keyEff = b.keyEffect || b.desc.substring(0,72)+'…';
-  return `<tr>
-    <td>${icHtml}</td>
-    <td class="ov-name">${b.name}${demolishTag}</td>
-    <td class="ov-cat">${catLabel}</td>
+// Overview
+const allB=[...baseCards,...farmCards,...fabCards];
+document.getElementById('ovBody').innerHTML=
+  allB.map(b=>{
+    const ic=b.ic?`<img src="${IC[b.ic]||''}"class="ov-ic"alt="">`:'🏗';
+    const cost=b.blueprintCost>0?`${b.blueprintCost.toLocaleString()}G`:'—';
+    const upgs=b.upgrades&&b.upgrades.length?`${b.upgrades.length} upgrades`:'—';
+    const cat={base:'Base',farming:'Farming',fabricate:'Science Lab'}[b.cat]||b.cat;
+    const dem=b.demolish?` <span style="color:var(--acc5);font-size:8px">✕ demolish</span>`:'';
+    return`<tr>
+    <td style="width:36px">${ic}</td>
+    <td class="ov-name">${b.name}${dem}</td>
+    <td class="ov-cat">${cat}</td>
     <td class="ov-cost">${cost}</td>
     <td class="ov-day">Day ${b.day}</td>
     <td class="ov-effect">${upgs}</td>
-    <td class="ov-effect" style="max-width:220px">${keyEff}</td>
+    <td class="ov-effect">${b.keyEffect||b.desc.substring(0,72)+'…'}</td>
   </tr>`;
-}).join('');
-
-// Also append FAB_CATS gadgets to overview
-const fabGadgetRows = FAB_CATS.flatMap(cat => cat.gadgets.map(g => {
-  const icHtml = g.ic ? `<img src="${IC[g.ic]||''}" class="ov-ic" alt="">` : '<span style="font-size:16px">⚙</span>';
-  const cost = g.cost > 0 ? `${g.cost.toLocaleString()}G` : (g.tag==='blueprint' ? 'Blueprint' : '—');
-  const upgs = g.levels && g.levels.length > 1 ? `${g.levels.length} levels` : '—';
-  const demolishTag = g.demolish ? ' <span style="font-size:8px;color:var(--r);opacity:.8">demolish</span>' : '';
-  const keyEff = (g.levels && g.levels[0]) ? g.levels[0].desc.substring(0,72)+'…' : '—';
-  return `<tr>
-    <td>${icHtml}</td>
-    <td class="ov-name">${g.name}${demolishTag}</td>
+  }).join('')+
+  FAB_CATS.flatMap(cat=>cat.gadgets.map(g=>{
+    const ic=g.ic?`<img src="${IC[g.ic]||''}"class="ov-ic"alt="">`:'⚙';
+    const cost=g.cost>0?`${g.cost.toLocaleString()}G`:(g.tag==='blueprint'?'Blueprint':'—');
+    const upgs=g.levels&&g.levels.length>1?`${g.levels.length} levels`:'—';
+    const dem=g.demolish?` <span style="color:var(--acc5);font-size:8px">✕ demolish</span>`:'';
+    const ke=(g.levels&&g.levels[0])?g.levels[0].desc.substring(0,72)+'…':'—';
+    return`<tr>
+    <td style="width:36px">${ic}</td>
+    <td class="ov-name">${g.name}${dem}</td>
     <td class="ov-cat">Gadget · ${cat.name}</td>
     <td class="ov-cost">${cost}</td>
     <td class="ov-day">Day ${g.day}</td>
     <td class="ov-effect">${upgs}</td>
-    <td class="ov-effect" style="max-width:220px">${keyEff}</td>
+    <td class="ov-effect">${ke}</td>
   </tr>`;
-}));
-document.getElementById('ovBody').innerHTML += fabGadgetRows.join('');
+  })).join('');
 </script>
 </body>
 </html>

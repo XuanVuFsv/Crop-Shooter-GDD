@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Shooter GDD Analysis</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent-color: #238636;
+            --border-color: #30363d;
+            --code-bg: #161b22;
+            --header-color: #58a6ff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 32px;
+            background-color: #0d1117;
+        }
+        h1, h2, h3 {
+            color: var(--header-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+        h1 { font-size: 2em; color: var(--accent-color); }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background-color: var(--code-bg); }
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9em;
+        }
+        .suggestion-box {
+            background-color: #161b22;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        ul li { margin-bottom: 8px; }
+        footer {
+            margin-top: 40px;
+            font-size: 0.8em;
+            color: #8b949e;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌾 CROP SHOOTER GDD ANALYSIS</h1>
+        <div class="status-badge">Version 2.3 - Analysis Complete</div>
+        
+        <p>Bản phân tích chuyên sâu về hệ thống thiết kế game, cân bằng kinh tế và cảm giác trải nghiệm (Game Feel) dựa trên tài liệu thiết kế gốc.</p>
+
+        <h2>1. Xác lập Mục tiêu Người chơi (Establishing User Intent)</h2>
+        <p>Người chơi đóng vai trò một <strong>nông dân chiến binh</strong> trong vòng lặp 21 ngày. Mục tiêu cốt lõi là:</p>
+        <ul>
+            <li>Quản lý tài nguyên (nước, đất, thời gian) một cách tối ưu</li>
+            <li>Chuyển hóa nông sản thành đạn dược và thực phẩm</li>
+            <li>Sống sót qua các đợt tấn công ban đêm</li>
+            <li>Tích lũy <code>Granumz (G)</code> để đạt trạng thái "Max Everything" (~82,750G)</li>
+        </ul>
+
+        <h2>2. Phân tích Cân bằng & Kinh tế (Balance & Economy)</h2>
+        
+        <h3>2.1 Đường cong Tích lũy Granumz</h3>
+        <div class="suggestion-box">
+            <strong>Finding:</strong> Tổng chi phí nâng cấp là ~82,750G. Các công trình chính như Crop Turret tiêu tốn tới 16,300G.<br><br>
+            <strong>Impact:</strong> Giai đoạn Day 10-15 sẽ là "điểm nghẽn" (bottleneck) nặng nề nhất khi người chơi vừa phải nâng cấp súng (Carambola, Chili), vừa phải đầu tư vào Turret và các thiết bị tự động hóa (Drill, Apiary).<br><br>
+            <strong>Recommendations:</strong>
+            <ul>
+                <li>Tăng giá trị bán của Tomato (Day 6) hoặc Beetroot trong giai đoạn giữa để hỗ trợ dòng tiền</li>
+                <li>Điều chỉnh giá Blueprint của các Gadget ban đầu thấp hơn 20% và tăng dần về phía WarpTech để tạo đà (momentum) tốt hơn cho người chơi mới</li>
+            </ul>
+        </div>
+
+        <h3>2.2 Xung đột Tài nguyên "Ammo vs. Food vs. Gold"</h3>
+        <div class="suggestion-box">
+            <strong>Finding:</strong> Mọi thứ đều bắt nguồn từ mùa vụ. Ví dụ: Wheat vừa là đạn SMG (1 harvest = 3 đạn), vừa là nguyên liệu làm Flour (nhu cầu >50 đơn vị).<br><br>
+            <strong>Impact:</strong> Nếu người chơi bắn quá nhiều ban đêm, họ sẽ không có đủ nguyên liệu để nâng cấp công nghệ hoặc nấu ăn, dẫn đến suy kiệt chỉ số ở các ngày sau.<br><br>
+            <strong>Recommendation:</strong> Đưa cơ chế <strong>"Gleaner's Bonus"</strong> – sau mỗi đợt wave, quái vật có tỉ lệ nhỏ rơi ra "Wild Seeds" của các loại cây người chơi đang thiếu để giảm bớt áp lực "soft-lock" tài nguyên.
+        </div>
+
+        <h2>3. Phân tích Dòng chảy Trò chơi (Game Flow)</h2>
+        
+        <h3>3.1 Áp lực Thời gian trong chu kỳ 24 phút</h3>
+        <div class="suggestion-box">
+            <strong>Dữ liệu:</strong> 12' Ngày / 8' Đêm / 4' Ngủ<br><br>
+            <strong>Impact:</strong> Flow game rất chặt chẽ. Tuy nhiên, việc phải di chuyển thủ công để đặt Gadget (Fabricate Flow) có thể gây ức chế (friction) ở giai đoạn cuối game khi bản đồ mở rộng.<br><br>
+            <strong>Recommendations:</strong>
+            <ul>
+                <li><strong>WarpTech Integration:</strong> Đẩy sớm khả năng nhận Refinery Link từ Treasure Pod Lv2 thay vì chỉ Lv3 để giảm áp lực Backpack từ Day 11</li>
+                <li><strong>Sleep Buff Optimization:</strong> Giữ nguyên +33% Speed nhưng thêm hiệu ứng "Fast Watering" (tưới nước nhanh gấp đôi) vào buổi sáng để bù đắp thời gian đã mất do ngủ</li>
+            </ul>
+        </div>
+
+        <h2>4. Đánh giá Cảm giác Game (Game Feel)</h2>
+        <ul>
+            <li><strong>Hệ thống vũ khí nông sản:</strong> Việc biến các loại cây quen thuộc thành đạn dược (Tomato -> Shotgun, Berry -> AR) tạo ra sự thú vị về mặt hình ảnh và logic gameplay. Các thông số <code>attacking_recoil_pattern</code> cho thấy sự đầu tư vào cảm giác bắn súng chuyên sâu.</li>
+            <li><strong>Nhịp độ Ngày/Đêm:</strong> Sự luân chuyển giữa xây dựng và phòng thủ được thiết kế tốt. Áp lực tăng dần theo từng đêm giúp duy trì sự hứng thú của người chơi.</li>
+            <li><strong>Phản hồi giác quan:</strong> Các Treasure Pod phân tán khắp bản đồ đóng vai trò là phần thưởng khám phá, tạo động lực cho người chơi rời khỏi căn cứ an toàn.</li>
+        </ul>
+
+        <h3>4.1 Cơ chế "Crops as Ammo" - Điểm Sáng Nhất</h3>
+        <div class="suggestion-box">
+            <strong>Impact:</strong> Đây là Unique Selling Point (USP) của dự án. Việc bắn ra Berry hay Tomato tạo cảm giác vui nhộn nhưng vẫn mang tính chiến thuật nhờ hệ thống Recoil và Damage khác biệt.<br><br>
+            <strong>Recommendations:</strong>
+            <ul>
+                <li><strong>Visual Effects (VFX):</strong> Thêm hiệu ứng hình ảnh đặc trưng khi đạn bắn trúng:
+                    <ul>
+                        <li>Tomato nổ tung thành nước sốt làm chậm quái</li>
+                        <li>Chili tạo tia lửa nhỏ gây burn damage</li>
+                        <li>Berry bật bốn hướng tạo hiệu ứng nổ tung</li>
+                    </ul>
+                </li>
+                <li><strong>Sound Effects (SFX):</strong> Tiếng "thump" của súng nạp nông sản cần khác biệt hoàn toàn với tiếng súng kim loại thông thường để nhấn mạnh chất "Nông dân"</li>
+            </ul>
+        </div>
+
+        <h2>5. Vòng lặp Core Loop</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Giai đoạn</th>
+                    <th>Hoạt động chính</th>
+                    <th>Mục tiêu tiến trình</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Day (7AM-7PM)</td>
+                    <td>Trồng trọt, Khai thác, Xây dựng</td>
+                    <td>Tích lũy tài nguyên & nâng cấp thiết bị</td>
+                </tr>
+                <tr>
+                    <td>Night (7PM-3AM)</td>
+                    <td>Chiến đấu, Thủ thành</td>
+                    <td>Thu thập Granumz & Nguyên liệu quái vật</td>
+                </tr>
+                <tr>
+                    <td>Automation</td>
+                    <td>Turret Link, Market Link</td>
+                    <td>Chuyển dịch từ thủ công sang quản lý quy mô lớn</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>6. Hệ thống Kinh tế & Công thức</h2>
+        <p>Nền kinh tế trong game xoay quanh <code>Granumz (G)</code> với tổng chi phí nâng cấp cực lớn (~82,750G), đảm bảo giá trị chơi lại lâu dài.</p>
+        <ul>
+            <li><strong>Quy tắc 3 Slot:</strong> Một cơ chế thông minh buộc người chơi phải quản lý tài nguyên chi tiết. Việc tách nguyên liệu (Split stacks) để lấp đầy 3 slot yêu cầu người chơi phải hiểu rõ thuộc tính của từng vật phẩm.</li>
+            <li><strong>Bottleneck (Nút thắt):</strong> Các vật phẩm Tier Niche (ít hơn 8 công thức dùng tới) thường có thời gian trồng lâu, tạo ra sự khan hiếm có chủ đích.</li>
+            <li><strong>Lưu ý WarpTech:</strong> Cần chú ý tính toán lại lượng Granumz rơi ra từ quái vật ở Day 15+ để đảm bảo người chơi có thể chạm tới các nâng cấp WarpTech đắt đỏ mà không phải "cày cuốc" (grinding) quá mức.</li>
+        </ul>
+
+        <h2>7. Đề xuất cho hạng mục WIP (Đang phát triển)</h2>
+        <div class="suggestion-box">
+            <h3>🥑 Vật phẩm mới đề xuất:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vật phẩm</th>
+                        <th>Loại</th>
+                        <th>Vai trò đề xuất</th>
+                        <th>Thông số dự kiến</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Durian (Sầu riêng)</strong></td>
+                        <td>Crop/Ammo</td>
+                        <td>Vũ khí hạng nặng (Heavy Mortar)</td>
+                        <td>Sát thương diện rộng cực lớn, tốc độ bắn cực chậm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Noni Fruit (Trái Nhàu)</strong></td>
+                        <td>Crop/Ammo</td>
+                        <td>Hỗ trợ (Utility)</td>
+                        <td>Tạo vùng "Stun" hoặc làm yếu giáp quái vật</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <h3>⚙️ WarpTech Enhancement:</h3>
+            <ul>
+                <li><strong>BASE_UPGRADE_VALUE - Cooldown chuyển đồ:</strong> Mặc định 30s. Nâng cấp giảm xuống còn 10s.</li>
+            </ul>
+        </div>
+
+        <h2>8. Đánh giá Chung</h2>
+        <div class="suggestion-box">
+            <p><strong>Kết luận:</strong> Dự án Crop Shooter có nền tảng toán học rất vững chắc, đặc biệt là hệ thống Coop Imbalance và Logic 3-Slot. Các điểm sáng chính bao gồm:</p>
+            <ul>
+                <li>✅ Cơ chế "Crops as Ammo" tạo nên USB độc nhất vô nhị</li>
+                <li>✅ Hệ thống kinh tế chi tiết với đường cong khó độ phù hợp</li>
+                <li>✅ Dòng chảy game năng động với sự cân bằng giữa khai thác tài nguyên và chiến đấu</li>
+                <li>✅ Cơ chế tự động hóa tạo kết thúc tự nhiên cho trò chơi</li>
+            </ul>
+            <p><strong>Hướng cải thiện:</strong></p>
+            <ul>
+                <li>⚠️ Theo dõi sát sao giai đoạn Day 10-15 để tránh "bottleneck" quá khó</li>
+                <li>⚠️ Thêm các hiệu ứng VFX/SFX để tăng cảm giác hài hước và sống động</li>
+                <li>⚠️ Kiểm tra cân bằng giữa tiêu thụ tài nguyên (bắn đạn) vs. sản xuất (thu hoạch)</li>
+                <li>⚠️ Đảm bảo Gleaner's Bonus không quá mạnh, chỉ cần là "bổ sung" chứ không thay thế chiến lược</li>
+            </ul>
+        </div>
+
+        <footer>
+            Documented based on GDD Summary v2.3, Constructions Detail, and Recipe Diagrams.<br>
+            Analysis contributed by Game Design Expert | Updated March 2026<br>
+            &copy; 2026 Crop Shooter Development Team.
+        </footer>
+    </div>
+</body>
+</html>
