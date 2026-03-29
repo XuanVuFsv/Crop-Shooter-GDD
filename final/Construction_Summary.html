@@ -147,6 +147,7 @@ body::before{
 .pill-free   {color:var(--tx3);border-color:var(--bd);background:var(--bg)}
 .pill-cost   {color:var(--acc2);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.07)}
 .pill-demolish{color:var(--acc5);border-color:rgba(255,116,80,.3);background:rgba(255,116,80,.07)}
+.pill-build   {color:var(--acc);border-color:rgb(255, 242, 0);background:rgba(109,255,74,.07)}
 
 .bcard-body{padding:12px 16px}
 .bcard-desc{font-size:10px;color:var(--tx2);line-height:1.7;margin-bottom:10px}
@@ -301,7 +302,7 @@ body::before{
       </button>
 <div class="hd">
   <div class="hd-left">
-    <div class="hd-eye">GDD Reference · v1.0</div>
+    <div class="hd-eye">GDD Reference · Version 300326</div>
     <h1>Buildings <em>&amp;</em> Upgrades</h1>
     <div class="hd-sub">CROP SHOOTER · All costs in Granumz (G)</div>
   </div>
@@ -320,7 +321,7 @@ body::before{
     <table class="ov-table">
       <thead><tr>
         <th></th><th>Building / Gadget</th><th>Category</th>
-        <th>Blueprint</th><th>Unlock</th><th>Upgrades</th><th>Key Effect</th>
+        <th>Blueprint</th><th>Build Cost</th><th>Unlock</th><th>Upgrades</th><th>Key Effect</th>
       </tr></thead>
       <tbody id="ovBody"></tbody>
     </table>
@@ -492,7 +493,7 @@ const BUILDINGS=[
    keyEffect:'Purchase Blueprints to unlock buildings & Gadgets',
    desc:"Purchase blueprints to unlock construction of new buildings and Fabricate Gadgets. All buildings require blueprint purchase before placement.",
    upgrades:[]},
-  {id:'silo',name:'Silo',cat:'farming',ic:'silo',blueprintCost:0,day:4,demolish:true,
+  {id:'silo',name:'Silo',cat:'farming',ic:'silo',blueprintCost:0,buildCost:450,day:4,demolish:true,
    keyEffect:'Item storage — 150 items/port, max 4 ports',
    desc:'Item storage warehouse. Each port holds up to 150 items of the same type. Starts with 1 port (Port I), maximum 4 ports.',
    upgrades:[
@@ -504,7 +505,7 @@ const BUILDINGS=[
    keyEffect:'Craft & deploy Gadgets — 1 stored at a time',
    desc:'Craft and place Gadgets on the map. Stores 1 Gadget at a time. 3 categories: Extractors, Utilities, WarpTech. Higher tier gadgets require Lv3 Treasure Pod blueprints.',
    upgrades:[]},
-  {id:'pond',name:'Pond',cat:'farming',ic:'pond',blueprintCost:0,day:7,demolish:true,
+  {id:'pond',name:'Pond',cat:'farming',ic:'pond',blueprintCost:0,buildCost:450,day:7,demolish:true,
    keyEffect:'Natural salt water source — auto-refills on cooldown',
    desc:'Holds water generated from natural sources. Auto-refills on cooldown. Provides salt water — must pass through Water Purifier before watering the Garden.',
    upgrades:[
@@ -515,7 +516,7 @@ const BUILDINGS=[
     {name:'More Water III',desc:'+50 max water capacity',ic:'',cost:1300,day:7},
     {name:'More Water IV',desc:'+100 max water capacity (max)',ic:'',cost:1300,day:7},
   ]},
-  {id:'coop',name:'Coop',cat:'farming',ic:'coop',blueprintCost:0,day:7,demolish:true,
+  {id:'coop',name:'Coop',cat:'farming',ic:'coop',blueprintCost:0,buildCost:250,day:7,demolish:true,
    keyEffect:'Raise chickens for eggs & meat — breeds every 12h',
    desc:'Raise chickens for eggs and meat. Max 6 chickens (base), expandable to 12. A Hen + Rooster pair breeds every 12h in-game. Old chickens automatically convert to meat after 6 breeding cycles.',
    upgrades:[
@@ -616,12 +617,15 @@ function renderCard(b){
   const bp=b.blueprintCost>0
     ?`<span class="pill pill-cost">${b.blueprintCost.toLocaleString()}G blueprint</span>`
     :`<span class="pill pill-free">No blueprint</span>`;
+  const bc=b.buildCost>0
+    ?`<span class="pill pill-build">${b.buildCost.toLocaleString()}G build</span>`
+    :'';
   const dem=b.demolish?`<span class="pill pill-demolish">Demolish</span>`:'';
   return`<div class="bcard">
   <div class="bcard-head">${ic}
     <div class="bcard-meta">
       <div class="bcard-name">${b.name}</div>
-      <div class="bcard-pills"><span class="pill pill-day">Day ${b.day}</span>${bp}${dem}</div>
+      <div class="bcard-pills"><span class="pill pill-day">Day ${b.day}</span>${bp}${bc}${dem}</div>
     </div>
   </div>
   <div class="bcard-body">
@@ -691,6 +695,7 @@ document.getElementById('ovBody').innerHTML=
   allB.map(b=>{
     const ic=b.ic?`<img src="${IC[b.ic]||''}"class="ov-ic"alt="">`:'🏗';
     const cost=b.blueprintCost>0?`${b.blueprintCost.toLocaleString()}G`:'—';
+    const buildCost=b.buildCost>0?`<span class="ov-cost">${b.buildCost.toLocaleString()}G</span>`:'—';
     const upgs=b.upgrades&&b.upgrades.length?`${b.upgrades.length} upgrades`:'—';
     const cat={base:'Base',farming:'Farming',fabricate:'Science Lab'}[b.cat]||b.cat;
     const dem=b.demolish?` <span style="color:var(--acc5);font-size:8px">✕ demolish</span>`:'';
@@ -699,6 +704,7 @@ document.getElementById('ovBody').innerHTML=
     <td class="ov-name">${b.name}${dem}</td>
     <td class="ov-cat">${cat}</td>
     <td class="ov-cost">${cost}</td>
+    <td>${buildCost}</td>
     <td class="ov-day">Day ${b.day}</td>
     <td class="ov-effect">${upgs}</td>
     <td class="ov-effect">${b.keyEffect||b.desc.substring(0,72)+'…'}</td>

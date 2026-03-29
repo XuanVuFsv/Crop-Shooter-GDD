@@ -1,417 +1,1034 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Crop🍅Shooter — GDD</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --bg:#fdf6ff;--bg2:#f5edff;--cloud:#ffffff;--border:#e2d0f8;
-  --pink:#ff7ec7;--teal:#3dd6b0;--yellow:#ffc94a;--purple:#9b72f5;
-  --blue:#52c5f7;--orange:#ff8f5e;--green:#6ee083;
-  --text:#2d1f4e;--muted:#9a87b8;--shadow:rgba(155,114,245,0.13);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop🍅Shooter — GDD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fdf6ff;
+      --bg2: #f5edff;
+      --cloud: #ffffff;
+      --border: #e2d0f8;
+      --pink: #ff7ec7;
+      --teal: #3dd6b0;
+      --yellow: #ffc94a;
+      --purple: #9b72f5;
+      --blue: #52c5f7;
+      --orange: #ff8f5e;
+      --green: #6ee083;
+      --text: #2d1f4e;
+      --muted: #9a87b8;
+      --shadow: rgba(155, 114, 245, 0.13);
+    }
 
-/* BG */
-.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.bg-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.22;animation:blobFloat 14s ease-in-out infinite alternate}
-.bg-blob:nth-child(1){width:500px;height:500px;background:#c084fc;top:-100px;left:-120px;animation-duration:17s}
-.bg-blob:nth-child(2){width:380px;height:380px;background:#67e8f9;bottom:-60px;right:-80px;animation-duration:13s;animation-delay:-5s}
-.bg-blob:nth-child(3){width:300px;height:300px;background:#fde68a;top:38%;left:58%;animation-duration:19s;animation-delay:-9s}
-.bg-blob:nth-child(4){width:220px;height:220px;background:#f9a8d4;bottom:28%;left:8%;animation-duration:11s;animation-delay:-3s}
-@keyframes blobFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(35px,28px) scale(1.08)}}
-.bg-dots{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(circle,#c084fc22 1.2px,transparent 1.2px);background-size:36px 36px}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(253,246,255,.85);backdrop-filter:blur(20px);border-bottom:1.5px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 20px rgba(155,114,245,.08)}
-.nav-logo{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--purple);display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 0 8px var(--pink);display:inline-block}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-link{font-size:.82rem;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:99px;transition:all .2s}
-.nav-link:hover{background:var(--border);color:var(--purple)}
-.lang-toggle{display:flex;gap:4px;background:var(--bg2);border:1.5px solid var(--border);border-radius:99px;padding:4px}
-.lt-btn{font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.5px;padding:5px 14px;border-radius:99px;border:none;cursor:pointer;transition:all .22s;background:transparent;color:var(--muted)}
-.lt-btn.active{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;box-shadow:0 2px 10px rgba(155,114,245,.4)}
+    html {
+      scroll-behavior: smooth
+    }
 
-/* HERO */
-.hero{position:relative;z-index:1;padding:90px 40px 80px;text-align:center;overflow:hidden}
-.slime{position:absolute;font-size:3rem;animation:slimeFloat 5s ease-in-out infinite;filter:drop-shadow(0 8px 16px rgba(155,114,245,.25));pointer-events:none;user-select:none}
-@keyframes slimeFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-22px) rotate(4deg)}}
-.slime:nth-child(1){left:5%;top:12%;animation-delay:0s;font-size:3.5rem}
-.slime:nth-child(2){right:6%;top:8%;animation-delay:-2s;font-size:2.8rem}
-.slime:nth-child(3){left:13%;bottom:22%;animation-delay:-4s;font-size:2.2rem}
-.slime:nth-child(4){right:12%;bottom:20%;animation-delay:-1s;font-size:2.6rem}
-.slime:nth-child(5){left:47%;top:4%;animation-delay:-3s;font-size:2rem}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fce7f3,#ede9fe);border:1.5px solid #e9d5ff;border-radius:99px;padding:6px 20px;font-size:.75rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--purple);margin-bottom:24px;box-shadow:0 2px 12px rgba(192,132,252,.2)}
-h1.hero-title{font-family:'Fredoka One',cursive;font-size:clamp(2.8rem,7vw,5rem);line-height:1.1;background:linear-gradient(135deg,var(--purple) 0%,var(--pink) 45%,var(--yellow) 85%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;filter:drop-shadow(0 2px 8px rgba(192,132,252,.2));animation:titlePop .8s cubic-bezier(.175,.885,.32,1.275) both}
-@keyframes titlePop{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.hero-sub{color:var(--muted);font-size:1rem;font-weight:600;max-width:500px;margin:0 auto 36px;line-height:1.7}
-.hero-stats{display:inline-flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px}
-.stat-chip{background:#fff;border:1.5px solid var(--border);border-radius:99px;padding:7px 18px;font-size:.8rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px var(--shadow)}
-.stat-chip b{color:var(--purple)}
-.cloud-row{position:absolute;bottom:0;left:0;right:0;height:90px;pointer-events:none}
-.cloud-svg{width:100%;height:90px}
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden
+    }
 
-/* MAIN */
-main{position:relative;z-index:1;max-width:1140px;margin:0 auto;padding:20px 32px 100px}
-.section-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;margin-top:52px}
-.section-head h2{font-family:'Fredoka One',cursive;font-size:1.4rem;color:var(--text)}
-.section-pill{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:99px}
-.section-line{flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);border-radius:4px}
+    /* BG */
+    .bg-deco {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden
+    }
 
-/* FEATURE CARD */
-.feature-card{background:linear-gradient(135deg,#f5f0ff 0%,#fce7f3 50%,#e0f7fa 100%);border:2px solid #e9d5ff;border-radius:28px;padding:36px 40px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;margin-bottom:18px;text-decoration:none;color:var(--text);box-shadow:0 4px 30px rgba(192,132,252,.12),0 1px 0 #fff inset;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
-.feature-card:hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(192,132,252,.22)}
-.feature-card .fc-icon{font-size:3.8rem;filter:drop-shadow(0 4px 10px rgba(192,132,252,.3))}
-.fc-tag{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:99px;margin-bottom:10px}
-.fc-title{font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:8px}
-.fc-desc{font-size:.88rem;color:var(--muted);line-height:1.65;max-width:480px}
-.fc-arrow{font-size:1.8rem;color:var(--purple);width:52px;height:52px;border-radius:50%;background:rgba(155,114,245,.1);display:flex;align-items:center;justify-content:center;transition:transform .25s,background .25s;flex-shrink:0}
-.feature-card:hover .fc-arrow{transform:translateX(5px);background:var(--purple);color:#fff}
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .22;
+      animation: blobFloat 14s ease-in-out infinite alternate
+    }
 
-/* CARDS */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
-.card{background:#fff;border:1.5px solid var(--border);border-radius:22px;padding:26px 24px 22px;text-decoration:none;color:var(--text);position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .22s;box-shadow:0 2px 16px var(--shadow);display:flex;flex-direction:column;gap:10px}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--c1,var(--purple)),var(--c2,var(--pink)));border-radius:22px 22px 0 0}
-.card:not(.disabled):hover{transform:translateY(-6px);box-shadow:0 14px 40px var(--hover-glow,rgba(155,114,245,.2));border-color:var(--hover-color,var(--purple))}
-.card.disabled{opacity:.38;filter:grayscale(.4);cursor:not-allowed;pointer-events:none;position:relative}
-.card.disabled::after{content:attr(data-soon);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:.95rem;color:var(--muted);background:rgba(253,246,255,.65);border-radius:inherit;backdrop-filter:blur(2px)}
-.card-icon{font-size:2.4rem;filter:drop-shadow(0 2px 6px var(--hover-glow,rgba(155,114,245,.2)))}
-.card-lang-badge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:99px;background:linear-gradient(135deg,var(--c1,var(--purple)),var(--c2,var(--pink)));color:#fff;width:fit-content}
-.card-title{font-family:'Fredoka One',cursive;font-size:1.1rem;line-height:1.3}
-.card-desc{font-size:.8rem;color:var(--muted);line-height:1.6;flex:1}
-.card-filename{font-size:.72rem;color:#c4b5e0;font-family:'Courier New',monospace;background:#f5f0ff;padding:4px 10px;border-radius:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-cta{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
-.card-open{font-size:.78rem;font-weight:800;color:var(--c1,var(--purple));display:flex;align-items:center;gap:4px}
-.card-open::after{content:'→';transition:transform .2s}
-.card:hover .card-open::after{transform:translateX(4px)}
+    .bg-blob:nth-child(1) {
+      width: 500px;
+      height: 500px;
+      background: #c084fc;
+      top: -100px;
+      left: -120px;
+      animation-duration: 17s
+    }
 
-/* NOTE */
-.section-note{background:linear-gradient(135deg,#fef9c3,#fce7f3);border:1.5px solid #fde68a;border-radius:16px;padding:16px 22px;font-size:.84rem;color:#92400e;font-weight:700;display:flex;align-items:center;gap:10px;margin-top:28px}
+    .bg-blob:nth-child(2) {
+      width: 380px;
+      height: 380px;
+      background: #67e8f9;
+      bottom: -60px;
+      right: -80px;
+      animation-duration: 13s;
+      animation-delay: -5s
+    }
 
-/* FOOTER */
-footer{position:relative;z-index:1;background:linear-gradient(180deg,transparent,var(--bg2));border-top:1.5px solid var(--border);padding:40px;text-align:center}
-footer p{color:var(--muted);font-size:.82rem;font-weight:600}
-footer strong{color:var(--purple)}
+    .bg-blob:nth-child(3) {
+      width: 300px;
+      height: 300px;
+      background: #fde68a;
+      top: 38%;
+      left: 58%;
+      animation-duration: 19s;
+      animation-delay: -9s
+    }
 
-@media(max-width:640px){
-  nav{padding:0 16px}
-  .nav-links{display:none}
-  .hero{padding:60px 20px 50px}
-  main{padding:16px 16px 60px}
-  .feature-card{grid-template-columns:1fr}
-  .feature-card .fc-arrow,.feature-card .fc-icon{display:none}
-}
-</style>
-</head>
-<body>
+    .bg-blob:nth-child(4) {
+      width: 220px;
+      height: 220px;
+      background: #f9a8d4;
+      bottom: 28%;
+      left: 8%;
+      animation-duration: 11s;
+      animation-delay: -3s
+    }
 
-<div class="bg-deco">
-  <div class="bg-blob"></div><div class="bg-blob"></div>
-  <div class="bg-blob"></div><div class="bg-blob"></div>
-</div>
-<div class="bg-dots"></div>
+    @keyframes blobFloat {
+      from {
+        transform: translate(0, 0) scale(1)
+      }
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">
-    <span class="logo-dot"></span>
-    <span id="nav-brand">Crop🍅Shooter GDD</span>
-  </a>
-  <div class="nav-links">
-    <a class="nav-link" href="#overview" id="nl-overview">Tổng Quan</a>
-    <a class="nav-link" href="#constructions" id="nl-docs">Công Trình</a>
-    <a class="nav-link" href="#gdd" id="nl-other">GDD</a>
-  </div>
-  <div class="lang-toggle">
-    <button class="lt-btn active" id="lt-vie" onclick="setLang('vie')">🇻🇳 VIE</button>
-    <button class="lt-btn" id="lt-eng" onclick="setLang('eng')">🇺🇸 ENG</button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="slime">🟣</div>
-  <div class="slime">🟡</div>
-  <div class="slime">🩵</div>
-  <div class="slime">🩷</div>
-  <div class="slime">🟢</div>
-
-  <div class="hero-badge" id="hero-badge">⭐ Game Design Document</div>
-  <h1 class="hero-title" id="hero-title">Crop🍅Shooter</h1>
-  <p class="hero-sub" id="hero-sub">Tài liệu thiết kế game chính thức — cơ chế bắn súng, trồng trọt và xây dựng trong thế giới nông trại kỳ diệu!</p>
-
-  <div class="hero-stats">
-    <div class="stat-chip">🎮 <b>Cute</b> FPS Shooter Style</div>
-    <div class="stat-chip">📄 <b>4</b>&nbsp;<span id="stat-label">tài liệu</span></div>
-    <div class="stat-chip">🌐 <b>VIE</b> + <b>ENG</b></div>
-    <div class="stat-chip">🏗️ <b>GDD</b></div>
-  </div>
-
-  <div class="cloud-row">
-    <svg class="cloud-svg" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,40 Q80,10 160,35 Q240,60 320,30 Q400,5 480,32 Q560,60 640,28 Q720,0 800,30 Q880,60 960,28 Q1040,0 1120,32 Q1200,60 1280,30 Q1360,5 1440,35 L1440,90 L0,90 Z" fill="#fdf6ff"/>
-    </svg>
-  </div>
-</section>
-
-<main>
-
-  <!-- OVERVIEW -->
-  <div id="overview"></div>
-  <div class="section-head">
-    <h2 id="sh1">📋 Tổng Quan Trò Chơi</h2>
-    <div class="section-pill" id="sp1">Chính</div>
-    <div class="section-line"></div>
-  </div>
-
-  <a class="feature-card" id="fc-gdd" href="final/GDD_Summary.html">
-    <div>
-      <div class="fc-tag" id="fc-tag">📖 Tài Liệu Chính</div>
-      <div class="fc-title" id="fc-title">GDD Tóm Tắt</div>
-      <p class="fc-desc" id="fc-desc">Tổng quan toàn bộ dự án: tầm nhìn sáng tạo, cơ chế cốt lõi, vòng lặp gameplay, hệ thống tiến trình và mục tiêu thiết kế. Điểm khởi đầu tốt nhất để hiểu game.</p>
-    </div>
-    <div class="fc-icon">📖</div>
-    <div class="fc-arrow">→</div>
-  </a>
-
-  <!-- CONSTRUCTIONS -->
-  <div id="constructions"></div>
-  <div class="section-head">
-    <h2 id="sh2">🏗️ Hệ Thống Công Trình</h2>
-    <div class="section-pill" id="sp2">Có File HTML</div>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="cards">
-    <a class="card" data-lang="vie" href="final/Constructions_Detail_VIE.html" style="--c1:#3dd6b0;--c2:#52c5f7;--hover-color:#3dd6b0;--hover-glow:rgba(61,214,176,.2)">
-      <span class="card-icon">🏗️</span>
-      <div class="card-lang-badge" style="--c1:#3dd6b0;--c2:#52c5f7">🇻🇳 Tiếng Việt</div>
-      <div class="card-title" id="ct1">Chi Tiết Công Trình</div>
-      <div class="card-desc" id="cd1">Thông số kỹ thuật, điều kiện mở khóa, chi phí tài nguyên và hiệu ứng của từng loại công trình.</div>
-      <div class="card-filename">final/Constructions_Detail_VIE.html</div>
-      <div class="card-cta"><div class="card-open" id="co1">Mở tài liệu</div></div>
-    </a>
-
-    <a class="card" data-lang="eng" href="final/Constructions_Detail_ENG.html" style="--c1:#52c5f7;--c2:#3dd6b0;--hover-color:#52c5f7;--hover-glow:rgba(82,197,247,.2)">
-      <span class="card-icon">🏗️</span>
-      <div class="card-lang-badge" style="--c1:#52c5f7;--c2:#3dd6b0">🇺🇸 English</div>
-      <div class="card-title" id="ct2">Constructions Detail</div>
-      <div class="card-desc" id="cd2">Technical specs, unlock conditions, resource costs and effects for every construction type.</div>
-      <div class="card-filename">final/Constructions_Detail_ENG.html</div>
-      <div class="card-cta"><div class="card-open" id="co2">Open document</div></div>
-    </a>
-
-    <a class="card" data-lang="vie" href="final/Construction_Summary.html" style="--c1:#ffc94a;--c2:#ff8f5e;--hover-color:#ffc94a;--hover-glow:rgba(255,201,74,.2)">
-      <span class="card-icon">🗺️</span>
-      <div class="card-lang-badge" style="--c1:#ffc94a;--c2:#ff8f5e">📋 Tóm tắt</div>
-      <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 Chỉ Tiếng Anh</div>
-      <div class="card-title" id="ct41">Sơ Đồ Công Trình</div>
-      <div class="card-desc" id="cd41">Bản đồ tổng hợp các công trình với cấu trúc và phân loại rõ ràng.</div>
-      <div class="card-filename">final/Construction_Summary.html</div>
-      <div class="card-cta"><div class="card-open" id="co41">Mở tài liệu</div></div>
-    </a>
-
-    <a class="card" data-lang="eng" href="final/Construction_Summary.html" style="--c1:#ffc94a;--c2:#ff8f5e;--hover-color:#ffc94a;--hover-glow:rgba(255,201,74,.2)">
-      <span class="card-icon">🗺️</span>
-      <div class="card-lang-badge" style="--c1:#ffc94a;--c2:#ff8f5e">📋 Summary</div>
-      <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 English Only</div>
-      <div class="card-title" id="ct42">Construction Diagram</div>
-      <div class="card-desc" id="cd42">Full map of the construction system with clear structure and categorization.</div>
-      <div class="card-filename">final/Construction_Summary.html</div>
-      <div class="card-cta"><div class="card-open" id="co42">Open document</div></div>
-    </a>
-  </div>
-
-  <!-- GDD DOCS -->
-  <div id="gdd"></div>
-  <div class="section-head">
-    <h2 id="sh3">📄 Tài Liệu GDD</h2>
-    <div class="section-pill" id="sp3">Có File HTML</div>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="cards">
-    <a class="card" data-lang="vie" href="final/GDD_Summary.html" style="--c1:#ff7ec7;--c2:#a78bfa;--hover-color:#ff7ec7;--hover-glow:rgba(255,126,199,.2)">
-      <span class="card-icon">📄</span>
-      <div class="card-lang-badge" style="--c1:#ff7ec7;--c2:#a78bfa">🇻🇳 Tiếng Việt</div>
-      <div class="card-title" id="ct5">GDD Tóm Tắt — Tiếng Việt</div>
-      <div class="card-desc" id="cd5">Tài liệu thiết kế game đầy đủ bằng tiếng Việt: cơ chế, thế giới, nhân vật và hệ thống.</div>
-      <div class="card-filename">final/GDD_Summary.html</div>
-      <div class="card-cta"><div class="card-open" id="co5">Mở tài liệu</div></div>
-    </a>
-
-    <a class="card" data-lang="eng" href="final/GDD_Summary.html" style="--c1:#6ee083;--c2:#52c5f7;--hover-color:#6ee083;--hover-glow:rgba(110,224,131,.2)">
-      <span class="card-icon">📄</span>
-      <div class="card-lang-badge" style="--c1:#6ee083;--c2:#52c5f7">🇺🇸 English</div>
-      <div class="card-title" id="ct6">GDD Summary — English</div>
-      <div class="card-desc" id="cd6">Full game design document in English: mechanics, world, characters and all systems.</div>
-      <div class="card-filename">final/GDD_Summary.html</div>
-      <div class="card-cta"><div class="card-open" id="co6">Open document</div></div>
-    </a>
-
-    <a class="card" data-lang="eng" href="final/Recipe_Diagram_ENG.html" style="--c1:#ff8f5e;--c2:#ffc94a;--hover-color:#ff8f5e;--hover-glow:rgba(255,143,94,.2)">
-      <span class="card-icon">🍳</span>
-      <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 English Only</div>
-      <div class="card-title" id="ct7">Recipe Diagram</div>
-      <div class="card-desc" id="cd7">Recipe ingame — Ingredients, combinations and output products.</div>
-      <div class="card-filename">final/Recipe_Diagram_ENG.html</div>
-      <div class="card-cta"><div class="card-open" id="co7">Open Document</div></div>
-    </a>
-
-    <a class="card" data-lang="vie" href="final/Recipe_Diagram_ENG.html" style="--c1:#ff8f5e;--c2:#ffc94a;--hover-color:#ff8f5e;--hover-glow:rgba(255,143,94,.2)">
-      <span class="card-icon">🍳</span>
-      <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 Chỉ Tiếng Anh</div>
-      <div class="card-title" id="ct7">Recipe Diagram</div>
-      <div class="card-desc" id="cd7">Công thức chế tạo trong game — sơ đồ nguyên liệu, kết hợp và sản phẩm đầu ra.</div>
-      <div class="card-filename">final/Recipe_Diagram_ENG.html</div>
-      <div class="card-cta"><div class="card-open" id="co7">Mở tài liệu</div></div>
-    </a>
-
-    <a class="card" data-lang="eng" href="analysis.html" style="--c1:#095e00;--c2:#1000bc;--hover-color:#095e00;--hover-glow:rgba(255,143,94,.2)">
-      <span class="card-icon">🍳</span>
-      <div class="card-lang-badge" style="--c1:#095e00;--c2:#1000bc">🇺🇸 Vietnamese Only</div>
-      <div class="card-title" id="ct7">GDD Analysis</div>
-      <div class="card-desc" id="cd7">A analysis focusing on economic balance, gameplay flow, and the “Crops as Ammo” mechanic.</div>
-      <div class="card-filename">analysis.html</div>
-      <div class="card-cta"><div class="card-open" id="co7">Open Document</div></div>
-    </a>
-
-    <a class="card" data-lang="vie" href="analysis.html" style="--c1:#095e00;--c2:#1000bc;--hover-color:#095e00;--hover-glow:rgba(255,143,94,.2)">
-      <span class="card-icon">🍳</span>
-      <div class="card-lang-badge" style="--c1:#095e00;--c2:#1000bc">🇻🇳 Chỉ Tiếng Việt</div>
-      <div class="card-title" id="ct7">Bản Phân tích GDD</div>
-      <div class="card-desc" id="cd7">Bản phân tích tập trung vào cân bằng kinh tế, gameplay flow và cơ chế “Crops as Ammo”.</div>
-      <div class="card-filename">analysis.html</div>
-      <div class="card-cta"><div class="card-open" id="co7">Mở tài liệu</div></div>
-    </a>
-
-    <!-- DISABLED: Recipe Diagram (only .md) -->
-    <div class="card disabled" data-soon="🔜 Chưa có HTML">
-      <span class="card-icon">🍳</span>
-      <div class="card-lang-badge" style="--c1:#94a3b8;--c2:#cbd5e1">📝 Markdown</div>
-      <div class="card-title">Recipe Diagram</div>
-      <div class="card-desc">Sơ đồ công thức chế tạo — chỉ có file .md, chưa export HTML.</div>
-      <div class="card-filename">final/Recipe_Diagram.md</div>
-    </div>
-
-    <!-- DISABLED: GDD Summary .md -->
-    <div class="card disabled" data-soon="🔜 Chưa có HTML">
-      <span class="card-icon">📝</span>
-      <div class="card-lang-badge" style="--c1:#94a3b8;--c2:#cbd5e1">📝 Markdown</div>
-      <div class="card-title">GDD Summary (raw .md)</div>
-      <div class="card-desc">Nguồn Markdown gốc — chỉ có file .md, chưa export HTML.</div>
-      <div class="card-filename">final/GDD_Summary.md</div>
-    </div>
-  </div>
-
-  <div class="section-note">
-    <!-- 💡 <span id="note-text">Card <strong>mờ</strong> = file <code>.md</code> chưa export sang HTML. Card <strong>sáng</strong> = có file HTML sẵn sàng mở.</span> -->
-  </div>
-
-</main>
-
-<footer>
-  <p id="footer-text">✦ <strong>Crop🍅Shooter</strong> &nbsp;·&nbsp; Game Design Document &nbsp;·&nbsp; 2026 ✦</p>
-</footer>
-
-<script>
-const T = {
-  vie:{
-    'nav-brand':'Crop🍅Shooter GDD',
-    'nl-overview':'Tổng Quan','nl-docs':'Công Trình','nl-other':'GDD',
-    'hero-badge':'⭐ Tài Liệu Thiết Kế Game',
-    'hero-title':'Crop🍅Shooter',
-    'hero-sub':'Tài liệu thiết kế game chính thức — cơ chế bắn súng, trồng trọt và xây dựng trong thế giới nông trại kỳ diệu!',
-    'stat-label':'tài liệu',
-    'sh1':'📋 Tổng Quan Trò Chơi','sp1':'Chính',
-    'sh2':'🏗️ Hệ Thống Công Trình','sp2':'Có File HTML',
-    'sh3':'📄 Tài Liệu GDD','sp3':'Có File HTML',
-    'fc-tag':'📖 Tài Liệu Chính','fc-title':'GDD Tóm Tắt',
-    'fc-desc':'Tổng quan toàn bộ dự án: tầm nhìn sáng tạo, cơ chế cốt lõi, vòng lặp gameplay, hệ thống tiến trình và mục tiêu thiết kế.',
-    'fc-href':'final/GDD_Summary.html',
-    'ct1':'Chi Tiết Công Trình','cd1':'Thông số kỹ thuật, điều kiện mở khóa và hiệu ứng của từng loại công trình.','co1':'Mở tài liệu',
-    'ct2':'Constructions Detail','cd2':'Technical specs, unlock conditions and effects for every construction type.','co2':'Open document',
-    'ct4':'Sơ Đồ Công Trình','cd4':'Bản đồ tổng hợp các công trình với cấu trúc và phân loại rõ ràng.','co4':'Mở tài liệu',
-    'ct5':'GDD Tóm Tắt — Tiếng Việt','cd5':'Tài liệu thiết kế game đầy đủ: cơ chế, thế giới, nhân vật và hệ thống.','co5':'Mở tài liệu',
-    'ct6':'GDD Summary — English','cd6':'Full game design document in English: mechanics, world, characters and systems.','co6':'Open document',
-    'note-text':'Card <strong>mờ</strong> = file <code>.md</code> chưa export sang HTML. Card <strong>sáng</strong> = có file HTML sẵn sàng mở.',
-    'footer-text':'✦ <strong>Crop🍅Shooter</strong> &nbsp;·&nbsp; Tài Liệu Thiết Kế Game &nbsp;·&nbsp; 2026 ✦',
-    soon:'🔜 Chưa có HTML'
-  },
-  eng:{
-    'nav-brand':'Crop🍅Shooter GDD',
-    'nl-overview':'Overview','nl-docs':'Constructions','nl-other':'GDD',
-    'hero-badge':'⭐ Game Design Document',
-    'hero-title':'Crop🍅Shooter',
-    'hero-sub':'Official game design document — shooting mechanics, farming and building in a magical farm world!',
-    'stat-label':'documents',
-    'sh1':'📋 Game Overview','sp1':'Main',
-    'sh2':'🏗️ Construction System','sp2':'Has HTML Files',
-    'sh3':'📄 GDD Documents','sp3':'Has HTML Files',
-    'fc-tag':'📖 Main Document','fc-title':'GDD Summary',
-    'fc-desc':'Full project overview: creative vision, core mechanics, gameplay loop, progression systems and design goals.',
-    'fc-href':'final/GDD_Summary.html',
-    'ct1':'Chi Tiết Công Trình','cd1':'Technical specs in Vietnamese — unlock conditions, costs and effects.','co1':'Open document',
-    'ct2':'Constructions Detail','cd2':'Technical specs, unlock conditions and effects for every construction type.','co2':'Open document',
-    'ct4':'Construction Diagram','cd4':'Full map of the construction system with clear structure and categorization.','co4':'Open document',
-    'ct5':'GDD Summary — Vietnamese','cd5':'Full game design document in Vietnamese: mechanics, world, characters.','co5':'Open document',
-    'ct6':'GDD Summary — English','cd6':'Full game design document in English: mechanics, world, characters and systems.','co6':'Open document',
-    'note-text':'<strong>Dimmed</strong> cards = <code>.md</code> source files not yet exported to HTML. <strong>Bright</strong> cards = HTML files ready to open.',
-    'footer-text':'✦ <strong>Crop🍅Shooter</strong> &nbsp;·&nbsp; Game Design Document &nbsp;·&nbsp; 2026 ✦',
-    soon:'🔜 Coming Soon'
-  }
-};
-
-// Cards with data-lang="vie"  → show only when lang===vie, hide when lang===eng
-// Cards with data-lang="eng"  → show only when lang===eng, BUT if no VIE counterpart exists → always show
-// Cards with data-lang="both" → always show
-// Rule: "chỉ có tiếng anh thì luôn hiện" means eng-only cards (no VIE pair) always visible.
-// Here Constructions_Detail_ENG has a VIE pair → hide when VIE active.
-// GDD_Summary_ENG has a VIE pair → hide when VIE active.
-// Construction_Summary has data-lang="both" → always show.
-
-function updateCardVisibility(lang) {
-  document.querySelectorAll('.card[data-lang]').forEach(card => {
-    const cl = card.dataset.lang;
-    if (cl === 'both') {
-      card.style.display = '';
-    } else if (cl === 'vie') {
-      // VIE card: show when lang=vie, hide when lang=eng
-      card.style.display = (lang === 'vie') ? '' : 'none';
-    } else if (cl === 'eng') {
-      // ENG card: show when lang=eng, hide when lang=vie
-      // UNLESS it has no VIE counterpart (data-eng-only="true") → always show
-      if (card.dataset.engOnly === 'true') {
-        card.style.display = '';
-      } else {
-        card.style.display = (lang === 'eng') ? '' : 'none';
+      to {
+        transform: translate(35px, 28px) scale(1.08)
       }
     }
-  });
-}
 
-function setLang(lang){
-  document.getElementById('lt-vie').classList.toggle('active',lang==='vie');
-  document.getElementById('lt-eng').classList.toggle('active',lang==='eng');
-  document.documentElement.lang=lang==='vie'?'vi':'en';
-  const c=T[lang];
-  for(const[id,val] of Object.entries(c)){
-    if(id==='fc-href'){document.getElementById('fc-gdd').href=val;continue}
-    if(id==='soon'){document.querySelectorAll('.card.disabled').forEach(el=>el.dataset.soon=val);continue}
-    const el=document.getElementById(id);
-    if(el)el.innerHTML=val;
-  }
-  updateCardVisibility(lang);
-}
+    .bg-dots {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(circle, #c084fc22 1.2px, transparent 1.2px);
+      background-size: 36px 36px
+    }
 
-// Init
-updateCardVisibility('vie');
-</script>
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253, 246, 255, .85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1.5px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 2px 20px rgba(155, 114, 245, .08)
+    }
+
+    .nav-logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.25rem;
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      box-shadow: 0 0 8px var(--pink);
+      display: inline-block
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .nav-link {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 99px;
+      transition: all .2s
+    }
+
+    .nav-link:hover {
+      background: var(--border);
+      color: var(--purple)
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 99px;
+      padding: 4px
+    }
+
+    .lt-btn {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .5px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      transition: all .22s;
+      background: transparent;
+      color: var(--muted)
+    }
+
+    .lt-btn.active {
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(155, 114, 245, .4)
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 90px 40px 80px;
+      text-align: center;
+      overflow: hidden
+    }
+
+    .slime {
+      position: absolute;
+      font-size: 3rem;
+      animation: slimeFloat 5s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(155, 114, 245, .25));
+      pointer-events: none;
+      user-select: none
+    }
+
+    @keyframes slimeFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-4deg)
+      }
+
+      50% {
+        transform: translateY(-22px) rotate(4deg)
+      }
+    }
+
+    .slime:nth-child(1) {
+      left: 5%;
+      top: 12%;
+      animation-delay: 0s;
+      font-size: 3.5rem
+    }
+
+    .slime:nth-child(2) {
+      right: 6%;
+      top: 8%;
+      animation-delay: -2s;
+      font-size: 2.8rem
+    }
+
+    .slime:nth-child(3) {
+      left: 13%;
+      bottom: 22%;
+      animation-delay: -4s;
+      font-size: 2.2rem
+    }
+
+    .slime:nth-child(4) {
+      right: 12%;
+      bottom: 20%;
+      animation-delay: -1s;
+      font-size: 2.6rem
+    }
+
+    .slime:nth-child(5) {
+      left: 47%;
+      top: 4%;
+      animation-delay: -3s;
+      font-size: 2rem
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #fce7f3, #ede9fe);
+      border: 1.5px solid #e9d5ff;
+      border-radius: 99px;
+      padding: 6px 20px;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(192, 132, 252, .2)
+    }
+
+    h1.hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 45%, var(--yellow) 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 2px 8px rgba(192, 132, 252, .2));
+      animation: titlePop .8s cubic-bezier(.175, .885, .32, 1.275) both
+    }
+
+    @keyframes titlePop {
+      from {
+        opacity: 0;
+        transform: scale(.85) translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0)
+      }
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 600;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.7
+    }
+
+    .hero-stats {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 8px
+    }
+
+    .stat-chip {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 99px;
+      padding: 7px 18px;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px var(--shadow)
+    }
+
+    .stat-chip b {
+      color: var(--purple)
+    }
+
+    .cloud-row {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 90px;
+      pointer-events: none
+    }
+
+    .cloud-svg {
+      width: 100%;
+      height: 90px
+    }
+
+    /* MAIN */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 20px 32px 100px
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      margin-top: 52px
+    }
+
+    .section-head h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--text)
+    }
+
+    .section-pill {
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px
+    }
+
+    .section-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border), transparent);
+      border-radius: 4px
+    }
+
+    /* FEATURE CARD */
+    .feature-card {
+      background: linear-gradient(135deg, #f5f0ff 0%, #fce7f3 50%, #e0f7fa 100%);
+      border: 2px solid #e9d5ff;
+      border-radius: 28px;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 18px;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: 0 4px 30px rgba(192, 132, 252, .12), 0 1px 0 #fff inset;
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 50px rgba(192, 132, 252, .22)
+    }
+
+    .feature-card .fc-icon {
+      font-size: 3.8rem;
+      filter: drop-shadow(0 4px 10px rgba(192, 132, 252, .3))
+    }
+
+    .fc-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 10px
+    }
+
+    .fc-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      margin-bottom: 8px
+    }
+
+    .fc-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 480px
+    }
+
+    .fc-arrow {
+      font-size: 1.8rem;
+      color: var(--purple);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(155, 114, 245, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .25s, background .25s;
+      flex-shrink: 0
+    }
+
+    .feature-card:hover .fc-arrow {
+      transform: translateX(5px);
+      background: var(--purple);
+      color: #fff
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px
+    }
+
+    .card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 26px 24px 22px;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+      transition: transform .22s, box-shadow .22s, border-color .22s;
+      box-shadow: 0 2px 16px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--c1, var(--purple)), var(--c2, var(--pink)));
+      border-radius: 22px 22px 0 0
+    }
+
+    .card:not(.disabled):hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px var(--hover-glow, rgba(155, 114, 245, .2));
+      border-color: var(--hover-color, var(--purple))
+    }
+
+    .card.disabled {
+      opacity: .38;
+      filter: grayscale(.4);
+      cursor: not-allowed;
+      pointer-events: none;
+      position: relative
+    }
+
+    .card.disabled::after {
+      content: attr(data-soon);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: .95rem;
+      color: var(--muted);
+      background: rgba(253, 246, 255, .65);
+      border-radius: inherit;
+      backdrop-filter: blur(2px)
+    }
+
+    .card-icon {
+      font-size: 2.4rem;
+      filter: drop-shadow(0 2px 6px var(--hover-glow, rgba(155, 114, 245, .2)))
+    }
+
+    .card-lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--c1, var(--purple)), var(--c2, var(--pink)));
+      color: #fff;
+      width: fit-content
+    }
+
+    .card-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      line-height: 1.3
+    }
+
+    .card-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1
+    }
+
+    .card-filename {
+      font-size: .72rem;
+      color: #c4b5e0;
+      font-family: 'Courier New', monospace;
+      background: #f5f0ff;
+      padding: 4px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px
+    }
+
+    .card-open {
+      font-size: .78rem;
+      font-weight: 800;
+      color: var(--c1, var(--purple));
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    .card-open::after {
+      content: '→';
+      transition: transform .2s
+    }
+
+    .card:hover .card-open::after {
+      transform: translateX(4px)
+    }
+
+    /* NOTE */
+    .section-note {
+      background: linear-gradient(135deg, #fef9c3, #fce7f3);
+      border: 1.5px solid #fde68a;
+      border-radius: 16px;
+      padding: 16px 22px;
+      font-size: .84rem;
+      color: #92400e;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent, var(--bg2));
+      border-top: 1.5px solid var(--border);
+      padding: 40px;
+      text-align: center
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 600
+    }
+
+    footer strong {
+      color: var(--purple)
+    }
+
+    @media(max-width:640px) {
+      nav {
+        padding: 0 16px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .hero {
+        padding: 60px 20px 50px
+      }
+
+      main {
+        padding: 16px 16px 60px
+      }
+
+      .feature-card {
+        grid-template-columns: 1fr
+      }
+
+      .feature-card .fc-arrow,
+      .feature-card .fc-icon {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-deco">
+    <div class="bg-blob"></div>
+    <div class="bg-blob"></div>
+    <div class="bg-blob"></div>
+    <div class="bg-blob"></div>
+  </div>
+  <div class="bg-dots"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <span class="logo-dot"></span>
+      <span id="nav-brand">Crop🍅Shooter GDD</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#overview" id="nl-overview">Tổng Quan</a>
+      <a class="nav-link" href="#constructions" id="nl-docs">Công Trình</a>
+      <a class="nav-link" href="#gdd" id="nl-other">GDD</a>
+    </div>
+    <div class="lang-toggle">
+      <button class="lt-btn active" id="lt-vie" onclick="setLang('vie')">🇻🇳 VIE</button>
+      <button class="lt-btn" id="lt-eng" onclick="setLang('eng')">🇺🇸 ENG</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="slime">🟣</div>
+    <div class="slime">🟡</div>
+    <div class="slime">🩵</div>
+    <div class="slime">🩷</div>
+    <div class="slime">🟢</div>
+
+    <div class="hero-badge" id="hero-badge">⭐ Game Design Document</div>
+    <h1 class="hero-title" id="hero-title">Crop🍅Shooter</h1>
+    <p class="hero-sub" id="hero-sub">Tài liệu thiết kế game chính thức — cơ chế bắn súng, trồng trọt và xây dựng trong
+      thế giới nông trại kỳ diệu!</p>
+
+    <div class="hero-stats">
+      <div class="stat-chip">🎮 <b>Cute</b> FPS Shooter Style</div>
+      <div class="stat-chip">📄 <b id="doc-count">0</b>&nbsp;<span id="stat-label">tài liệu</span></div>
+      <div class="stat-chip">🌐 <b>VIE</b> + <b>ENG</b></div>
+      <div class="stat-chip">🏗️ <b>GDD</b></div>
+    </div>
+
+    <div class="cloud-row">
+      <svg class="cloud-svg" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M0,40 Q80,10 160,35 Q240,60 320,30 Q400,5 480,32 Q560,60 640,28 Q720,0 800,30 Q880,60 960,28 Q1040,0 1120,32 Q1200,60 1280,30 Q1360,5 1440,35 L1440,90 L0,90 Z"
+          fill="#fdf6ff" />
+      </svg>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- OVERVIEW -->
+    <div id="overview"></div>
+    <div class="section-head">
+      <h2 id="sh1">📋 Tổng Quan Trò Chơi</h2>
+      <div class="section-pill" id="sp1">Chính</div>
+      <div class="section-line"></div>
+    </div>
+
+    <a class="feature-card" id="fc-gdd" href="final/GDD_Summary.html">
+      <div>
+        <div class="fc-tag" id="fc-tag">📖 Tài Liệu Chính</div>
+        <div class="fc-title" id="fc-title">GDD Tóm Tắt</div>
+        <p class="fc-desc" id="fc-desc">Tổng quan toàn bộ dự án: tầm nhìn sáng tạo, cơ chế cốt lõi, vòng lặp gameplay,
+          hệ thống tiến trình và mục tiêu thiết kế. Điểm khởi đầu tốt nhất để hiểu game.</p>
+      </div>
+      <div class="fc-icon">📖</div>
+      <div class="fc-arrow">→</div>
+    </a>
+
+    <!-- CONSTRUCTIONS -->
+    <div id="constructions"></div>
+    <div class="section-head">
+      <h2 id="sh2">🏗️ Hệ Thống Công Trình</h2>
+      <div class="section-pill" id="sp2">Có File HTML</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cards">
+      <a class="card IsDocument" data-lang="vie" href="final/Constructions_Detail.html"
+        style="--c1:#3dd6b0;--c2:#52c5f7;--hover-color:#3dd6b0;--hover-glow:rgba(61,214,176,.2)">
+        <span class="card-icon">🏗️</span>
+        <div class="card-lang-badge" style="--c1:#3dd6b0;--c2:#52c5f7">🇻🇳 Tiếng Việt</div>
+        <div class="card-title" id="ct1">Chi Tiết Công Trình</div>
+        <div class="card-desc" id="cd1">Thông số kỹ thuật, điều kiện mở khóa, chi phí tài nguyên và hiệu ứng của từng
+          loại công trình.</div>
+        <div class="card-filename">final/Constructions_Detail.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co1">Mở tài liệu</div>
+        </div>
+      </a>
+
+      <a class="card" data-lang="eng" href="final/Constructions_Detail.html"
+        style="--c1:#52c5f7;--c2:#3dd6b0;--hover-color:#52c5f7;--hover-glow:rgba(82,197,247,.2)">
+        <span class="card-icon">🏗️</span>
+        <div class="card-lang-badge" style="--c1:#52c5f7;--c2:#3dd6b0">🇺🇸 English</div>
+        <div class="card-title" id="ct2">Constructions Detail</div>
+        <div class="card-desc" id="cd2">Technical specs, unlock conditions, resource costs and effects for every
+          construction type.</div>
+        <div class="card-filename">final/Constructions_Detail.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co2">Open document</div>
+        </div>
+      </a>
+
+      <a class="card IsDocument" data-lang="vie" href="final/Construction_Summary.html"
+        style="--c1:#ffc94a;--c2:#ff8f5e;--hover-color:#ffc94a;--hover-glow:rgba(255,201,74,.2)">
+        <span class="card-icon">🗺️</span>
+        <div class="card-lang-badge" style="--c1:#ffc94a;--c2:#ff8f5e">📋 Tóm tắt</div>
+        <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 Chỉ Tiếng Anh</div>
+        <div class="card-title" id="ct41">Sơ Đồ Công Trình</div>
+        <div class="card-desc" id="cd41">Bản đồ tổng hợp các công trình với cấu trúc và phân loại rõ ràng.</div>
+        <div class="card-filename">final/Construction_Summary.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co41">Mở tài liệu</div>
+        </div>
+      </a>
+
+      <a class="card" data-lang="eng" href="final/Construction_Summary.html"
+        style="--c1:#ffc94a;--c2:#ff8f5e;--hover-color:#ffc94a;--hover-glow:rgba(255,201,74,.2)">
+        <span class="card-icon">🗺️</span>
+        <div class="card-lang-badge" style="--c1:#ffc94a;--c2:#ff8f5e">📋 Summary</div>
+        <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 English Only</div>
+        <div class="card-title" id="ct42">Construction Diagram</div>
+        <div class="card-desc" id="cd42">Full map of the construction system with clear structure and categorization.
+        </div>
+        <div class="card-filename">final/Construction_Summary.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co42">Open document</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- GDD DOCS -->
+    <div id="gdd"></div>
+    <div class="section-head">
+      <h2 id="sh3">📄 Tài Liệu GDD</h2>
+      <div class="section-pill" id="sp3">Có File HTML</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cards">
+      <a class="card IsDocument" data-lang="vie" href="final/GDD_Summary.html"
+        style="--c1:#ff7ec7;--c2:#a78bfa;--hover-color:#ff7ec7;--hover-glow:rgba(255,126,199,.2)">
+        <span class="card-icon">📄</span>
+        <div class="card-lang-badge" style="--c1:#ff7ec7;--c2:#a78bfa">🇻🇳 Tiếng Việt</div>
+        <div class="card-title" id="ct5">GDD Tóm Tắt — Tiếng Việt</div>
+        <div class="card-desc" id="cd5">Tài liệu thiết kế game đầy đủ bằng tiếng Việt: cơ chế, thế giới, nhân vật và hệ
+          thống.</div>
+        <div class="card-filename">final/GDD_Summary.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co5">Mở tài liệu</div>
+        </div>
+      </a>
+
+      <a class="card" data-lang="eng" href="final/GDD_Summary.html"
+        style="--c1:#6ee083;--c2:#52c5f7;--hover-color:#6ee083;--hover-glow:rgba(110,224,131,.2)">
+        <span class="card-icon">📄</span>
+        <div class="card-lang-badge" style="--c1:#6ee083;--c2:#52c5f7">🇺🇸 English</div>
+        <div class="card-title" id="ct6">GDD Summary — English</div>
+        <div class="card-desc" id="cd6">Full game design document in English: mechanics, world, characters and all
+          systems.</div>
+        <div class="card-filename">final/GDD_Summary.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co6">Open document</div>
+        </div>
+      </a>
+
+      <a class="card IsDocument" data-lang="eng" href="final/Recipe_Diagram_ENG.html"
+        style="--c1:#ff8f5e;--c2:#ffc94a;--hover-color:#ff8f5e;--hover-glow:rgba(255,143,94,.2)">
+        <span class="card-icon">🍳</span>
+        <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 English Only</div>
+        <div class="card-title" id="ct7">Recipe Diagram</div>
+        <div class="card-desc" id="cd7">Recipe ingame — Ingredients, combinations and output products.</div>
+        <div class="card-filename">final/Recipe_Diagram_ENG.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co7">Open Document</div>
+        </div>
+      </a>
+
+      <a class="card" data-lang="vie" href="final/Recipe_Diagram_ENG.html"
+        style="--c1:#ff8f5e;--c2:#ffc94a;--hover-color:#ff8f5e;--hover-glow:rgba(255,143,94,.2)">
+        <span class="card-icon">🍳</span>
+        <div class="card-lang-badge" style="--c1:#ff8f5e;--c2:#ffc94a">🇺🇸 Chỉ Tiếng Anh</div>
+        <div class="card-title" id="ct7">Recipe Diagram</div>
+        <div class="card-desc" id="cd7">Công thức chế tạo trong game — sơ đồ nguyên liệu, kết hợp và sản phẩm đầu ra.
+        </div>
+        <div class="card-filename">final/Recipe_Diagram_ENG.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co7">Mở tài liệu</div>
+        </div>
+      </a>
+
+      <a class="card IsDocument" data-lang="eng" href="final/analysis.html"
+        style="--c1:#095e00;--c2:#1000bc;--hover-color:#095e00;--hover-glow:rgba(255,143,94,.2)">
+        <span class="card-icon">🍳</span>
+        <div class="card-lang-badge" style="--c1:#095e00;--c2:#1000bc">🇺🇸 Vietnamese Only</div>
+        <div class="card-title" id="ct7">GDD Analysis</div>
+        <div class="card-desc" id="cd7">A analysis focusing on economic balance, gameplay flow, and the “Crops as Ammo”
+          mechanic.</div>
+        <div class="card-filename">final/analysis.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co7">Open Document</div>
+        </div>
+      </a>
+
+      <a class="card" data-lang="vie" href="final/analysis.html"
+        style="--c1:#095e00;--c2:#1000bc;--hover-color:#095e00;--hover-glow:rgba(255,143,94,.2)">
+        <span class="card-icon">🍳</span>
+        <div class="card-lang-badge" style="--c1:#095e00;--c2:#1000bc">🇻🇳 Chỉ Tiếng Việt</div>
+        <div class="card-title" id="ct7">Bản Phân tích GDD</div>
+        <div class="card-desc" id="cd7">Bản phân tích tập trung vào cân bằng kinh tế, gameplay flow và cơ chế “Crops as
+          Ammo”.</div>
+        <div class="card-filename">final/analysis.html</div>
+        <div class="card-cta">
+          <div class="card-open" id="co7">Mở tài liệu</div>
+        </div>
+      </a>
+
+      <!-- DISABLED: Recipe Diagram (only .md) -->
+      <div class="card disabled" data-soon="🔜 Chưa có HTML">
+        <span class="card-icon">🍳</span>
+        <div class="card-lang-badge" style="--c1:#94a3b8;--c2:#cbd5e1">📝 Markdown</div>
+        <div class="card-title">Recipe Diagram</div>
+        <div class="card-desc">Sơ đồ công thức chế tạo — chỉ có file .md, chưa export HTML.</div>
+        <div class="card-filename">final/Recipe_Diagram.md</div>
+      </div>
+
+      <!-- DISABLED: GDD Summary .md -->
+      <div class="card disabled" data-soon="🔜 Chưa có HTML">
+        <span class="card-icon">📝</span>
+        <div class="card-lang-badge" style="--c1:#94a3b8;--c2:#cbd5e1">📝 Markdown</div>
+        <div class="card-title">GDD Summary (raw .md)</div>
+        <div class="card-desc">Nguồn Markdown gốc — chỉ có file .md, chưa export HTML.</div>
+        <div class="card-filename">final/GDD_Summary.md</div>
+      </div>
+    </div>
+
+    <div class="section-note">
+      <!-- 💡 <span id="note-text">Card <strong>mờ</strong> = file <code>.md</code> chưa export sang HTML. Card <strong>sáng</strong> = có file HTML sẵn sàng mở.</span> -->
+    </div>
+
+  </main>
+
+  <footer>
+    <p id="footer-text">✦ <strong>Crop🍅Shooter</strong> &nbsp;·&nbsp; Game Design Document Version 300326 &nbsp;·&nbsp;
+      2026 ✦</p>
+  </footer>
+
+  <script>
+    const T = {
+      vie: {
+        'nav-brand': 'Crop🍅Shooter GDD',
+        'nl-overview': 'Tổng Quan', 'nl-docs': 'Công Trình', 'nl-other': 'GDD',
+        'hero-badge': '⭐ Tài Liệu Thiết Kế Game',
+        'hero-title': 'Crop🍅Shooter',
+        'hero-sub': 'Tài liệu thiết kế game chính thức — cơ chế bắn súng, trồng trọt và xây dựng trong thế giới nông trại kỳ diệu!',
+        'stat-label': 'tài liệu',
+        'sh1': '📋 Tổng Quan Trò Chơi', 'sp1': 'Chính',
+        'sh2': '🏗️ Hệ Thống Công Trình', 'sp2': 'Có File HTML',
+        'sh3': '📄 Tài Liệu GDD', 'sp3': 'Có File HTML',
+        'fc-tag': '📖 Tài Liệu Chính', 'fc-title': 'GDD Tóm Tắt',
+        'fc-desc': 'Tổng quan toàn bộ dự án: tầm nhìn sáng tạo, cơ chế cốt lõi, vòng lặp gameplay, hệ thống tiến trình và mục tiêu thiết kế.',
+        'fc-href': 'final/GDD_Summary.html',
+        'ct1': 'Chi Tiết Công Trình', 'cd1': 'Thông số kỹ thuật, điều kiện mở khóa và hiệu ứng của từng loại công trình.', 'co1': 'Mở tài liệu',
+        'ct2': 'Constructions Detail', 'cd2': 'Technical specs, unlock conditions and effects for every construction type.', 'co2': 'Open document',
+        'ct4': 'Sơ Đồ Công Trình', 'cd4': 'Bản đồ tổng hợp các công trình với cấu trúc và phân loại rõ ràng.', 'co4': 'Mở tài liệu',
+        'ct5': 'GDD Tóm Tắt — Tiếng Việt', 'cd5': 'Tài liệu thiết kế game đầy đủ: cơ chế, thế giới, nhân vật và hệ thống.', 'co5': 'Mở tài liệu',
+        'ct6': 'GDD Summary — English', 'cd6': 'Full game design document in English: mechanics, world, characters and systems.', 'co6': 'Open document',
+        'note-text': 'Card <strong>mờ</strong> = file <code>.md</code> chưa export sang HTML. Card <strong>sáng</strong> = có file HTML sẵn sàng mở.',
+        'footer-text': '✦ <strong>Crop🍅Shooter</strong> &nbsp;·&nbsp; Tài Liệu Thiết Kế Game &nbsp;·&nbsp; 2026 ✦',
+        soon: '🔜 Chưa có HTML'
+      },
+      eng: {
+        'nav-brand': 'Crop🍅Shooter GDD',
+        'nl-overview': 'Overview', 'nl-docs': 'Constructions', 'nl-other': 'GDD',
+        'hero-badge': '⭐ Game Design Document',
+        'hero-title': 'Crop🍅Shooter',
+        'hero-sub': 'Official game design document — shooting mechanics, farming and building in a magical farm world!',
+        'stat-label': 'documents',
+        'sh1': '📋 Game Overview', 'sp1': 'Main',
+        'sh2': '🏗️ Construction System', 'sp2': 'Has HTML Files',
+        'sh3': '📄 GDD Documents', 'sp3': 'Has HTML Files',
+        'fc-tag': '📖 Main Document', 'fc-title': 'GDD Summary',
+        'fc-desc': 'Full project overview: creative vision, core mechanics, gameplay loop, progression systems and design goals.',
+        'fc-href': 'final/GDD_Summary.html',
+        'ct1': 'Chi Tiết Công Trình', 'cd1': 'Technical specs in Vietnamese — unlock conditions, costs and effects.', 'co1': 'Open document',
+        'ct2': 'Constructions Detail', 'cd2': 'Technical specs, unlock conditions and effects for every construction type.', 'co2': 'Open document',
+        'ct4': 'Construction Diagram', 'cd4': 'Full map of the construction system with clear structure and categorization.', 'co4': 'Open document',
+        'ct5': 'GDD Summary — Vietnamese', 'cd5': 'Full game design document in Vietnamese: mechanics, world, characters.', 'co5': 'Open document',
+        'ct6': 'GDD Summary — English', 'cd6': 'Full game design document in English: mechanics, world, characters and systems.', 'co6': 'Open document',
+        'note-text': '<strong>Dimmed</strong> cards = <code>.md</code> source files not yet exported to HTML. <strong>Bright</strong> cards = HTML files ready to open.',
+        'footer-text': '✦ <strong>Crop🍅Shooter</strong> &nbsp;·&nbsp; Game Design Document &nbsp;·&nbsp; 2026 ✦',
+        soon: '🔜 Coming Soon'
+      }
+    };
+
+    // Cards with data-lang="vie"  → show only when lang===vie, hide when lang===eng
+    // Cards with data-lang="eng"  → show only when lang===eng, BUT if no VIE counterpart exists → always show
+    // Cards with data-lang="both" → always show
+    // Rule: "chỉ có tiếng anh thì luôn hiện" means eng-only cards (no VIE pair) always visible.
+    // Here Constructions_Detail_ENG has a VIE pair → hide when VIE active.
+    // GDD_Summary_ENG has a VIE pair → hide when VIE active.
+    // Construction_Summary has data-lang="both" → always show.
+
+    function updateCardVisibility(lang) {
+      document.querySelectorAll('.card[data-lang]').forEach(card => {
+        const cl = card.dataset.lang;
+        if (cl === 'both') {
+          card.style.display = '';
+        } else if (cl === 'vie') {
+          // VIE card: show when lang=vie, hide when lang=eng
+          card.style.display = (lang === 'vie') ? '' : 'none';
+        } else if (cl === 'eng') {
+          // ENG card: show when lang=eng, hide when lang=vie
+          // UNLESS it has no VIE counterpart (data-eng-only="true") → always show
+          if (card.dataset.engOnly === 'true') {
+            card.style.display = '';
+          } else {
+            card.style.display = (lang === 'eng') ? '' : 'none';
+          }
+        }
+      });
+    }
+
+    function setLang(lang) {
+      document.getElementById('lt-vie').classList.toggle('active', lang === 'vie');
+      document.getElementById('lt-eng').classList.toggle('active', lang === 'eng');
+      document.documentElement.lang = lang === 'vie' ? 'vi' : 'en';
+      const c = T[lang];
+      for (const [id, val] of Object.entries(c)) {
+        if (id === 'fc-href') { document.getElementById('fc-gdd').href = val; continue }
+        if (id === 'soon') { document.querySelectorAll('.card.disabled').forEach(el => el.dataset.soon = val); continue }
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = val;
+      }
+      updateCardVisibility(lang);
+    }
+
+    // Init
+    updateCardVisibility('vie');
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const elements = document.querySelectorAll('.IsDocument');
+      document.getElementById('doc-count').textContent = elements.length;
+    });
+
+  </script>
 </body>
+
 </html>
