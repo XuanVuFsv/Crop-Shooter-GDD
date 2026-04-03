@@ -114,7 +114,7 @@ Each crop can be used as:
 | 🌱 | Bean | Day 3 | — | SMG | 1 crop | Ammo, Bean Oil |
 | 🥕 | Carrot | Day 3 | — | — | 1 crop | Hot Bunny, Carrot Cake, Red Alert Salad |
 | 🥬 | Cabbage | Day 3 | — | — | 1 crop | Cabbage Sauce, Burger Berry |
-| 🥥 | Coconut | Day 3 | — | — | 1 crop | Coconut Oil → Coconut Milk |
+| 🥥 | Coconut | Day 3 | — | — | 1 crop | Coconut Oil, Coconut Milk |
 | 🫚 | Beetroot | Day 5 | — | — | 1 crop | Sugar (9 beet = 1 sugar) |
 | 🍇 | Grape | Day 8 | 📦 Open Treasure Pod | (special) | 1 crop | Ammo, Sweet Grapeball, Cluster Bottle |
 | 🍅 | Tomato | Day 6 | 🗡 Kill 300 monsters | Shotgun | 1 crop | Ammo, Tomato Soup, Red Alert Salad → Crit Bottle |
@@ -162,7 +162,7 @@ Each crop can be used as:
 |--------|-------------|---------|--------|
 | 🥐 Flour | Wheat ×9 | Bread, Berry Cake, Apple Pie… | Day 1 |
 | 🍬 Sugar | Beetroot ×9 | Many foods & bottles | Day 5 |
-| 🥛 Coconut Milk | Coconut ×3 | Cream, Carrot Cake… | Day 3 |
+| 🥛 Coconut Milk | Coconut ×9 | Cream, Carrot Cake… | Day 3 |
 | 🛢️ Bean Oil | Bean ×9 | Margarine | Day 3 |
 | 🧴 Coconut Oil | Coconut ×9 | Margarine | Day 3 |
 | 🧈 Margarine | Bean Oil ×3 + Coconut Oil ×1 | Tomato Soup, Burnwich | Day 3 |
@@ -412,7 +412,7 @@ Crafts everything: Materials, Bottles, Food Ingredients, Foods. Queue up to 3/5/
 | 1 | Queue Expand I — +2 recipe slots |
 | 2 | Craft Speed I — reduces craft time |
 | 3 | Queue Expand II — +2 recipe slots |
-| 4 | Craft Speed II |
+| 4 | Craft Speed II | reduces craft time
 
 ### 🏞 Pond
 

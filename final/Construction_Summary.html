@@ -416,6 +416,9 @@ const IC={
   market_link:'https://xuanvufsv.github.io/gdd-images/marketlink_icon.png',
   blueprint:'https://xuanvufsv.github.io/gdd-images/blueprint_icon.png',
   notify:'https://xuanvufsv.github.io/gdd-images/notify_icon.png',
+  crafting_station:'https://xuanvufsv.github.io/gdd-images/craftingstation_icon.png',
+  crafting_queue:'https://xuanvufsv.github.io/gdd-images/craftingstation_upgrade_additionalslot_icon.png',
+  crafting_speed:'https://xuanvufsv.github.io/gdd-images/craftingstation_upgrade_craftspeed_icon.png',
 };
 
 function img(key,cls='bcard-ic'){
@@ -424,6 +427,15 @@ function img(key,cls='bcard-ic'){
 }
 
 const BUILDINGS=[
+  {id:'crafting_station',name:'Crafting Station',cat:'base',ic:'crafting_station',blueprintCost:0,buildCost:0,day:1,demolish:false,
+   keyEffect:'Craft Materials, Bottles, Food Ingredients & Foods — runs during Sleep',
+   desc:'Crafts everything: Materials, Bottles, Food Ingredients, Foods. Queue up to 3/5/7 recipes × 10 each. Runs in background during Sleep. ⚠ Items inserted cannot be retrieved.',
+   upgrades:[
+    {name:'Queue Expand I',desc:'+2 recipe slots',ic:'crafting_queue',cost:500,day:0},
+    {name:'Craft Speed I',desc:'Reduces craft time',ic:'crafting_speed',cost:1300,day:0},
+    {name:'Queue Expand II',desc:'+2 recipe slots',ic:'crafting_queue',cost:2000,day:0},
+    {name:'Craft Speed II',desc:'Reduces craft time',ic:'crafting_speed',cost:4500,day:0},
+  ]},
   {id:'gear',name:'Gear Upgrades',cat:'base',ic:'general_gear',blueprintCost:0,day:1,demolish:false,
    keyEffect:'Upgrade HP, Water, Speed, Backpack, Energy',
    desc:'Personal stat upgrades. Purchase via UI interaction. No blueprint required — always available from Day 1.',

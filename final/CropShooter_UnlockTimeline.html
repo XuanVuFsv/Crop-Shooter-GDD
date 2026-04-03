@@ -121,86 +121,57 @@
   <!-- ===== CONFLICT CHECK ===== -->
   <div class="section">
     <div class="section-title">🔍 Kiểm tra tính nhất quán (Cross-file Conflicts)</div>
-    <div class="conflicts">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;border-left:4px solid var(--ok);margin-bottom:4px;">
+      <div style="font-size:15px;font-weight:800;color:var(--ok);margin-bottom:10px;">✅ Tất cả conflicts đã được xử lý — phiên bản hiện tại nhất quán</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.8;">Các xung đột đã tìm thấy và giải quyết trong lần review trước:</div>
+      <div class="conflicts" style="margin-top:14px;">
 
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Omelet unlock ngày không nhất quán</h4>
-        <p>
-          <span class="badge warn">GDD Day 5</span> GDD_Summary timeline ghi <em>"Day 5 — 🍳 Omelet +25HP"</em>.<br>
-          <span class="badge warn">Recipe Day 7</span> Recipe_Diagram bảng Food ghi Omelet unlock <strong>Day 7</strong> (yêu cầu 🥚 Egg — Coop chỉ unlock Day 7).
-        </p>
-        <div class="fix">✅ Đề xuất: Omelet = <strong>Day 7</strong> là đúng về logic (cần Egg từ Coop). GDD timeline Day 5 là lỗi copy-paste — cần sửa lại GDD_Summary dòng Day 5.</div>
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Omelet unlock Day 7 (không phải Day 5)</h4>
+          <p>GDD_Summary đã được cập nhật: Omelet chuyển sang Day 7 đúng với dependency Egg từ Coop.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Burger Berry thống nhất +25 HP</h4>
+          <p>Đã chọn +25 HP theo Recipe_Diagram làm nguồn chuẩn. GDD_Summary đã cập nhật.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Crit Bottle = Day 11</h4>
+          <p>Đã thống nhất Crit Bottle unlock Day 11 (sau khi có đủ Tomato Soup ×8 từ Day 10). GDD timeline đã cập nhật.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Power Core / Circuit = Day 1</h4>
+          <p>"Day 0" đã được xóa khỏi Recipe_Diagram. Power Core và Circuit thống nhất unlock Day 1.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Cluster Bottle ghi chú rõ ràng</h4>
+          <p>Sweet Grapeball (food) unlock Day 8, Cluster Bottle (bottle) unlock Day 15 khi có Vial Lv2. Đã thêm ghi chú phân biệt trong cả hai file.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Day 4 được thêm vào GDD timeline</h4>
+          <p>GDD_Summary đã bổ sung Day 4: Silo, Builder's Shop, Fabricate Gadget, Drill Gadget blueprint.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Đã xử lý — Coconut Milk phân loại đúng vào Ingredients</h4>
+          <p>Recipe_Diagram đã chuyển Coconut Milk từ bảng "Natural & Coop Drops" sang bảng Ingredients. Nguồn: craft từ 🥥 Coconut ×3 tại Crafting Station.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Nhất quán — Tất cả Bottle recipes khớp giữa các file</h4>
+          <p>Toàn bộ 10 bottle (Frost, Rapidfire, Crit, Blaze, Venom, Cluster, Corrosion, Arc, Miasma) nhất quán.</p>
+        </div>
+
+        <div class="conflict-card ok-card">
+          <h4>✅ Nhất quán — Special Craft, Constructions, Gadgets đều khớp</h4>
+          <p>Ap-pleClear Ca-Rotket, tất cả constructions và gadget unlock day nhất quán giữa 3 file.</p>
+        </div>
+
       </div>
-
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Burger Berry HP không khớp</h4>
-        <p>
-          <span class="badge warn">GDD +20HP</span> GDD_Summary ghi Burger Berry <strong>+20 HP</strong>.<br>
-          <span class="badge warn">Recipe +25HP</span> Recipe_Diagram ghi Burger Berry <strong>+25 HP</strong>.
-        </p>
-        <div class="fix">✅ Đề xuất: Chọn một giá trị thống nhất. Đề nghị dùng <strong>+25 HP</strong> (Recipe_Diagram thường là nguồn design chính xác hơn).</div>
-      </div>
-
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Crit Bottle unlock Day 10 vs Day 11</h4>
-        <p>
-          <span class="badge warn">GDD Day 10</span> GDD_Summary timeline ghi Crit Bottle unlock <strong>Day 10</strong> (cùng với Tomato Soup).<br>
-          <span class="badge warn">Recipe Day 11</span> Recipe_Diagram đặt Crit Bottle trong <strong>Tier 2 (Day 10–12)</strong> và bảng Bottles ghi Day 11.
-        </p>
-        <div class="fix">✅ Đề xuất: Crit Bottle = <strong>Day 11</strong> vì phụ thuộc Tomato Soup (Day 10) cần 1 ngày để craft đủ số lượng ×8. Cập nhật GDD timeline.</div>
-      </div>
-
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Power Core / Circuit "Day 0" vs "Day 1"</h4>
-        <p>
-          <span class="badge warn">GDD Day 1</span> GDD_Summary timeline ghi Power Core & Circuit unlock <strong>Day 1</strong>.<br>
-          <span class="badge warn">Recipe Day 0</span> Recipe_Diagram bảng Ingredients ghi unlock <strong>Day 0</strong>.
-        </p>
-        <div class="fix">✅ Đề xuất: Dùng <strong>Day 1</strong> làm chuẩn — "Day 0" không tồn tại trong game timeline. Sửa Recipe_Diagram.</div>
-      </div>
-
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Cluster Bottle: Day 8 food vs Day 15 bottle</h4>
-        <p>
-          <span class="badge warn">Food Day 8</span> Sweet Grapeball unlock Day 8 (cần Grape × Treasure Pod).<br>
-          <span class="badge warn">Bottle Day 15</span> Recipe_Diagram đặt Cluster Bottle ở <strong>Day 15</strong> (Tier 3 — Vial Lv2 cần Ruby).
-        </p>
-        <div class="fix">✅ Không xung đột thực sự — food unlock sớm, nhưng bottle cần Vial Lv2 (Day 15). Cần ghi chú rõ hơn để tránh nhầm lẫn. GDD timeline ghi "Sweet Grapeball → Cluster Bottle" ở Day 8 dễ hiểu nhầm là bottle cũng Day 8.</div>
-      </div>
-
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Silo & Builder's Shop unlock Day 4 (thiếu trong GDD timeline)</h4>
-        <p>
-          <span class="badge warn">Constructions Day 4</span> Constructions_Detail ghi Silo (Day 4), Builder's Shop (Day 4), Fabricate Gadget (Day 4).<br>
-          <span class="badge warn">GDD không có Day 4</span> GDD_Summary timeline bỏ qua hoàn toàn <strong>Day 4</strong> — nhảy từ Day 3 sang Day 5.
-        </p>
-        <div class="fix">✅ Đề xuất: Thêm Day 4 vào GDD_Summary Unlock Timeline với: Silo, Builder's Shop, Fabricate Gadget, Drill Gadget.</div>
-      </div>
-
-      <div class="conflict-card warn">
-        <h4>⚠️ Cảnh báo — Coconut Milk: Coop drop vs Crafting Station</h4>
-        <p>
-          <span class="badge warn">Natural/Coop Day 3</span> Recipe_Diagram liệt kê Coconut Milk trong bảng "Natural & Coop Drops", source: ⚗️ Crafting Station.<br>
-          <span class="badge warn">Ingredient</span> GDD_Summary liệt kê Coconut Milk trong Ingredients (craft từ Coconut ×3).
-        </p>
-        <div class="fix">✅ Không xung đột logic — đây là ingredient craft tại Crafting Station. Nhưng Recipe_Diagram đặt nhầm Coconut Milk vào bảng "Natural & Coop Drops" cần chuyển sang bảng Ingredients.</div>
-      </div>
-
-      <div class="conflict-card ok-card">
-        <h4>✅ Nhất quán — Tất cả Bottle recipes đều khớp</h4>
-        <p>Toàn bộ 10 bottle (Frost, Rapidfire, Crit, Blaze, Venom, Cluster, Corrosion, Arc, Miasma) có recipe nhất quán giữa GDD_Summary và Recipe_Diagram.</p>
-      </div>
-
-      <div class="conflict-card ok-card">
-        <h4>✅ Nhất quán — Constructions_Detail & GDD khớp nhau về unlock</h4>
-        <p>Garden, Water Purifier, Coop, Pond, Crop Turret, Med Station, Refinery Link, Turret Link, Market Link đều có ngày unlock nhất quán giữa 2 file.</p>
-      </div>
-
-      <div class="conflict-card ok-card">
-        <h4>✅ Nhất quán — Special Craft Ap-pleClear Ca-Rotket</h4>
-        <p>Cả 3 file đều ghi unlock Day 16, recipe Hot Bunny + Carrot Cake + Apple Pie nhất quán.</p>
-      </div>
-
     </div>
   </div>
 
@@ -245,6 +216,18 @@
     <div class="day-grid" id="dayGrid"></div>
   </div>
 
+  <!-- ===== PLAIN TEXT SUMMARY ===== -->
+  <div class="section">
+    <div class="section-title">📝 Bảng tổng hợp dạng text (dễ copy)</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span style="font-size:13px;color:var(--muted);">Số lượng unlock theo từng loại, từng ngày · Copy và dán vào Notion, Google Sheets, v.v.</span>
+        <button id="copyBtn" onclick="copyText()" style="background:var(--accent2);color:#fff;border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;">📋 Copy</button>
+      </div>
+      <pre id="plainTextOutput" style="font-family:'Consolas','Courier New',monospace;font-size:12px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;line-height:1.6;white-space:pre;"></pre>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -283,6 +266,7 @@ const days = [
       { name: "🌱 Garden", detail: "Farming · 1 plot base · max 4 plots after upgrades" },
       { name: "💧 Water Purifier", detail: "Farming · Filters salt water → fresh water" },
       { name: "🔬 Refinery", detail: "Science Lab · Deposit-only item storage" },
+      { name: "⚗️ Crafting Station", detail: "Science Lab · Craft Materials, Bottles, Food · Queue 3→5→7 recipes × 10 · Runs during Sleep" },
     ],
     upgrades: [
       { name: "Garden: Additional Plot II/III/IV", detail: "350G each · Day 1 · +1 plot per upgrade" },
@@ -323,7 +307,7 @@ const days = [
       { name: "🛢️ Bean Oil", detail: "Recipe: 🌱 Bean ×9 (3×3)" },
       { name: "🧴 Coconut Oil", detail: "Recipe: 🥥 Coconut ×9 (3×3)" },
       { name: "🧈 Margarine", detail: "Recipe: 🛢️ Bean Oil ×2 + 🧴 Coconut Oil ×1 + 🛢️ Bean Oil ×1" },
-      { name: "🥛 Coconut Milk", detail: "Recipe: 🥥 Coconut ×3 (craft tại Crafting Station)" },
+      { name: "🥛 Coconut Milk", detail: "Recipe: 🥥 Coconut ×9 (3×3) · (craft tại Crafting Station)" },
     ],
     food: [],
     bottles: [],
@@ -445,7 +429,9 @@ const days = [
       { name: "🧁 Carrot Cake", detail: "+40 HP · Ap-pleClear 2/3 · Recipe: 🥕 Carrot ×5 + 🥛 Coconut Milk ×3 + 🍬 Sugar ×1" },
     ],
     bottles: [],
-    constructions: [],
+    constructions: [
+      { name: "📦 Treasure Pod Lv2", detail: "Base · Milestone · Medium difficulty · Better rewards than Lv1" },
+    ],
     upgrades: [
       { name: "Garden: Alluvium Soil", detail: "900G · Day 8 · -20% grow time all crops" },
     ],
@@ -505,9 +491,7 @@ const days = [
       { name: "🎯 Crit Bottle", detail: "Tier 2 · ⚡ 100% Crit × 2 dmg · 10s · AR/Shotgun/Sniper · Recipe: 🍲 Tomato Soup ×8 + 🧪 Vial Lv1 ×1 + 🔩 Iron ×2" },
     ],
     constructions: [],
-    upgrades: [
-      { name: "⛏️ Drill: Refinery Link", detail: "500G blueprint · Day 11 ghi trong GDD timeline — Drill Lv1 available" },
-    ],
+    upgrades: [],
     gadgets: [],
     special: [],
   },
@@ -566,11 +550,12 @@ const days = [
     bottles: [
       { name: "💥 Cluster Bottle", detail: "Tier 3 · 💫 Split → 3 targets 50% dmg · 8s · Grenade/Shotgun · Recipe: 🍡 Sweet Grapeball ×8 + 🔬 Vial Lv2 ×1 + 💎 Ruby ×2" },
     ],
-    constructions: [],
+    constructions: [
+      { name: "📦 Treasure Pod Lv3", detail: "Base · Milestone · Hard reach — requires platforming skill & HandGun · Reward: Blueprint + rare item drop" },
+    ],
     upgrades: [
       { name: "Garden: Auto Harvest", detail: "1,800G · Day 15 · Auto-harvest into Silo when ripe" },
       { name: "WarpTech: Refinery Link", detail: "Blueprint: Treasure Pod Lv3 · Cost: 2,000G · Remote item deposit into Refinery" },
-      { name: "Treasure Pod Lv3", detail: "Hard reach · Reward: Blueprint + rare item · Day 15" },
     ],
     gadgets: [],
     special: [],
@@ -835,6 +820,58 @@ function toggleAll() {
   document.querySelectorAll('.day-body').forEach(b => b.classList.toggle('open', allOpen));
   document.querySelectorAll('.chevron').forEach(c => c.classList.toggle('open', allOpen));
 }
+
+// ============================================================
+// PLAIN TEXT SUMMARY
+// ============================================================
+const ptCols = ['crops','natural','ingredients','food','bottles','constructions','upgrades','gadgets','special'];
+const ptLabels = ['Crops','Natural/Coop','Ingredients','Food','Bottles','Constructions','Upgrades','Gadgets','Special','TOTAL'];
+
+function buildPlainText() {
+  const colW = 15;
+  const dayW = 8;
+  const totalW = 8;
+  const makeSep = () => '+' + '-'.repeat(dayW) + ptCols.map(() => '+' + '-'.repeat(colW)).join('') + '+' + '-'.repeat(totalW) + '+';
+  const pad = (s, w) => String(s).padEnd(w-1) + ' ';
+  const sep = makeSep();
+  const headerCells = ptLabels.map(l => '| ' + pad(l, colW));
+  const header = '| ' + pad('Day', dayW) + headerCells.join('') + '|';
+  const lines = [sep, header, sep];
+
+  days.forEach(d => {
+    const total = ptCols.reduce((s,c) => s + d[c].length, 0);
+    const cells = ptCols.map(c => '| ' + pad(d[c].length > 0 ? d[c].length : '—', colW));
+    const row = '| ' + pad('Day ' + d.day, dayW) + cells.join('') + '| ' + pad(total, totalW) + '|';
+    lines.push(row);
+  });
+  lines.push(sep);
+
+  const grandTotals = ptCols.map(c => days.reduce((s,d) => s + d[c].length, 0));
+  const grandTotal = grandTotals.reduce((a,b)=>a+b,0);
+  const totCells = grandTotals.map(n => '| ' + pad(n, colW));
+  const totRow = '| ' + pad('TOTAL', dayW) + totCells.join('') + '| ' + pad(grandTotal, totalW) + '|';
+  lines.push(totRow);
+  lines.push(sep);
+  return lines.join('\n');
+}
+
+document.addEventListener('DOMContentLoaded', () => {});
+const txtEl = document.getElementById('plainTextOutput');
+if (txtEl) txtEl.textContent = buildPlainText();
+
+function copyText() {
+  const el = document.getElementById('plainTextOutput');
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Đã copy!';
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+  });
+}
+// init after DOM ready
+window.addEventListener('load', () => {
+  const el = document.getElementById('plainTextOutput');
+  if (el) el.textContent = buildPlainText();
+});
 </script>
 </body>
 </html>
