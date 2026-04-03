@@ -1285,6 +1285,8 @@
         <div class="sidebar-group">
             <div class="sidebar-label"><span class="en">Base Construction</span><span class="vi">Công trình cơ sở</span>
             </div>
+            <a class="sidebar-link" href="#crafting">🔨 <span class="en">Crafting Station</span><span class="vi">Trạm
+                    chế tạo</span></a>
             <a class="sidebar-link" href="#gear">⚙️ <span class="en">Gear Upgrades</span><span class="vi">Nâng cấp
                     Gear</span></a>
             <a class="sidebar-link" href="#farmhouse">🏡 Farm House</a>
@@ -1344,7 +1346,7 @@
                 <div class="stat-box">
                     <div class="stat-box-label"><span class="en">Total Buildings</span><span class="vi">Tổng công
                             trình</span></div>
-                    <div class="stat-box-value">12</div>
+                    <div class="stat-box-value">13</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-box-label"><span class="en">Primary Currency</span><span class="vi">Tiền tệ
@@ -1406,6 +1408,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">1</td>
+                        <td class="ov-name">Crafting Station</td>
+                        <td><span class="tag gray">Base</span></td>
+                        <td class="ov-cost">—</td>
+                        <td class="ov-cost">—</td>
+                        <td class="ov-day">Day 1</td>
+                        <td>16</td>
+                        <td class="ov-desc"><span class="en">Crafting everything (ingredients, food, bottles,
+                                ...)</span><span class="vi">Chế tạo mọi thứ (từ nguyên liệu, thức ăn, bottle,...)</span>
+                        </td>
+                    </tr>
                     <tr>
                         <td style="color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px">1</td>
                         <td class="ov-name">Gear Upgrades</td>
@@ -1556,6 +1570,89 @@
                 to Day 4.</p>
             <p class="vi">Các công trình cố định ở khu vực farm chính. Không có tùy chọn Demolish. Mở khóa từ Day 1 đến
                 Day 4.</p>
+
+            <!-- CRAFTING STATION -->
+            <div class="building-card" id="crafting">
+                <div class="building-header">
+                    <div class="building-icon">⚗️</div>
+                    <div class="building-title-area">
+                        <div class="building-name">
+                            <span class="en">Crafting Station</span>
+                            <span class="vi">Trạm Chế Tạo</span>
+                            <span class="tag gray">Base</span>
+                        </div>
+                        <div class="building-meta">
+                            <span>📅 Day 1</span>
+                            <span>💰 <span class="en">No Blueprint Required</span><span class="vi">Không cần
+                                    Blueprint</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="building-body">
+                    <div class="building-desc">
+                        <span class="en">Crafts everything: Materials, Bottles, Food Ingredients, Foods. Queue up to
+                            3/5/7 recipes × 10 each. Runs in background during Sleep.</span>
+                        <span class="vi">Chế tạo mọi thứ: Nguyên liệu, Chai lọ, Thành phần thực phẩm, Đồ ăn. Hàng chờ
+                            lên đến 3/5/7 công thức × 10 đơn vị mỗi loại. Hoạt động ngầm trong khi Ngủ.</span>
+                    </div>
+
+                    <div class="callout design">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-body">
+                            <strong><span class="en">Warning</span><span class="vi">Cảnh báo</span>:</strong>
+                            <span class="en">Items inserted into the station cannot be retrieved.</span>
+                            <span class="vi">Nguyên liệu đã đưa vào trạm không thể lấy lại.</span>
+                        </div>
+                    </div>
+
+                    <div class="h2">
+                        <span class="en">Station Upgrades — Efficiency & Capacity</span>
+                        <span class="vi">Nâng cấp Trạm — Hiệu suất & Sức chứa</span>
+                    </div>
+
+                    <table class="upgrade-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><span class="en">Upgrade</span><span class="vi">Nâng cấp</span></th>
+                                <th>Effect</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="upg-num">1</td>
+                                <td class="upg-name">Queue Expand I</td>
+                                <td class="upg-desc">+2 recipe slots</td>
+                                <td class="upg-cost">500G</td>
+                            </tr>
+                            <tr>
+                                <td class="upg-num">2</td>
+                                <td class="upg-name">Craft Speed I</td>
+                                <td class="upg-desc">Reduces craft time</td>
+                                <td class="upg-cost">1,300G</td>
+                            </tr>
+                            <tr>
+                                <td class="upg-num">3</td>
+                                <td class="upg-name">Queue Expand II</td>
+                                <td class="upg-desc">+2 recipe slots</td>
+                                <td class="upg-cost">2,000G</td>
+                            </tr>
+                            <tr>
+                                <td class="upg-num">4</td>
+                                <td class="upg-name">Craft Speed II</td>
+                                <td class="upg-desc">Further reduces craft time</td>
+                                <td class="upg-cost">4,500G</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="todo-item">
+                        <div class="todo-checkbox"></div>
+                        <div>TODO: Define specific percentage for <code>CRAFT_SPEED</code> reduction per level.</div>
+                    </div>
+                </div>
+            </div>
 
             <!-- GEAR UPGRADES -->
             <div class="building-card" id="gear">
@@ -2825,11 +2922,16 @@
                     <div class="econ-subtotal"><span><span class="en">Subtotal Gear Upgrades</span><span class="vi">Tổng
                                 Gear Upgrades</span></span><span class="amount">22,500G</span></div>
 
-                    <div class="econ-group-title" style="margin-top:18px"><span class="en">Farming &amp; Storing (Build
-                            + all upgrades)</span><span class="vi">Farming &amp; Storing (Xây dựng + tất cả nâng
+                    <div class="econ-group-title" style="margin-top:18px"><span class="en">Farming, Storing & Crafting
+                            (Build
+                            + all upgrades)</span><span class="vi">Farming, Storing & Chế tạo (Xây dựng + tất cả nâng
                             cấp)</span></div>
                     <div class="econ-pills">
                         <div class="econ-pill"><span class="ep-name">Farm Market</span><span class="ep-free">Free</span>
+                        </div>
+                        <div class="econ-pill">
+                            <span class="ep-name">Crafting Station</span>
+                            <span class="ep-cost">8,300G</span>
                         </div>
                         <div class="econ-pill">
                             <span class="ep-name">Garden</span>
@@ -2863,16 +2965,16 @@
                         <div class="callout-body" style="font-size:11px">
                             <strong><span class="en">Build costs included</span><span class="vi">Đã bao gồm chi phí xây
                                     dựng</span>:</strong>
-                            <span class="en"> Garden 250G · Silo 450G · Pond 450G · Coop 250G — these are one-time
+                            <span class="en"> Garden 250G · Silo 450G · Pond 450G · Coop 250G — one-time
                                 construction costs, separate from blueprint &amp; upgrade costs.</span>
-                            <span class="vi"> Garden 250G · Silo 450G · Pond 450G · Coop 250G — đây là chi phí xây dựng
-                                một lần, tách biệt với chi phí blueprint &amp; nâng cấp.</span>
+                            <span class="vi"> Garden 250G · Silo 450G · Pond 450G · Coop 250G — chi phí xây dựng
+                                một lần, tách biệt với blueprint &amp; nâng cấp.</span>
                         </div>
                     </div>
                     <div class="econ-subtotal">
                         <span><span class="en">Subtotal Farming &amp; Storing</span><span class="vi">Tổng Farming &amp;
                                 Storing</span></span>
-                        <span class="amount">20,850G</span>
+                        <span class="amount">29,150G</span>
                     </div>
 
                     <div class="econ-group-title" style="margin-top:18px"><span class="en">Gadgets (Blueprint + all
@@ -2902,9 +3004,9 @@
                 <div class="econ-grand">
                     <div class="econ-grand-label">
                         <div class="egl-sub">Grand Total · Max Everything</div>
-                        <div class="egl-main">Gear 22,500 + Farming 20,850 + Gadgets 40,800</div>
+                        <div class="egl-main">Gear 22,500 + Farming/Craft 29,150 + Gadgets 40,800</div>
                     </div>
-                    <div class="econ-grand-amount">84,150G</div>
+                    <div class="econ-grand-amount">92,450G</div>
                 </div>
             </div>
 

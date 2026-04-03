@@ -361,7 +361,7 @@ After 6 breeding cycles:
 | 🏞 | Pond | Farming | Natural water source, refills with cooldown | More Water Contain, Decrease Cooldown | Salt Water |
 | 💧 | Water Purifier | Farming | Salt Water → Fresh Water for watering Garden | More Contain, Decrease Purifier Time | Runs during Sleep |
 | ⚗️ | Crafting Station | Farming | Crafts all: Materials, Bottles, Food, Ingredients | Queue +slot, Speed upgrade | Input only, no retrieval |
-| 🐔 | Coop | Farming | Raise Hen/Rooster → Eggs & Meat | High Wall, Expand Coop (→20) | Max 6 → 12 chickens |
+| 🐔 | Coop | Farming | Raise Hen/Rooster → Eggs & Meat | High Wall, Expand Coop (→12) | Max 6 → 12 chickens |
 | 🔬 | Refinery | Science Lab | Central storage hub — deposit only | — | Cannot retrieve |
 | 🏪 | Builder's Shop | Science Lab | Purchase blueprints with Granumz | — | Some blueprints from Treasure Pods or Unlock Events |
 | 🔧 | Fabricate Gadget | Science Lab | Craft & place Gadgets on the map | — | Holds 1 Gadget at a time |
@@ -441,7 +441,7 @@ Filters Salt Water → Fresh Water for watering Garden. Runs automatically durin
 
 ### 🐔 Coop
 
-Raises Hen/Rooster → Eggs & Meat. Max 6 chickens (base) → 20 after upgrade. Hen+Rooster pairs breed every 12h. Demolish required.
+Raises Hen/Rooster → Eggs & Meat. Max 6 chickens (base) → 12 after upgrade. Hen+Rooster pairs breed every 12h. Demolish required.
 
 | # | Upgrade |
 |---|---------|

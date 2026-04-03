@@ -10,7 +10,7 @@ The construction system is divided into 3 main groups. Each construction can be 
 
 | Info | Value |
 | --- | --- |
-| Total constructions | 12 constructions |
+| Total constructions | 13 constructions |
 | Main currency | Granumz (G) |
 | Craftable Gadgets | 8 gadgets (3 groups) |
 | Demolish option | Excludes pre-existing constructions |
@@ -27,18 +27,19 @@ The construction system is divided into 3 main groups. Each construction can be 
 
 | # | Name | Group | Blueprint | Unlock Day | Upgrades | Main Function |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Gear Upgrades | Base | — | Day 1 | 16 | Upgrade player stats (HP, Water, Speed, Backpack) |
-| 2 | Farm House | Base | — | Day 1 | — | Sleep to skip the rest of the night |
-| 3 | Farm Market | Base | — | Day 1 | 1 | Sell crops / items, dynamic pricing |
-| 4 | Garden | Farming | — | Day 1 | 8 | Main farming construction, max 4 plots |
-| 5 | Water Purifier | Farming | — | Day 1 | 4 | Filter salt water → fresh water |
-| 6 | Refinery | Science Lab | — | Day 1 | — | Item storage (deposit only, no withdrawal) |
-| 7 | Treasure Pod | Base | Free | Day 2 | 3 tiers | Scattered across map, reward Granumz + Crops + Blueprints |
-| 8 | Builder's Shop | Base | — | Day 4 | — | Purchase Blueprints to unlock constructions |
-| 9 | Silo | Storing | — | Day 4 | 3 | Item storage, max 4 ports |
-| 10 | Fabricate Gadget | Science Lab | — | Day 4 | — | Craft and place Gadgets on map |
-| 11 | Pond | Farming | — | Day 7 | 6 | Natural salt water source |
-| 12 | Coop | Farming | — | Day 7 | 4 | Raise chickens for eggs and meat, max 6–12 chickens |
+| 1 | Crafting Station | Base | — | Day 1 | 4 | Increase slots, craft time |
+| 2 | Gear Upgrades | Base | — | Day 1 | 16 | Upgrade player stats (HP, Water, Speed, Backpack) |
+| 3 | Farm House | Base | — | Day 1 | — | Sleep to skip the rest of the night |
+| 4 | Farm Market | Base | — | Day 1 | 1 | Sell crops / items, dynamic pricing |
+| 5 | Garden | Farming | — | Day 1 | 8 | Main farming construction, max 4 plots |
+| 6 | Water Purifier | Farming | — | Day 1 | 4 | Filter salt water → fresh water |
+| 7 | Refinery | Science Lab | — | Day 1 | — | Item storage (deposit only, no withdrawal) |
+| 8 | Treasure Pod | Base | Free | Day 2 | 3 tiers | Scattered across map, reward Granumz + Crops + Blueprints |
+| 9 | Builder's Shop | Base | — | Day 4 | — | Purchase Blueprints to unlock constructions |
+| 10 | Silo | Storing | — | Day 4 | 3 | Item storage, max 4 ports |
+| 11 | Fabricate Gadget | Science Lab | — | Day 4 | — | Craft and place Gadgets on map |
+| 12 | Pond | Farming | — | Day 7 | 6 | Natural salt water source |
+| 13 | Coop | Farming | — | Day 7 | 4 | Raise chickens for eggs and meat, max 6–12 chickens |
 
 ---
 
@@ -47,6 +48,17 @@ The construction system is divided into 3 main groups. Each construction can be 
 Constructions always present in the main farm area. No Demolish option. Unlocked from Day 1 to Day 4.
 
 ---
+
+### ⚗️ Crafting Station
+
+Crafts everything: Materials, Bottles, Food Ingredients, Foods. Queue up to 3/5/7 recipes × 10 each. Runs in background during Sleep. ⚠ Items inserted cannot be retrieved.
+
+| # | Upgrade |
+|---|---------|
+| 1 | Queue Expand I — +2 recipe slots |
+| 2 | Craft Speed I — reduces craft time |
+| 3 | Queue Expand II — +2 recipe slots |
+| 4 | Craft Speed II |
 
 ### ⚙️ Gear Upgrades
 
@@ -369,6 +381,10 @@ All upgrade costs use **Granumz (G)** — the main in-game currency. Primary inc
 
 > ✅ **Full game max cost breakdown:**
 >
+> **Crafting Station (no Blueprint required):**
+> Queue Expand I: 500G · Craft Speed: 1,300G · Queue Expand II: 2,000G · Craft Speed II: 4,500G
+> **Subtotal Crafting Station Upgrades: 8,300G**
+>
 > **Gear Upgrades (no Blueprint required):**
 > Heart ×4: 2,500G · Water ×3: 1,600G · Boost ×2: 1,450G · Backpack ×4: 14,950G · Energy ×3: 2,000G
 > **Subtotal Gear Upgrades: 22,500G**
@@ -382,6 +398,6 @@ All upgrade costs use **Granumz (G)** — the main in-game currency. Primary inc
 > Drill: 3,050G · Water Pump: 3,300G · Apiary: 3,550G · Crop Turret: 16,300G · Med Station: 3,600G · Refinery Link: 2,000G · Turret Link: 4,500G · Market Link: 4,500G
 > **Subtotal Gadgets: 40,800G**
 >
-> **🏆 Grand Total (Gear 22,500 + Farming 20,850 + Gadgets 40,800): 84,150G**
+> **🏆 Grand Total (Crafting Station 8,300G + Gear 22,500 + Farming 20,850 + Gadgets 40,800): 92,450G**
 
 > 🎨 **Dynamic Pricing System:** Farm Market uses Perlin Noise + supply/demand tracking. Selling too much of one crop type → price drops (inflation). Encourages players to diversify crops and optimize their daily selling catalog.
