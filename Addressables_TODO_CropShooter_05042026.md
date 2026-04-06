@@ -38,9 +38,9 @@ Assets/
 │   │   │   ├── Potions/            ← ĐÃ CÓ — đổi tên thành Bottles/ cho nhất quán
 │   │   │   ├── Skills/             ← ĐÃ CÓ
 │   │   │   └── UI/                 ← ĐÃ CÓ
-│   │   │   ── [THÊM] Crops/        ← CẦN TẠO — icon cho 15 crop
-│   │   │   ── [THÊM] NaturalResources/ ← CẦN TẠO — icon cho 16 natural
-│   │   │   ── [THÊM] Food/         ← CẦN TẠO — icon cho 15 food
+│   │   │   ── [THÊM] Crops/        ← ĐÃ CÓ
+│   │   │   ── [THÊM] NaturalResources/ ← ĐÃ CÓ
+│   │   │   ── [THÊM] Food/         ← ĐÃ CÓ
 │   │   │   ── [THÊM] Gadgets/      ← CẦN TẠO — icon cho 8 gadget
 │   │   ├── Background/             ← ĐÃ CÓ
 │   │   └── Weapon/                 ← ĐÃ CÓ
@@ -77,7 +77,7 @@ Assets/
 │   └── [THÊM] Registry/            ← CẦN TẠO — SharedUIData Registry SO
 │
 ├── Prefabs/                        ← ĐÃ CÓ — asset cuối, mark Addressable
-│   ├── Ammo/                       ← ĐÃ CÓ — Prefab của ammo/crop (Beetroot đã có)
+│   ├── Crops/                       ← ĐÃ CÓ — Prefab của ammo/crop (Beetroot đã có)
 │   │   ├── Normal/
 │   │   │   └── Beetroot/           ← ĐÃ CÓ — mẫu tham khảo cấu trúc
 │   │   └── Pack/
@@ -100,13 +100,6 @@ Assets/
 │   │   ├── Normal/
 │   │   └── Pack/
 │   ├── UI/                         ← ĐÃ CÓ — UI prefab
-│   ── [THÊM] Crops/                ← CẦN TẠO — crop model prefab (plant in garden)
-│   │   ├── Day1_3/                 ← Berry, Wheat, Bean, Carrot, Cabbage, Coconut
-│   │   ├── Day5_6/                 ← Beetroot, Tomato
-│   │   ├── Day7_9/                 ← Grape
-│   │   ├── Day10_12/               ← Carambola, Chili
-│   │   ├── Day13_16/               ← Apple, Pepper
-│   │   └── Day17_Plus/             ← Durian, NoniFruit (WIP)
 │   ── [THÊM] Gadgets/              ← CẦN TẠO — gadget prefab đặt trên map
 │   └── [THÊM] VFX/                 ← CẦN TẠO — assembled VFX prefab (trail, hit, grow)
 │
@@ -128,10 +121,10 @@ Assets/
 
 ### 0.2 Vấn đề cần làm sạch trước khi setup Addressables
 
-- [ ] **Thống nhất `Product/` vs `Products/`** — hai folder trùng chức năng, gộp lại thành `Prefabs/Products/`
-- [ ] **`Art/Resources/`** — Unity treat folder tên `Resources/` đặc biệt (load bằng Resources.Load). Đổi tên thành `Art/NaturalResourcesArt/` để tránh conflict với Addressables
-- [ ] **`Art/Sprites/Icons/Potions/`** — đổi tên thành `Bottles/` để nhất quán với DataSpec v3
-- [ ] Verify `Prefabs/Ammo/Normal/Beetroot/` — đây là mẫu tốt, dùng làm template cấu trúc cho các crop còn lại
+- [x] **Thống nhất `Product/` vs `Products/`** — hai folder trùng chức năng, gộp lại thành `Prefabs/Products/`
+- [x] **`Art/Resources/`** — Unity treat folder tên `Resources/` đặc biệt (load bằng Resources.Load). Đổi tên thành `Art/NaturalResourcesArt/` để tránh conflict với Addressables
+- [x] **`Art/Sprites/Icons/Potions/`** — đổi tên thành `Bottles/` để nhất quán với DataSpec v3
+- [~] Verify `Prefabs/Ammo/Normal/Beetroot/` — đây là mẫu tốt, dùng làm template cấu trúc cho các crop còn lại. Done CropPrefabSetup tool.
 
 ---
 
@@ -158,7 +151,7 @@ Assets/
 > Folder không theo Addressables structure → SmartAddresser cần rule phức tạp hơn.
 > Rule match theo **path subfolder + asset type + SO field value**.
 
-- [ ] Cài SmartAddresser:
+- [x] Cài SmartAddresser:
   ```
   https://github.com/CyberAgentGameEntertainment/SmartAddresser.git?path=/Assets/SmartAddresser
   ```
