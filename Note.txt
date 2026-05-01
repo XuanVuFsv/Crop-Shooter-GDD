@@ -23,7 +23,7 @@ GDD
 
 Details: 
 # Crop Shooter — Development Timeline
-> Version 280426 · FPS Farming Survival · Target: Playable Build
+> Version 010526 · FPS Farming Survival · Target: Playable Build
 
 ---
 
@@ -109,16 +109,16 @@ Details:
 | Stat system — Query, Mediator, Cache | ✅ Done | Float migration, nullable cache |
 | Interface design — IDamageable, IEffectApplicable, IHealable | ✅ Done | Bidirectional player ↔ enemy |
 | ScriptableObject data pipeline | ✅ Done | BottleStat, AbilityBaseStat, GlobalAbilityConfig |
-| NavMesh AI | 📅 28–29 Apr | Brute + Swarm |
-| Construction system | 📅 1–2 May | Gear Upgrades priority |
-| Save / Load | 📅 2–3 May | JSON-based |
-| Addressable | 📅 2–3 May | Basic setup |
-| Remote Config | 📅 4–5 May | Balance values |
-| CSV ↔ SO Import / Export | 📅 4–5 May | Editor tool, post SO freeze |
+| NavMesh AI | 📅 28–2 Apr | Brute + Swarm |
+| Construction system | 📅 3 May | Gear Upgrades priority |
+| Save / Load | 📅 4 May | JSON-based |
+| Addressable | 📅 4 May | Basic setup |
+| Simple Guide | 📅 4 May | In-game or HTML |
+| Remote Config | 📅 5 May | Balance values |
+| Economy — Dynamic pricing | 📅 5 May | Perlin Noise + supply/demand |
+| CSV ↔ SO Import / Export | 📅 5 May | Editor tool, post SO freeze |
 | GPU / CPU Optimization | 📅 6–7 May | Profiler pass |
 | Object Pooling (Group 5) | 📅 6–7 May | VFX + Projectile |
-| Economy — Dynamic pricing | 📅 4–5 May | Perlin Noise + supply/demand |
-| Simple Guide | 📅 2–3 May | In-game or HTML |
 
 ---
 
@@ -126,7 +126,7 @@ Details:
 
 | Feature | Blocked by |
 |---|---|
-| `SlowEffect` / `FreezeEffect` | NavMesh AI (28–29 Apr) |
+| `SlowEffect` / `FreezeEffect` | NavMesh AI (28– Apr) |
 | `StealthEffect` | Enemy AI perception system |
 | Crop Turret | Enemy system complete |
 | Necromancer AI | Tactical AI research (Part 27, 29, 41) |
