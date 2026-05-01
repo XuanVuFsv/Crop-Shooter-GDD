@@ -44,18 +44,18 @@ Details:
 
 ## 🗓️ Pre-Deadline: Target 3 May
 
-### 28–29 Apr — AI Foundation + Map
+### 28– Apr — AI Foundation + Map
 - [ ] NavMesh bake on existing map asset
 - [ ] Brute AI: NavMesh chase + melee attack (simple FSM)
 - [ ] Animator sync — prevent slide
 - [ ] **Unlocks:** SlowEffect + FreezeEffect testable
 
-### 30 Apr — Group 3 Complete
+### - Apr —2 Group 3 Complete
 - [ ] `SlowEffect` + Factory — reduce `NavMeshAgent.speed` by `slowPercent`, restore on expire
 - [ ] `FreezeEffect` + Factory — set speed = 0, disable AI, restore after `freezeDuration`
 - [ ] `BottleSlotManager` duration tracking — bottle auto-expire after `activeDuration`
 
-### 1–2 May — Construction System
+### 3 May — Construction System
 
 | Construction | Priority | Reason |
 |---|---|---|
@@ -76,7 +76,7 @@ Details:
 | Fabricate Gadget | 🔵 Post-deadline | Gadget system |
 | Refinery | 🔵 Post-deadline | Storage system |
 
-### 2–3 May — CV-Critical Features
+### 4 May — CV-Critical Features
 - [ ] **Save/Load** — JSON-based, covers player progression + settings
 - [ ] **Addressable** — basic asset loading pipeline setup
 - [ ] **Simple Guide** — in-game UI page or HTML doc
@@ -85,7 +85,7 @@ Details:
 
 ## 🗓️ Extended: Target 7 May
 
-### 4–5 May — AI + Economy + Tools
+### 5 May — AI + Economy + Tools
 - [ ] Swarm AI — clone Brute, tweak speed/HP, validate AOE effects
 - [ ] Farm Market dynamic pricing — Perlin Noise + supply/demand differential
 - [ ] Remote Config — balance values via Addressable remote (no hardcode)
